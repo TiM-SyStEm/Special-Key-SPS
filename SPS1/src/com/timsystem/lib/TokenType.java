@@ -13,7 +13,6 @@ public enum TokenType {
     RPAREN,
     EQ,
     COLON,
-    HASHTAG,
     // Keywords
     OUT,
     ADD,
