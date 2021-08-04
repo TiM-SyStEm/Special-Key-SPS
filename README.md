@@ -36,6 +36,7 @@ Example of usage:
 Hello, World`
 
 `$>comp main.spk`
+
 Hello, World
 
 Notice that extension of file is not required
