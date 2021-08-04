@@ -32,13 +32,27 @@ public final class Parser {
     }
 
     private Statement statement() {
+        Token current = get(0);
         if (match(TokenType.OUT)) {
             return outStatement();
         }
         if (match(TokenType.ADD)) {
             return new AddStatement(consume(TokenType.WORD).getText());
         }
-        return assignmentsStatement();
+        if (match(TokenType.VAR)) {
+            return assignmentStatement();
+        }
+        return reAssignmentStatement();
+    }
+
+    private Statement reAssignmentStatement() {
+        final Token current = get(0);
+        if (current.getType() == TokenType.WORD && get(1).getType() == TokenType.EQ) {
+            final String variable = consume(TokenType.WORD).getText();
+            consume(TokenType.EQ);
+            return new ReAssignmentStatement(variable, expression());
+        }
+        throw new SPKException("StatementError", String.format("unknown statement '%s'", current.getText()));
     }
 
     private Statement outStatement() {
@@ -46,14 +60,11 @@ public final class Parser {
         return new OutStatement(expression());
     }
 
-    private Statement assignmentsStatement() {
+    private Statement assignmentStatement() {
         final Token current = get(0);
-        if (current.getType() == TokenType.WORD && get(1).getType() == TokenType.EQ) {
-            final String variable = consume(TokenType.WORD).getText();
-            consume(TokenType.EQ);
-            return new AssignmentStatement(variable, expression());
-        }
-        throw new SPKException("StatementError", String.format("unknown statement '%s'", current.getText()));
+        final String variable = consume(TokenType.WORD).getText();
+        consume(TokenType.EQ);
+        return new AssignmentStatement(variable, expression());
     }
 
 
