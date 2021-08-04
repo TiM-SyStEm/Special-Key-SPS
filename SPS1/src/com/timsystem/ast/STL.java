@@ -13,6 +13,6 @@ public class STL {
         Variables.set("PI", NumberValue.of(Math.PI));
         Variables.set("E", NumberValue.of(Math.E));
         Variables.set("__ver__", new StringValue(("Special Key " + getVer()).getBytes(StandardCharsets.UTF_8)));
-        Variables.set("__about__", new StringValue(("SPK is dynamic a interpreted programming language built on Java Virtual Machine\nCreated by Timofey Gorlov in Russia with his team.").getBytes(StandardCharsets.UTF_8)));
+        Variables.set("__about__", new StringValue(("SPK is dynamic a interpreted programming language built on Java Virtual Machine\nCreated by Timofey Gorlov in Russia with his team").getBytes(StandardCharsets.UTF_8)));
     }
 }

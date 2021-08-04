@@ -21,6 +21,6 @@ public final class AssignmentStatement implements Statement {
 
     @Override
     public String toString() {
-        return String.format("%s = %s", variable, expression);
+        return String.format("var %s = %s", variable, expression);
     }
 }

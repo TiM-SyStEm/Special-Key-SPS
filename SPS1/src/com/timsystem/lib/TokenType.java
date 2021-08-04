@@ -17,6 +17,7 @@ public enum TokenType {
     // Keywords
     OUT,
     ADD,
+    VAR,
 
     WORD
 }

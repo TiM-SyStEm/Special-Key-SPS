@@ -27,4 +27,8 @@ public final class Variables {
     public static void set(String key, Value value) {
         variables.put(key, value);
     }
+
+    public static void clear() {
+        variables.clear();
+    }
 }

@@ -1,7 +1,3 @@
-/*
-* © Special Key. TIM SYSTEM 2021
-* Creators: Timofei Gorlov, Nikolaev Oleg
- */
 package com.timsystem;
 
 import com.timsystem.lib.Handler;

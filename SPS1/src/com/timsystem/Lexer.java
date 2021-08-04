@@ -33,6 +33,7 @@ public final class Lexer {
         KEYWORDS = new HashMap<>();
         KEYWORDS.put("out", TokenType.OUT);
         KEYWORDS.put("Add", TokenType.ADD);
+        KEYWORDS.put("var", TokenType.VAR);
     }
 
     private final String input;

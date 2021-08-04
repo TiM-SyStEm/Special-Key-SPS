@@ -1,6 +1,5 @@
 package com.timsystem.ast;
 
-import com.timsystem.lib.SPKException;
 import com.timsystem.runtime.Value;
 import com.timsystem.runtime.Variables;
 
@@ -14,7 +13,6 @@ public final class VariableExpression implements Expression {
 
     @Override
     public Value eval() {
-        if (!Variables.isExists(name)) throw new SPKException("UndoundVariableExpression", "Constant does not exists");
         return Variables.get(name);
     }
 
