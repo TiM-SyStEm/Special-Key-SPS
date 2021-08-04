@@ -13,7 +13,7 @@ import static java.lang.Character.isDigit;
 import static java.lang.Character.toLowerCase;
 
 public final class Lexer {
-    private static final String OPERATOR_CHARS = "+-*/()=:";
+    private static final String OPERATOR_CHARS = "+-*/()=:"; //#
     private static final Map<String, TokenType> OPERATORS;
     private static final Map<String, TokenType> KEYWORDS;
 
@@ -27,6 +27,7 @@ public final class Lexer {
         OPERATORS.put(")", TokenType.RPAREN);
         OPERATORS.put("=", TokenType.EQ);
         OPERATORS.put(":", TokenType.COLON);
+        //OPERATORS.put("#", TokenType.HASHTAG);
     }
 
     static {
@@ -56,7 +57,8 @@ public final class Lexer {
     public List<Token> tokenize() {
         while (pos < length) {
             final char current = peek(0);
-            if (isDigit(current)) tokenizeNumber();
+            if (current == '#') comment();
+            else if (isDigit(current)) tokenizeNumber();
             else if (isIdentifier(current)) tokenizeWord();
             else if (current == '$') {
                 next();
@@ -70,6 +72,13 @@ public final class Lexer {
             }
         }
         return tokens;
+    }
+
+    private void comment() {
+        char current = peek(0);
+        while ("\r\n\0".indexOf(current) == -1) {
+            current = next();
+        }
     }
 
     private void tokenizeText() {
