@@ -3,6 +3,7 @@ Special key is a dynamic, fast and object-oriented programming language for buin
 
 It is in heavy develpoment now, but ready to try out!
 ## Installation
+### Building from source
 First install Java JDK.
 
 You can clone this repository and create new project Your IDE.
@@ -10,7 +11,13 @@ You can clone this repository and create new project Your IDE.
 `
 git clone https://github.com/TiM-SyStEm/Special-Key-SPS spk
 `
-
+#
+### By .jar
+You also can open SPK Shell by running compiler.jar in the src folder
+#
+### BY .exe
+If you don't need the SPK sources, then you can just run it through .an exe file that is distributed along with SPK
+#
 ## Contribution
 Special Key is open-source project. Almost all pull requests will be considered!
 
