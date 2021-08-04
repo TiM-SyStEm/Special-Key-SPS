@@ -35,8 +35,8 @@ Example of usage:
 `$>comp main
 Hello, World`
 
-`$>comp main.spk
-Hello, World`
+`$>comp main.spk`
+Hello, World
 
 Notice that extension of file is not required
 
