@@ -25,6 +25,10 @@ public class StringValue implements Value {
         throw new SPKException("TypeError", "Cannot cast string to number");
     }
 
+    public String decode() {
+        return new String(string);
+    }
+
     @Override
     public String toString() {
         return new String(string);

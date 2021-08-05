@@ -24,7 +24,7 @@ public final class ConditionalExpression implements Expression {
 
     private NumberValue eval(Value value1, Value value2) {
         if (value1 instanceof StringValue) {
-            return new NumberValue(false); // вот здесь нужно добавить поддружек str
+            return eval((StringValue) value1, value2);
         } else {
             double value1n = value1.asNumber();
             double value2n = value2.asNumber();
@@ -40,158 +40,18 @@ public final class ConditionalExpression implements Expression {
         }
     }
 
-    private Value add(Value value1, Value value2) {
-        if (value1 instanceof NumberValue)
-            return add((NumberValue) value1, value2);
-        else return new StringValue((value1.toString() + value2.toString()).getBytes(StandardCharsets.UTF_8));
-    }
-
-    private Value add(NumberValue value1, Value value2) {
-        final Number number1 = value1.raw();
-        if (value2 instanceof Number) {
-            final Number number2 = (Number) value2.raw();
-            if (number1 instanceof Double || number2 instanceof Double) {
-                return NumberValue.of(number1.doubleValue() + number2.doubleValue());
-            }
-            if (number1 instanceof Float || number2 instanceof Float) {
-                return NumberValue.of(number1.floatValue() + number2.floatValue());
-            }
-            if (number1 instanceof Long || number2 instanceof Long) {
-                return NumberValue.of(number1.longValue() + number2.longValue());
-            }
-            return NumberValue.of(number1.intValue() + number2.intValue());
+    private NumberValue eval(StringValue value1, Value value2) {
+        String value = value1.decode();
+        switch (operation) {
+            case '=':
+                return new NumberValue(value.equals(value2.toString()));
+            case '>':
+                return new NumberValue(value.compareTo(value2.toString()) > 0);
+            case '<':
+                return new NumberValue(value.compareTo(value2.toString()) < 0);
+            default:
+                throw new SPKException("UnsupportedOperationException", "Unsupported operation '" + operation + " for strings");
         }
-
-        if (number1 instanceof Double) {
-            return NumberValue.of(number1.doubleValue() + value2.asNumber());
-        }
-        if (number1 instanceof Float) {
-            return NumberValue.of(number1.floatValue() + value2.asNumber());
-        }
-        if (number1 instanceof Long) {
-            return NumberValue.of(number1.longValue() + value2.asInt());
-        }
-        return NumberValue.of(number1.intValue() + value2.asInt());
-    }
-
-    private Value subtract(Value value1, Value value2) {
-        if (value1 instanceof NumberValue)
-            return subtract((NumberValue) value1, value2);
-        else
-            throw new SPKException("UnsupportedOperationException", "Operation '-' is supported only for numbers");
-    }
-
-    private Value subtract(NumberValue value1, Value value2) {
-        final Number number1 = value1.raw();
-        if (value2 instanceof NumberValue) {
-            // number1 - number2
-            final Number number2 = (Number) value2.raw();
-            if (number1 instanceof Double || number2 instanceof Double) {
-                return NumberValue.of(number1.doubleValue() - number2.doubleValue());
-            }
-            if (number1 instanceof Float || number2 instanceof Float) {
-                return NumberValue.of(number1.floatValue() - number2.floatValue());
-            }
-            if (number1 instanceof Long || number2 instanceof Long) {
-                return NumberValue.of(number1.longValue() - number2.longValue());
-            }
-            return NumberValue.of(number1.intValue() - number2.intValue());
-        }
-        // number1 - other
-        if (number1 instanceof Double) {
-            return NumberValue.of(number1.doubleValue() - value2.asNumber());
-        }
-        if (number1 instanceof Float) {
-            return NumberValue.of(number1.floatValue() - value2.asNumber());
-        }
-        if (number1 instanceof Long) {
-            return NumberValue.of(number1.longValue() - value2.asInt());
-        }
-        return NumberValue.of(number1.intValue() - value2.asInt());
-    }
-
-    private Value multiply(Value value1, Value value2) {
-        if (value1 instanceof NumberValue)
-            return multiply((NumberValue) value1, value2);
-        else if (value1 instanceof StringValue)
-            return multiply((StringValue) value1, value2);
-        else
-            throw new SPKException("UnsupportedOperationException", "Operation '*' is supported only for numbers and strings");
-    }
-
-    private Value multiply(NumberValue value1, Value value2) {
-        final Number number1 = value1.raw();
-        if (value2 instanceof NumberValue) {
-            // number1 * number2
-            final Number number2 = (Number) value2.raw();
-            if (number1 instanceof Double || number2 instanceof Double) {
-                return NumberValue.of(number1.doubleValue() * number2.doubleValue());
-            }
-            if (number1 instanceof Float || number2 instanceof Float) {
-                return NumberValue.of(number1.floatValue() * number2.floatValue());
-            }
-            if (number1 instanceof Long || number2 instanceof Long) {
-                return NumberValue.of(number1.longValue() * number2.longValue());
-            }
-            return NumberValue.of(number1.intValue() * number2.intValue());
-        }
-
-        if (number1 instanceof Double) {
-            return NumberValue.of(number1.doubleValue() * value2.asNumber());
-        }
-        if (number1 instanceof Float) {
-            return NumberValue.of(number1.floatValue() * value2.asNumber());
-        }
-        if (number1 instanceof Long) {
-            return NumberValue.of(number1.longValue() * value2.asInt());
-        }
-        return NumberValue.of(number1.intValue() * value2.asInt());
-    }
-
-    private Value multiply(StringValue value1, Value value2) {
-        final String string1 = value1.toString();
-        final int iterations = value2.asInt();
-        final StringBuilder buffer = new StringBuilder();
-        for (int i = 0; i < iterations; i++) {
-            buffer.append(string1);
-        }
-        return new StringValue(buffer.toString().getBytes(StandardCharsets.UTF_8));
-    }
-
-    private Value divide(Value value1, Value value2) {
-        if (value1 instanceof NumberValue)
-            return divide((NumberValue) value1, value2);
-        else
-            throw new SPKException("UnsupportedOperationException", "Operation '/' supported only for numbers");
-    }
-
-    private Value divide(NumberValue value1, Value value2) {
-        final Number number1 = value1.raw();
-        if (value2 instanceof NumberValue) {
-            // number1 / number2
-            final Number number2 = (Number) value2.raw();
-            if (number1 instanceof Double || number2 instanceof Double) {
-                return NumberValue.of(number1.doubleValue() / number2.doubleValue());
-            }
-            if (number1 instanceof Float || number2 instanceof Float) {
-                return NumberValue.of(number1.floatValue() / number2.floatValue());
-            }
-            if (number1 instanceof Long || number2 instanceof Long) {
-                return NumberValue.of(number1.longValue() / number2.longValue());
-            }
-            return NumberValue.of(number1.intValue() / number2.intValue());
-        }
-        // number1 / other
-        if (number1 instanceof Double) {
-            return NumberValue.of(number1.doubleValue() / value2.asNumber());
-        }
-        if (number1 instanceof Float) {
-            return NumberValue.of(number1.floatValue() / value2.asNumber());
-        }
-        if (number1 instanceof Long) {
-            return NumberValue.of(number1.longValue() / value2.asInt());
-        }
-        return NumberValue.of(number1.intValue() / value2.asInt());
     }
 
     @Override
