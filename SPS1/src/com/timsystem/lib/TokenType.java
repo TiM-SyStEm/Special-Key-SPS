@@ -13,6 +13,10 @@ public enum TokenType {
     RPAREN,
     EQ,
     COLON,
+    LT,
+    GT,
+    IF,
+    ELSE,
     // Keywords
     OUT,
     ADD,

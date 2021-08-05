@@ -7,35 +7,36 @@ import com.timsystem.runtime.Value;
 
 import java.nio.charset.StandardCharsets;
 
-
-public final class BinaryExpression implements Expression {
+public final class ConditionalExpression implements Expression {
 
     private final Expression expr1, expr2;
     private final char operation;
 
-    public BinaryExpression(char operation, Expression expr1, Expression expr2) {
+    public ConditionalExpression(char operation, Expression expr1, Expression expr2) {
         this.operation = operation;
         this.expr1 = expr1;
         this.expr2 = expr2;
     }
 
-    @Override
-    public Value eval() {
+    public NumberValue eval() {
         return eval(expr1.eval(), expr2.eval());
     }
 
-    private Value eval(Value value1, Value value2) {
-        switch (operation) {
-            case '+':
-                return add(value1, value2);
-            case '-':
-                return subtract(value1, value2);
-            case '*':
-                return multiply(value1, value2);
-            case '/':
-                return divide(value1, value2);
-            default:
-                return value1;
+    private NumberValue eval(Value value1, Value value2) {
+        if (value1 instanceof StringValue) {
+            return new NumberValue(false); // вот здесь нужно добавить поддружек str
+        } else {
+            double value1n = value1.asNumber();
+            double value2n = value2.asNumber();
+            switch (operation) {
+                case '<':
+                    return new NumberValue(value1n < value2n);
+                case '>':
+                    return new NumberValue(value1n > value2n);
+                case '=':
+                default:
+                    return new NumberValue(value1n == value2n);
+            }
         }
     }
 
