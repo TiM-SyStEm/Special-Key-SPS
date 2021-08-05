@@ -39,11 +39,9 @@ Special Key shell provides you some functions to run code
 `comp [path_to_file]` - compile and run file
 Example of usage:
 
-`$>comp main
-Hello, World`
+`$>comp main`
 
 `$>comp main.spk`
-Hello, World
 
 Notice that extension of file is not required
 
