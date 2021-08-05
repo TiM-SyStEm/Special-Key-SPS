@@ -24,7 +24,9 @@ public final class NumberValue implements Value {
     public static NumberValue of(Number value) {
         return new NumberValue(value);
     }
-
+    public NumberValue(boolean value){
+        this.value = value ? 1 : 0;
+    }
     @Override
     public Number raw() {
         return value;

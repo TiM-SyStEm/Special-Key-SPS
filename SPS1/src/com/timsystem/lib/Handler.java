@@ -11,9 +11,9 @@ public class Handler {
     public static void handle(String input) {
         try {
             final List<Token> tokens = new Lexer(input).tokenize();
-            for (Token token : tokens) {
+            /*for (Token token : tokens) {
                 System.out.println(token);
-            }
+            }*/
             final List<Statement> statements = new Parser(tokens).parse();
             for (Statement statement : statements) {
                 statement.execute();

@@ -30,7 +30,27 @@ public final class Parser {
         }
         return result;
     }
+    private Expression conditional(){
+        Expression result = additive();
 
+        while (true) {
+            if (match(TokenType.EQ)) {
+                result = new ConditionalExpression('=', result, additive());
+                continue;
+            }
+            if (match(TokenType.LT)) {
+                result = new ConditionalExpression('<', result, additive());
+                continue;
+            }
+            else if (match(TokenType.GT)) {
+                result = new ConditionalExpression('>', result, additive());
+                continue;
+            }
+            break;
+        }
+
+        return result;
+    }
     private Statement statement() {
         Token current = get(0);
         if (match(TokenType.OUT)) {
@@ -69,7 +89,7 @@ public final class Parser {
 
 
     private Expression expression() {
-        return additive();
+        return conditional();
     }
 
     private Expression additive() {

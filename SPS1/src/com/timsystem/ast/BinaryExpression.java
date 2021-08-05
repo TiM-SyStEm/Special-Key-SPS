@@ -7,9 +7,7 @@ import com.timsystem.runtime.Value;
 
 import java.nio.charset.StandardCharsets;
 
-/**
- * @author aNNiMON
- */
+
 public final class BinaryExpression implements Expression {
 
     private final Expression expr1, expr2;
