@@ -16,6 +16,7 @@ public final class Lexer {
     private static final String OPERATOR_CHARS = "+-*/()=:<>";
     private static final Map<String, TokenType> OPERATORS;
     private static final Map<String, TokenType> KEYWORDS;
+    private static final Map<String, TokenType> BOOLOPER;
 
     static {
         OPERATORS = new HashMap<>();
@@ -46,6 +47,12 @@ public final class Lexer {
         KEYWORDS.put("and", TokenType.AND);
         KEYWORDS.put("not", TokenType.NOT);
         KEYWORDS.put("in", TokenType.IN);
+    }
+    static {
+        BOOLOPER = new HashMap<>();
+        BOOLOPER.put("and", TokenType.AND);
+        BOOLOPER.put("or", TokenType.OR);
+        BOOLOPER.put("not", TokenType.NOT);
     }
 
     private final String input;
@@ -177,6 +184,8 @@ public final class Lexer {
         final String word = buffer.toString();
         if (KEYWORDS.containsKey(word))
             addToken(KEYWORDS.get(word));
+        else if(BOOLOPER.containsKey(word))
+            addToken(BOOLOPER.get(word));
         else
             addToken(TokenType.WORD, word);
     }
