@@ -6,7 +6,6 @@ import com.timsystem.lib.Token;
 import com.timsystem.lib.TokenType;
 import java.util.List;
 
-
 public final class Parser {
     private static final Token EOF = new Token(TokenType.EOF, "");
 
