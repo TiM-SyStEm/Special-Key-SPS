@@ -1,1 +1,1 @@
-out : 5
+if (40 < 50 and 50 <= 60) out : "true"
