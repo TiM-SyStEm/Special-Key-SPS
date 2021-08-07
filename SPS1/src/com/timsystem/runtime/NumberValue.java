@@ -13,6 +13,10 @@ public final class NumberValue implements Value {
         this.value = value;
     }
 
+    public NumberValue(boolean value) {
+        this.value = value ? 1 : 0;
+    }
+
     public static NumberValue fromBoolean(boolean b) {
         return b ? ONE : ZERO;
     }
@@ -24,9 +28,7 @@ public final class NumberValue implements Value {
     public static NumberValue of(Number value) {
         return new NumberValue(value);
     }
-    public NumberValue(boolean value){
-        this.value = value ? 1 : 0;
-    }
+
     @Override
     public Number raw() {
         return value;
@@ -84,6 +86,11 @@ public final class NumberValue implements Value {
             return Long.compare(value.longValue(), other.longValue()) == 0;
         }
         return Integer.compare(value.intValue(), other.intValue()) == 0;
+    }
+
+    @Override
+    public boolean asBool() {
+        return value.intValue() == 1;
     }
 
     @Override

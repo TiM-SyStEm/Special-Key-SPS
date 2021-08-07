@@ -15,19 +15,6 @@ public class AddStatement implements Statement {
         this.arg = arg;
     }
 
-    @Override
-    public void execute() {
-        if (arg.equals("stl"))
-            STL.inject();
-        else {
-            try {
-                Handler.handle(readSource(arg));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     public static String readSource(String name) throws IOException {
         InputStream is = AddStatement.class.getResourceAsStream("/" + name);
         if (is != null) return readAndCloseStream(is);
@@ -46,6 +33,19 @@ public class AddStatement implements Statement {
         }
         is.close();
         return result.toString("UTF-8");
+    }
+
+    @Override
+    public void execute() {
+        if (arg.equals("stl"))
+            STL.inject();
+        else {
+            try {
+                Handler.handle(readSource(arg));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override

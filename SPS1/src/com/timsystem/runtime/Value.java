@@ -6,4 +6,6 @@ public interface Value {
     double asNumber();
 
     int asInt();
+
+    boolean asBool();
 }

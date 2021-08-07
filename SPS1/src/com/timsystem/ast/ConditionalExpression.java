@@ -5,14 +5,11 @@ import com.timsystem.runtime.NumberValue;
 import com.timsystem.runtime.StringValue;
 import com.timsystem.runtime.Value;
 
-import java.nio.charset.StandardCharsets;
-
 public final class ConditionalExpression implements Expression {
-
     private final Expression expr1, expr2;
-    private final char operation;
+    private final Operator operation;
 
-    public ConditionalExpression(char operation, Expression expr1, Expression expr2) {
+    public ConditionalExpression(Operator operation, Expression expr1, Expression expr2) {
         this.operation = operation;
         this.expr1 = expr1;
         this.expr2 = expr2;
@@ -23,32 +20,59 @@ public final class ConditionalExpression implements Expression {
     }
 
     private NumberValue eval(Value value1, Value value2) {
+        boolean result;
         if (value1 instanceof StringValue) {
             return eval((StringValue) value1, value2);
         } else {
             double value1n = value1.asNumber();
             double value2n = value2.asNumber();
+
             switch (operation) {
-                case '<':
-                    return new NumberValue(value1n < value2n);
-                case '>':
-                    return new NumberValue(value1n > value2n);
-                case '=':
+                case LT:
+                    result = value1n < value2n;
+                    break;
+                case LTEQ:
+                    result = value1n <= value2n;
+                    break;
+                case GT:
+                    result = value1n > value2n;
+                    break;
+                case GTEQ:
+                    result = value1n >= value2n;
+                    break;
+                case NOT_EQUALS:
+                    result = value1n != value2n;
+                    break;
+                case AND:
+                    result = (value1n != 0) && (value2n != 0);
+                    break;
+                case OR:
+                    result = (value1n != 0) || (value2n != 0);
+                    break;
+                case EQUALS:
                 default:
-                    return new NumberValue(value1n == value2n);
+                    result = value1n == value2n;
+                    break;
             }
         }
+        return new NumberValue(result);
     }
 
     private NumberValue eval(StringValue value1, Value value2) {
         String value = value1.decode();
         switch (operation) {
-            case '=':
+            case EQUALS:
                 return new NumberValue(value.equals(value2.toString()));
-            case '>':
-                return new NumberValue(value.compareTo(value2.toString()) > 0);
-            case '<':
+            case LT:
                 return new NumberValue(value.compareTo(value2.toString()) < 0);
+            case LTEQ:
+                return new NumberValue(value.compareTo(value2.toString()) <= 0);
+            case GT:
+                return new NumberValue(value.compareTo(value2.toString()) > 0);
+            case GTEQ:
+                return new NumberValue(value.compareTo(value2.toString()) >= 0);
+            case NOT_EQUALS:
+                return new NumberValue(value.compareTo(value2.toString()) != 0);
             default:
                 throw new SPKException("UnsupportedOperationException", "Unsupported operation '" + operation + " for strings");
         }
@@ -56,6 +80,17 @@ public final class ConditionalExpression implements Expression {
 
     @Override
     public String toString() {
-        return String.format("%s %c %s", expr1, operation, expr2);
+        return String.format("%s %s %s", expr1, operation.name(), expr2);
+    }
+
+    public enum Operator {
+        EQUALS,
+        NOT_EQUALS,
+        LT,
+        LTEQ,
+        GT,
+        GTEQ,
+        AND,
+        OR
     }
 }

@@ -10,7 +10,6 @@ import java.util.List;
 
 
 public final class Parser {
-
     private static final Token EOF = new Token(TokenType.EOF, "");
 
     private final List<Token> tokens;
@@ -30,27 +29,8 @@ public final class Parser {
         }
         return result;
     }
-    private Expression conditional(){
-        Expression result = additive();
 
-        while (true) {
-            if (match(TokenType.EQ)) {
-                result = new ConditionalExpression('=', result, additive());
-                continue;
-            }
-            if (match(TokenType.LT)) {
-                result = new ConditionalExpression('<', result, additive());
-                continue;
-            }
-            else if (match(TokenType.GT)) {
-                result = new ConditionalExpression('>', result, additive());
-                continue;
-            }
-            break;
-        }
 
-        return result;
-    }
     private Statement statement() {
         Token current = get(0);
         if (match(TokenType.OUT)) {
@@ -62,6 +42,9 @@ public final class Parser {
         if (match(TokenType.VAR)) {
             return assignmentStatement();
         }
+        if (match(TokenType.IF)) {
+            return ifElse();
+        }
         return reAssignmentStatement();
     }
 
@@ -72,7 +55,7 @@ public final class Parser {
             consume(TokenType.EQ);
             return new ReAssignmentStatement(variable, expression());
         }
-        throw new SPKException("StatementError", String.format("unknown statement '%s'", current.getText()));
+        throw new SPKException("StatementError", String.format("unknown statement '%s'", current.getType()));
     }
 
     private Statement outStatement() {
@@ -87,9 +70,92 @@ public final class Parser {
         return new AssignmentStatement(variable, expression());
     }
 
+    private Statement ifElse() {
+        final Expression conditional = expression();
+        final Statement ifStatement = statement();
+        final Statement elseStatement;
+        final Token current = get(0);
+        if (match(TokenType.ELSE)) {
+            elseStatement = statement();
+        } else {
+            elseStatement = null;
+        }
+        return new IfStatement(conditional, ifStatement, elseStatement);
+    }
 
     private Expression expression() {
-        return conditional();
+        return logicIn();
+    }
+
+    private Expression logicIn() {
+        Expression expr = logicOr();
+
+        if (match(TokenType.NOT) && match(TokenType.IN)) {
+            return new UnaryExpression('!', new InExpression(expr, logicOr()));
+        }
+
+        if (match(TokenType.IN)) {
+            return new InExpression(expr, expression());
+        }
+        return expr;
+    }
+
+    private Expression logicOr() {
+        Expression result = logicAnd();
+        while (true) {
+            if (match(TokenType.OR)) {
+                result = new ConditionalExpression(ConditionalExpression.Operator.OR, result, logicAnd());
+                continue;
+            }
+            break;
+        }
+        return result;
+    }
+
+    private Expression logicAnd() {
+        Expression result = equality();
+        while (true) {
+            if (match(TokenType.AND)) {
+                result = new ConditionalExpression(ConditionalExpression.Operator.AND, result, equality());
+                continue;
+            }
+            break;
+        }
+        return result;
+    }
+
+    private Expression equality() {
+        Expression result = conditional();
+        if (match(TokenType.EQEQ)) {
+            return new ConditionalExpression(ConditionalExpression.Operator.EQUALS, result, conditional());
+        }
+
+        if (match(TokenType.NOTEQ)) {
+            return new ConditionalExpression(ConditionalExpression.Operator.NOT_EQUALS, result, conditional());
+        } else return result;
+    }
+
+    private Expression conditional() {
+        Expression result = additive();
+
+        while (true) {
+            if (match(TokenType.LTEQ)) {
+                result = new ConditionalExpression(ConditionalExpression.Operator.LTEQ, result, additive());
+                continue;
+            } else if (match(TokenType.GTEQ)) {
+                result = new ConditionalExpression(ConditionalExpression.Operator.GTEQ, result, additive());
+                continue;
+            } else if (match(TokenType.LT)) {
+                result = new ConditionalExpression(ConditionalExpression.Operator.LT, result, additive());
+                continue;
+            } else if (match(TokenType.GT)) {
+                result = new ConditionalExpression(ConditionalExpression.Operator.GT, result, additive());
+                continue;
+            }
+            break;
+        }
+
+        return result;
     }
 
     private Expression additive() {
@@ -132,9 +198,11 @@ public final class Parser {
         if (match(TokenType.MINUS)) {
             return new UnaryExpression('-', primary());
         }
-        if (match(TokenType.PLUS)) {
-            return primary();
+
+        if (match(TokenType.NOT)) {
+            return new UnaryExpression('!', primary());
         }
+
         return primary();
     }
 
@@ -153,7 +221,7 @@ public final class Parser {
             match(TokenType.RPAREN);
             return result;
         }
-        throw new SPKException("ExpressionError", String.format("unknown expression '%s'", current.getText()));
+        throw new SPKException("ExpressionError", String.format("unknown expression '%s'", current.getType()));
     }
 
     private Number createNumber(String text, int radix) {

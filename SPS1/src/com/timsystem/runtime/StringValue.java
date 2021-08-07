@@ -30,6 +30,11 @@ public class StringValue implements Value {
     }
 
     @Override
+    public boolean asBool() {
+        return decode() != "" ? true : false;
+    }
+
+    @Override
     public String toString() {
         return new String(string);
     }
