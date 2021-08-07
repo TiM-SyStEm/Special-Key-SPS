@@ -44,6 +44,9 @@ public final class Lexer {
         KEYWORDS.put("var", TokenType.VAR);
         KEYWORDS.put("if", TokenType.IF);
         KEYWORDS.put("else", TokenType.ELSE);
+        KEYWORDS.put("and", TokenType.AND);
+        KEYWORDS.put("not", TokenType.NOT);
+        KEYWORDS.put("in", TokenType.IN);
     }
     static {
         BOOLOPER = new HashMap<>();

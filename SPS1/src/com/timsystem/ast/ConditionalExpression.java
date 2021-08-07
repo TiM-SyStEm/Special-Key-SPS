@@ -5,23 +5,7 @@ import com.timsystem.runtime.NumberValue;
 import com.timsystem.runtime.StringValue;
 import com.timsystem.runtime.Value;
 
-import java.nio.charset.StandardCharsets;
-
 public final class ConditionalExpression implements Expression {
-    public enum Operator{
-        PLUS,
-        MINUS,
-        MULTIPLY,
-        DEVIDE,
-        EQUALS,
-        NOT_EQUALS,
-        LT,
-        LTEQ,
-        GT,
-        GTEQ,
-        AND,
-        OR
-    }
     private final Expression expr1, expr2;
     private final Operator operation;
 
@@ -97,5 +81,16 @@ public final class ConditionalExpression implements Expression {
     @Override
     public String toString() {
         return String.format("%s %s %s", expr1, operation.name(), expr2);
+    }
+
+    public enum Operator {
+        EQUALS,
+        NOT_EQUALS,
+        LT,
+        LTEQ,
+        GT,
+        GTEQ,
+        AND,
+        OR
     }
 }

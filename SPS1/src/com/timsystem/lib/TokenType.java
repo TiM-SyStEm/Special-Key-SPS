@@ -24,6 +24,7 @@ public enum TokenType {
     GT,
     IF,
     ELSE,
+    IN,
     // Keywords
     OUT,
     ADD,

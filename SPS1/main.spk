@@ -1,1 +1,8 @@
-if (40 < 50 and 50 <= 60) out : "true"
+if ("a" in "abc") out : "a in abc"
+
+if ("a" in "integer") out : "a in integer"
+else out : "a in not integer"
+
+out : "a" not in "bc"
+if ("a" not in "bc") out : "a not in bc"
+else out : "a in bc"

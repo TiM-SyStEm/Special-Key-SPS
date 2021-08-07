@@ -16,7 +16,8 @@ public final class ReAssignmentStatement implements Statement {
 
     @Override
     public void execute() {
-        if (!Variables.isExists(variable)) throw new SPKException("ReAssignmentError", "Trying to re-assign variable that doesnt exists");
+        if (!Variables.isExists(variable))
+            throw new SPKException("ReAssignmentError", "Trying to re-assign variable that doesnt exists");
         final Value result = expression.eval();
         Variables.set(variable, result);
     }
