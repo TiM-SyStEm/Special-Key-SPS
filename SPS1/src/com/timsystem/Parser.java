@@ -4,6 +4,7 @@ import com.timsystem.ast.*;
 import com.timsystem.lib.SPKException;
 import com.timsystem.lib.Token;
 import com.timsystem.lib.TokenType;
+import jdk.nashorn.internal.ir.Block;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,28 +23,38 @@ public final class Parser {
         size = tokens.size();
     }
 
-    public List<Statement> parse() {
-        final List<Statement> result = new ArrayList<>();
+    public BlockStatement parse() {
+        final BlockStatement result = new BlockStatement();
         while (!match(TokenType.EOF)) {
             result.add(statement());
         }
         return result;
     }
 
-
+    private Statement block(){
+        final BlockStatement block = new BlockStatement();
+        consume(TokenType.LBRACE);
+        while (!match(TokenType.RBRACE)) {
+            block.add(statement());
+        }
+        return block;
+    }
     private Statement statement() {
         Token current = get(0);
         if (match(TokenType.OUT)) {
             return outStatement();
         }
-        if (match(TokenType.ADD)) {
+        else if (match(TokenType.ADD)) {
             return new AddStatement(consume(TokenType.WORD).getText());
         }
-        if (match(TokenType.VAR)) {
+        else if (match(TokenType.VAR)) {
             return assignmentStatement();
         }
-        if (match(TokenType.IF)) {
+        else if (match(TokenType.IF)) {
             return ifElse();
+        }
+        else if(match(TokenType.WHILE)){
+            return whileStatement();
         }
         return reAssignmentStatement();
     }
@@ -69,20 +80,27 @@ public final class Parser {
         consume(TokenType.EQ);
         return new AssignmentStatement(variable, expression());
     }
-
+    private Statement statementOrBlock(){
+        if(get(0).getType() == TokenType.LBRACE) return block();
+        else return statement();
+    }
     private Statement ifElse() {
         final Expression conditional = expression();
-        final Statement ifStatement = statement();
+        final Statement ifStatement = statementOrBlock();
         final Statement elseStatement;
         final Token current = get(0);
         if (match(TokenType.ELSE)) {
-            elseStatement = statement();
+            elseStatement = statementOrBlock();
         } else {
             elseStatement = null;
         }
         return new IfStatement(conditional, ifStatement, elseStatement);
     }
-
+    private Statement whileStatement(){
+        final Expression conditional = expression();
+        final Statement statement = statementOrBlock();
+        return new WhileStatement(conditional, statement);
+    }
     private Expression expression() {
         return logicIn();
     }

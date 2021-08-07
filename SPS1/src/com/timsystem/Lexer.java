@@ -13,7 +13,7 @@ import static java.lang.Character.isDigit;
 import static java.lang.Character.toLowerCase;
 
 public final class Lexer {
-    private static final String OPERATOR_CHARS = "+-*/()=:<>";
+    private static final String OPERATOR_CHARS = "+-*/(){}=:<>";
     private static final Map<String, TokenType> OPERATORS;
     private static final Map<String, TokenType> KEYWORDS;
     private static final Map<String, TokenType> BOOLOPER;
@@ -26,6 +26,8 @@ public final class Lexer {
         OPERATORS.put("/", TokenType.SLASH);
         OPERATORS.put("(", TokenType.LPAREN);
         OPERATORS.put(")", TokenType.RPAREN);
+        OPERATORS.put("{", TokenType.LBRACE);
+        OPERATORS.put("}", TokenType.RBRACE);
         OPERATORS.put("=", TokenType.EQ);
         OPERATORS.put(":", TokenType.COLON);
         OPERATORS.put("<", TokenType.LT);
@@ -47,6 +49,8 @@ public final class Lexer {
         KEYWORDS.put("and", TokenType.AND);
         KEYWORDS.put("not", TokenType.NOT);
         KEYWORDS.put("in", TokenType.IN);
+        KEYWORDS.put("while", TokenType.WHILE);
+        KEYWORDS.put("for", TokenType.FOR);
     }
     static {
         BOOLOPER = new HashMap<>();
