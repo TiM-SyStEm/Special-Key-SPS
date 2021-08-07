@@ -13,10 +13,9 @@ import static java.lang.Character.isDigit;
 import static java.lang.Character.toLowerCase;
 
 public final class Lexer {
-    private static final String OPERATOR_CHARS = "+-*/()=:<>";
+    private static final String OPERATOR_CHARS = "+-*/(){}=:<>";
     private static final Map<String, TokenType> OPERATORS;
     private static final Map<String, TokenType> KEYWORDS;
-    private static final Map<String, TokenType> BOOLOPER;
 
     static {
         OPERATORS = new HashMap<>();
@@ -26,6 +25,8 @@ public final class Lexer {
         OPERATORS.put("/", TokenType.SLASH);
         OPERATORS.put("(", TokenType.LPAREN);
         OPERATORS.put(")", TokenType.RPAREN);
+        OPERATORS.put("{", TokenType.LBRACE);
+        OPERATORS.put("}", TokenType.RBRACE);
         OPERATORS.put("=", TokenType.EQ);
         OPERATORS.put(":", TokenType.COLON);
         OPERATORS.put("<", TokenType.LT);
@@ -47,13 +48,10 @@ public final class Lexer {
         KEYWORDS.put("and", TokenType.AND);
         KEYWORDS.put("not", TokenType.NOT);
         KEYWORDS.put("in", TokenType.IN);
+        KEYWORDS.put("while", TokenType.WHILE);
+        KEYWORDS.put("for", TokenType.FOR);
     }
-    static {
-        BOOLOPER = new HashMap<>();
-        BOOLOPER.put("and", TokenType.AND);
-        BOOLOPER.put("or", TokenType.OR);
-        BOOLOPER.put("not", TokenType.NOT);
-    }
+
 
     private final String input;
     private final int length;
@@ -184,8 +182,6 @@ public final class Lexer {
         final String word = buffer.toString();
         if (KEYWORDS.containsKey(word))
             addToken(KEYWORDS.get(word));
-        else if(BOOLOPER.containsKey(word))
-            addToken(BOOLOPER.get(word));
         else
             addToken(TokenType.WORD, word);
     }

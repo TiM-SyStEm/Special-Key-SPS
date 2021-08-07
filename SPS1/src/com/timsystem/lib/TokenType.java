@@ -25,6 +25,10 @@ public enum TokenType {
     IF,
     ELSE,
     IN,
+    LBRACE,
+    RBRACE,
+    WHILE,
+    FOR,
     // Keywords
     OUT,
     ADD,
