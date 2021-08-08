@@ -52,6 +52,9 @@ public final class Parser {
         else if(match(TokenType.WHILE)){
             return whileStatement();
         }
+        if (match(TokenType.FOR)) {
+            return forStatement();
+        }
         return reAssignmentStatement();
     }
 
@@ -96,6 +99,15 @@ public final class Parser {
         final Expression conditional = expression();
         final Statement statement = statementOrBlock();
         return new WhileStatement(conditional, statement);
+    }
+    private Statement forStatement(){
+        final Statement initialization = assignmentStatement();
+        consume(TokenType.COMMA);
+        final Expression termination = expression();
+        consume(TokenType.COMMA);
+        final Statement increment = assignmentStatement();
+        final Statement statement = statementOrBlock();
+        return new ForStatement(initialization, termination, increment, statement);
     }
     private Expression expression() {
         return logicIn();
@@ -255,7 +267,6 @@ public final class Parser {
         final Token current = get(0);
         if (type != current.getType())
             throw new SPKException("TokenError", "Token '" + current.getText() + "' doesn't match " + type);
-        //    throw new RuntimeException("Token " + current + " doesn't match " + type);
         pos++;
         return current;
     }

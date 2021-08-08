@@ -29,6 +29,7 @@ public enum TokenType {
     RBRACE,
     WHILE,
     FOR,
+    COMMA,
     // Keywords
     OUT,
     ADD,
