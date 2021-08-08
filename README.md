@@ -28,7 +28,7 @@ See more about it!
 
 ## Roadmap
 Our small roadmap
-* Add conditions
+* __Add conditions__
 * Add loops
 * Add functions
 * Add modules
