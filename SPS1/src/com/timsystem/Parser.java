@@ -4,11 +4,7 @@ import com.timsystem.ast.*;
 import com.timsystem.lib.SPKException;
 import com.timsystem.lib.Token;
 import com.timsystem.lib.TokenType;
-import jdk.nashorn.internal.ir.Block;
-
-import java.util.ArrayList;
 import java.util.List;
-
 
 public final class Parser {
     private static final Token EOF = new Token(TokenType.EOF, "");
@@ -227,7 +223,7 @@ public final class Parser {
     private Expression primary() {
         final Token current = get(0);
         if (match(TokenType.NUMBER)) {
-            return new ValueExpression(createNumber(current.getText(), 32));
+            return new ValueExpression(createNumber(current.getText(), 16));
         } else if (match(TokenType.HEX_NUMBER)) {
             return new ValueExpression(createNumber(current.getText(), 32));
         } else if (match(TokenType.WORD)) {
@@ -249,9 +245,9 @@ public final class Parser {
         }
         // Integer
         try {
-            return Integer.parseInt(text, radix);
+            return Integer.parseInt(text);
         } catch (NumberFormatException nfe) {
-            return Long.parseLong(text, radix);
+            return Long.parseLong(text);
         }
     }
 

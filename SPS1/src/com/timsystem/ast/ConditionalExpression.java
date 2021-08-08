@@ -20,6 +20,7 @@ public final class ConditionalExpression implements Expression {
     }
 
     private NumberValue eval(Value value1, Value value2) {
+        // System.out.println(value1 + " | " + value2);
         boolean result;
         if (value1 instanceof StringValue) {
             return eval((StringValue) value1, value2);

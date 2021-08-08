@@ -12,14 +12,14 @@ public class Main {
         return "SPS1";
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println("================");
         System.out.println("Special Key " + getVer());
         System.out.println("================\n");
         while (true) {
             System.out.print("$>");
-            Scanner inp = new Scanner(System.in);
-            String cmd = inp.nextLine();
+            BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
+            String cmd = sc.readLine();
 
             if (cmd.contains("comp ")) {
                 String path = cmd.contains(".spk") ?
