@@ -12,6 +12,9 @@ public class Handler {
     public static void handle(String input) {
         try {
             final List<Token> tokens = new Lexer(input).tokenize();
+            for(Token token : tokens){
+                System.out.println(token.toString());
+            }
             final BlockStatement program = new Parser(tokens).parse();
             program.execute();
             Variables.clear();
