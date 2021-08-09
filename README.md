@@ -28,11 +28,13 @@ See more about it!
 
 ## Roadmap
 Our small roadmap
-* Add conditions
 * Add loops
 * Add functions
+* Add stl lib
 * Add modules
-* Extend Roadmap =D
+* Extend stl lib
+* Add new function for Special Key IDE
+* Redesign site
 ## Usage
 Special Key shell provides you some functions to run code
 
