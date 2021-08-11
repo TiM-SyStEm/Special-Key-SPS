@@ -1,23 +1,21 @@
 package com.timsystem.ast;
 
-public class WhileStatement implements Statement {
-    private final Expression condition;
+public class DoStatement implements Statement {
     private final Statement statement;
 
-    public WhileStatement(Expression condition, Statement statement) {
-        this.condition = condition;
+    public DoStatement(Statement statement) {
         this.statement = statement;
     }
 
     @Override
     public void execute() {
-        while (condition.eval().asNumber() != 0){
+        while (true){
             try{statement.execute();}
             catch (StopStatement st){break;}
         }
     }
     @Override
     public String toString(){
-        return "while " + condition + " " + statement;
+        return "do " + statement;
     }
 }

@@ -52,10 +52,24 @@ public final class Parser {
         else if(match(TokenType.WHILE)){
             return whileStatement();
         }
-        if (match(TokenType.FOR)) {
+        else if(match(TokenType.DO)){
+            return doStatement();
+        }
+        else if (match(TokenType.FOR)) {
+            return forStatement();
+        }
+        else if (match(TokenType.STOP)) {
+            return new StopStatement();
+        }
+        else if (match(TokenType.CONTINUE)) {
             return forStatement();
         }
         return reAssignmentStatement();
+    }
+
+    private Statement doStatement() {
+        final Statement statement = statementOrBlock();
+        return new DoStatement(statement);
     }
 
     private Statement reAssignmentStatement() {

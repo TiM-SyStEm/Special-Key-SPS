@@ -53,6 +53,9 @@ public final class Lexer {
         KEYWORDS.put("in", TokenType.IN);
         KEYWORDS.put("while", TokenType.WHILE);
         KEYWORDS.put("for", TokenType.FOR);
+        KEYWORDS.put("do", TokenType.DO);
+        KEYWORDS.put("stop", TokenType.STOP);
+        KEYWORDS.put("continue", TokenType.CONTINUE);
     }
 
 

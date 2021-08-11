@@ -1,3 +1,7 @@
-var i = 2
-i++
-out : i
+var test = 0
+do{
+    if (test != 5){
+        test = test + 1
+    }
+    else stop
+}
