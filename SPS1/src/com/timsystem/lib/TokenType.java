@@ -30,6 +30,8 @@ public enum TokenType {
     WHILE,
     FOR,
     COMMA,
+    INC,
+    DEC,
     // Keywords
     OUT,
     ADD,
