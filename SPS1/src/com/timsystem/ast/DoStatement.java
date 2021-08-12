@@ -12,6 +12,7 @@ public class DoStatement implements Statement {
         while (true){
             try{statement.execute();}
             catch (StopStatement st){break;}
+            catch (ContinueStatement ct){continue;}
         }
     }
     @Override

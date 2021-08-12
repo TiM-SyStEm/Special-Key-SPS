@@ -18,6 +18,7 @@ public class ForStatement implements Statement{
         for (initialization.execute(); termination.eval().asNumber() != 0; increment.execute()) {
             try{statement.execute();}
             catch (StopStatement st){break;}
+            catch (ContinueStatement ct){continue;}
         }
     }
 

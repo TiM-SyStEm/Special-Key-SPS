@@ -13,7 +13,7 @@ import static java.lang.Character.isDigit;
 import static java.lang.Character.toLowerCase;
 
 public final class Lexer {
-    private static final String OPERATOR_CHARS = "+-*/(){}=:<>,";
+    private static final String OPERATOR_CHARS = "+-*/(){}=:<>,!^";
     private static final Map<String, TokenType> OPERATORS;
     private static final Map<String, TokenType> KEYWORDS;
 
@@ -32,6 +32,7 @@ public final class Lexer {
         OPERATORS.put("<", TokenType.LT);
         OPERATORS.put(">", TokenType.GT);
         OPERATORS.put(",", TokenType.COMMA);
+        OPERATORS.put("^", TokenType.POW);
 
         OPERATORS.put("!=", TokenType.NOTEQ);
         OPERATORS.put("==", TokenType.EQEQ);

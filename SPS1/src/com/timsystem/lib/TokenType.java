@@ -34,6 +34,7 @@ public enum TokenType {
     INC,
     DEC,
     STOP,
+    POW,
     CONTINUE,
     // Keywords
     OUT,

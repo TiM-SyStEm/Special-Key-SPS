@@ -1,7 +1,2 @@
-var test = 0
-do{
-    if (test != 5){
-        test = test + 1
-    }
-    else stop
-}
+Add stl
+out : 2 ^ 2

@@ -62,7 +62,10 @@ public final class Parser {
             return new StopStatement();
         }
         else if (match(TokenType.CONTINUE)) {
-            return forStatement();
+            return new ContinueStatement();
+        }
+        else if (get(0).getType() == TokenType.WORD && get(1).getType() == TokenType.LPAREN) {
+            return new FunctionStatement(function());
         }
         return reAssignmentStatement();
     }
@@ -125,6 +128,16 @@ public final class Parser {
         match(TokenType.RPAREN);
         final Statement statement = statementOrBlock();
         return new ForStatement(initialization, termination, increment, statement);
+    }
+    private FunctionalExpression function() {
+        final String name = consume(TokenType.WORD).getText();
+        consume(TokenType.LPAREN);
+        final FunctionalExpression function = new FunctionalExpression(name);
+        while (!match(TokenType.RPAREN)) {
+            function.addArgument(expression());
+            match(TokenType.COMMA);
+        }
+        return function;
     }
     private Expression expression() {
         return logicIn();
@@ -209,7 +222,7 @@ public final class Parser {
                 result = new BinaryExpression('+', result, multiplicative());
                 continue;
             }
-            if (match(TokenType.MINUS)) {
+            else if (match(TokenType.MINUS)) {
                 result = new BinaryExpression('-', result, multiplicative());
                 continue;
             }
@@ -227,8 +240,12 @@ public final class Parser {
                 result = new BinaryExpression('*', result, unary());
                 continue;
             }
-            if (match(TokenType.SLASH)) {
+            else if (match(TokenType.SLASH)) {
                 result = new BinaryExpression('/', result, unary());
+                continue;
+            }
+            else if (match(TokenType.POW)) {
+                result = new BinaryExpression('^', result, unary());
                 continue;
             }
             break;
@@ -255,6 +272,8 @@ public final class Parser {
             return new ValueExpression(createNumber(current.getText(), 16));
         } else if (match(TokenType.HEX_NUMBER)) {
             return new ValueExpression(createNumber(current.getText(), 32));
+        } else if (get(0).getType() == TokenType.WORD && get(1).getType() == TokenType.LPAREN) {
+            return function();
         } else if (match(TokenType.WORD)) {
             return new VariableExpression(current.getText());
         } else if (match(TokenType.STRING)) {

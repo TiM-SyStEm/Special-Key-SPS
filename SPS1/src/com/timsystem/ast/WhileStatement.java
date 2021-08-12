@@ -14,6 +14,7 @@ public class WhileStatement implements Statement {
         while (condition.eval().asNumber() != 0){
             try{statement.execute();}
             catch (StopStatement st){break;}
+            catch (ContinueStatement ct){continue;}
         }
     }
     @Override
