@@ -2,6 +2,8 @@ package com.timsystem.runtime;
 
 import com.timsystem.lib.SPKException;
 
+import java.nio.charset.StandardCharsets;
+
 public class StringValue implements Value {
 
     private final byte[] string;

@@ -4,13 +4,16 @@ import com.timsystem.lib.SPKException;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 
 public final class Variables {
 
-    private static final Map<String, Value> variables;
+    private static final Stack<Map<String, Value>> stack;
+    private static Map<String, Value> variables;
 
     static {
+        stack = new Stack<>();
         variables = new HashMap<>();
     }
 
@@ -30,5 +33,12 @@ public final class Variables {
 
     public static void clear() {
         variables.clear();
+    }
+    public static void push() {
+        stack.push(new HashMap<>(variables));
+    }
+
+    public static void pop() {
+        variables = stack.pop();
     }
 }

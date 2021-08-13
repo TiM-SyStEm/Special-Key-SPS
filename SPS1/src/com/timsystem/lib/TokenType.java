@@ -38,8 +38,10 @@ public enum TokenType {
     CONTINUE,
     // Keywords
     OUT,
+    INPUT,
     ADD,
     VAR,
-
+    FUN,
+    RETURN,
     WORD
 }

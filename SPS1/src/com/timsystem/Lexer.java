@@ -45,8 +45,11 @@ public final class Lexer {
     static {
         KEYWORDS = new HashMap<>();
         KEYWORDS.put("out", TokenType.OUT);
+        KEYWORDS.put("input", TokenType.INPUT);
         KEYWORDS.put("Add", TokenType.ADD);
         KEYWORDS.put("var", TokenType.VAR);
+        KEYWORDS.put("fun", TokenType.FUN);
+        KEYWORDS.put("return", TokenType.RETURN);
         KEYWORDS.put("if", TokenType.IF);
         KEYWORDS.put("else", TokenType.ELSE);
         KEYWORDS.put("and", TokenType.AND);

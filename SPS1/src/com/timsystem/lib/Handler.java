@@ -4,6 +4,7 @@ import com.timsystem.Lexer;
 import com.timsystem.Parser;
 import com.timsystem.ast.BlockStatement;
 import com.timsystem.ast.Statement;
+import com.timsystem.runtime.Functions;
 import com.timsystem.runtime.Variables;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class Handler {
             final BlockStatement program = new Parser(tokens).parse();
             program.execute();
             Variables.clear();
+            Functions.clear();
         } catch (SPKException ex) {
             System.out.println(String.format("%s: %s", ex.getType(), ex.getText()));
             Variables.clear();

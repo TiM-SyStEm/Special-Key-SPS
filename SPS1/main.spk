@@ -1,2 +1,2 @@
-Add stl
-out : 2 ^ 2
+var num = input : "num: "
+out : num

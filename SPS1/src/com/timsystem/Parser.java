@@ -4,6 +4,8 @@ import com.timsystem.ast.*;
 import com.timsystem.lib.SPKException;
 import com.timsystem.lib.Token;
 import com.timsystem.lib.TokenType;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public final class Parser {
@@ -40,11 +42,17 @@ public final class Parser {
         if (match(TokenType.OUT)) {
             return outStatement();
         }
+        else if (match(TokenType.INPUT)) {
+            return inputStatement();
+        }
         else if (match(TokenType.ADD)) {
             return new AddStatement(consume(TokenType.WORD).getText());
         }
         else if (match(TokenType.VAR)) {
             return assignmentStatement();
+        }
+        else if(match(TokenType.FUN)){
+            return functionCreate();
         }
         else if (match(TokenType.IF)) {
             return ifElse();
@@ -63,6 +71,9 @@ public final class Parser {
         }
         else if (match(TokenType.CONTINUE)) {
             return new ContinueStatement();
+        }
+        else if (match(TokenType.RETURN)) {
+            return new ReturnStatement(expression());
         }
         else if (get(0).getType() == TokenType.WORD && get(1).getType() == TokenType.LPAREN) {
             return new FunctionStatement(function());
@@ -89,7 +100,10 @@ public final class Parser {
         consume(TokenType.COLON);
         return new OutStatement(expression());
     }
-
+    private Statement inputStatement() {
+        consume(TokenType.COLON);
+        return new InputStatement(expression());
+    }
     private Statement assignmentStatement() {
         final Token current = get(0);
         final String variable = consume(TokenType.WORD).getText();
@@ -129,6 +143,18 @@ public final class Parser {
         final Statement statement = statementOrBlock();
         return new ForStatement(initialization, termination, increment, statement);
     }
+    private FunctionalDefineStatement functionCreate() {
+        final String name = consume(TokenType.WORD).getText();
+        consume(TokenType.LPAREN);
+        final List<String> argNames = new ArrayList<>();
+        while (!match(TokenType.RPAREN)) {
+            argNames.add(consume(TokenType.WORD).getText());
+            match(TokenType.COMMA);
+        }
+        final Statement body = statementOrBlock();
+        return new FunctionalDefineStatement(name, argNames, body);
+    }
+
     private FunctionalExpression function() {
         final String name = consume(TokenType.WORD).getText();
         consume(TokenType.LPAREN);
@@ -265,7 +291,6 @@ public final class Parser {
 
         return primary();
     }
-
     private Expression primary() {
         final Token current = get(0);
         if (match(TokenType.NUMBER)) {
