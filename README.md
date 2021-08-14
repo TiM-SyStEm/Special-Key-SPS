@@ -28,12 +28,11 @@ See more about it!
 
 ## Roadmap
 Our small roadmap
-* Add loops
-* Add functions
-* Add stl lib
-* Add modules
-* Extend stl lib
-* Add new function for Special Key IDE
+* Add modules from cwd
+* one-dimensional array
+* multidimensional array
+* design template "Visitor"
+* optimization
 * Redesign site
 ## Usage
 Special Key shell provides you some functions to run code

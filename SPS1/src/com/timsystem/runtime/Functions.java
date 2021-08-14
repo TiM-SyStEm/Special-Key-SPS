@@ -31,4 +31,4 @@ public class Functions {
     public static void clear() {
         functions.clear();
     }
-}
+}}
