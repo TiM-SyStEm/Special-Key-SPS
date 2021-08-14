@@ -44,15 +44,18 @@ public class STL {
             return new NumberValue(args[0].asNumber() + (int) (Math.random() * args[1].asNumber()));
         });
         Functions.functions.put("Array", (args) -> {
-            if (args.length < 1) throw new SPKException("ArgumentError", "Expected at least 1 argument, got " + args.length);
+            if (args.length == 0) return new ArrayValue(new Value[] {});
             ArrayValue result = new ArrayValue(new Value[] {});
             // System.out.println(args[0]); // Это было нужно для дебага
-            for (Value x : ((ArrayValue) args[0]).array()) {
-                result.append(x);
-            }
-            List<Value> temporal = Arrays.asList(args);
-            Value[] slice = temporal.subList(1, temporal.size()).toArray(new Value[0]);
-            for (Value x : slice) {
+            //for (Value x : ((ArrayValue) args[0]).array()) {
+            //    result.append(x);
+            //}
+            //List<Value> temporal = Arrays.asList(args);
+            //Value[] slice = temporal.subList(1, temporal.size()).toArray(new Value[0]);
+            //for (Value x : slice) {
+            //result.append(x);
+            //}
+            for (Value x : args) {
                 result.append(x);
             }
             return result;
