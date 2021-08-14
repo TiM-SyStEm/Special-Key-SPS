@@ -59,5 +59,4 @@ public class STL {
             Arguments.check(1, args.length);
             return new StringValue(args[0].asString().getBytes(StandardCharsets.UTF_8));
         });
-    }
-}
+    
