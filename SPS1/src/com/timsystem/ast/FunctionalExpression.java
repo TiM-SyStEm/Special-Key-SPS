@@ -1,11 +1,9 @@
 package com.timsystem.ast;
 
+import com.timsystem.lib.Arguments;
 import com.timsystem.lib.Function;
 import com.timsystem.lib.SPKException;
-import com.timsystem.runtime.Functions;
-import com.timsystem.runtime.UserDefinedFunction;
-import com.timsystem.runtime.Value;
-import com.timsystem.runtime.Variables;
+import com.timsystem.runtime.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,10 +31,10 @@ public class FunctionalExpression implements Expression{
             values[i] = arguments.get(i).eval();
         }
 
-        final Function function = Functions.get(name);
+        final Function function = getFunction(name);
         if (function instanceof UserDefinedFunction) {
             final UserDefinedFunction userFunction = (UserDefinedFunction) function;
-            if (size != userFunction.getArgsCount()) throw new SPKException("SyntaxError", "Args count mismatch");
+            Arguments.check(userFunction.getArgsCount(), size);
 
             Variables.push();
             for (int i = 0; i < size; i++) {
@@ -48,6 +46,16 @@ public class FunctionalExpression implements Expression{
         }
         return function.execute(values);
     }
+
+    private Function getFunction(String key) {
+        if (Functions.isExists(key)) return Functions.get(key);
+        if (Variables.isExists(key)) {
+            final Value value = Variables.get(key);
+            if (value instanceof FunctionValue) return ((FunctionValue)value).getValue();
+        }
+        throw new RuntimeException("Unknown function " + key);
+    }
+
     @Override
     public String toString() {
         return name + "(" + arguments.toString() + ")";

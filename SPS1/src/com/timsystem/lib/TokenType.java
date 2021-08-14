@@ -37,7 +37,9 @@ public enum TokenType {
     DEC,
     STOP,
     POW,
-    CONTINUE,
+
+    MATCH,
+
     // Keywords
     OUT,
     INPUT,
@@ -45,5 +47,6 @@ public enum TokenType {
     VAR,
     FUN,
     RETURN,
+    CONTINUE,
     WORD
 }

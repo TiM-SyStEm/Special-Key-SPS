@@ -42,6 +42,8 @@ public final class Lexer {
         OPERATORS.put("<=", TokenType.LTEQ);
         OPERATORS.put("++", TokenType.INC);
         OPERATORS.put("--", TokenType.DEC);
+
+        OPERATORS.put("=>", TokenType.MATCH);
     }
 
     static {

@@ -1,6 +1,7 @@
 Add stl
 
-var test = Array([1, 1], [4, 8])
-out : test
-out : test[0]
-out : test[1]
+var sum = fun (a, b) {
+    return a + b
+}
+
+out : asString(sum(5, 5))
