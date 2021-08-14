@@ -2,6 +2,8 @@ package com.timsystem.runtime;
 
 import com.timsystem.lib.SPKException;
 
+import java.nio.charset.StandardCharsets;
+
 public class StringValue implements Value {
 
     private final byte[] string;
@@ -18,6 +20,11 @@ public class StringValue implements Value {
     @Override
     public double asNumber() {
         throw new SPKException("TypeError", "Cannot cast string to number");
+    }
+
+    @Override
+    public String asString() {
+        return string.toString();
     }
 
     @Override

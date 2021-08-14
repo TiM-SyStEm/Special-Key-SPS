@@ -34,6 +34,8 @@ public final class BinaryExpression implements Expression {
                 return multiply(value1, value2);
             case '/':
                 return divide(value1, value2);
+            case '^':
+                return pow(value1, value2);
             default:
                 return value1;
         }
@@ -50,7 +52,7 @@ public final class BinaryExpression implements Expression {
         if (value2 instanceof Number) {
             final Number number2 = (Number) value2.raw();
             if (number1 instanceof Double || number2 instanceof Double) {
-                return NumberValue.of(number1.doubleValue() + number2.doubleValue());
+                return NumberValue.of(number1.intValue() + number2.doubleValue());
             }
             if (number1 instanceof Float || number2 instanceof Float) {
                 return NumberValue.of(number1.floatValue() + number2.floatValue());
@@ -192,7 +194,40 @@ public final class BinaryExpression implements Expression {
         }
         return NumberValue.of(number1.intValue() / value2.asInt());
     }
-
+    private Value pow(Value value1, Value value2) {
+        if (value1 instanceof NumberValue)
+            return pow2((NumberValue) value1, (NumberValue) value2);
+        else
+            throw new SPKException("UnsupportedOperationException", "Operation '^' supported only for numbers");
+    }
+    private Value pow2(NumberValue value1, NumberValue value2) {
+        final Number number1 = value1.raw();
+        if (value2 instanceof NumberValue) {
+            // number1 / number2
+            final Number number2 = (Number) value2.raw();
+            if (number1 instanceof Double || number2 instanceof Double) {
+                return NumberValue.of(Math.pow(number1.doubleValue(), number2.doubleValue()));
+            }
+            if (number1 instanceof Float || number2 instanceof Float) {
+                return NumberValue.of(Math.pow(number1.floatValue(), number2.floatValue()));
+            }
+            if (number1 instanceof Long || number2 instanceof Long) {
+                return NumberValue.of(Math.pow(number1.longValue(), number2.longValue()));
+            }
+            return NumberValue.of(Math.pow(number1.intValue(), number2.intValue()));
+        }
+        // number1 / other
+        else if (number1 instanceof Double) {
+            return NumberValue.of(Math.pow(number1.doubleValue(), value2.asNumber()));
+        }
+        else if (number1 instanceof Float) {
+            return NumberValue.of(Math.pow(number1.floatValue(), value2.asNumber()));
+        }
+        else if (number1 instanceof Long) {
+            return NumberValue.of(Math.pow(number1.longValue(), value2.asInt()));
+        }
+        return NumberValue.of(Math.pow(number1.intValue(), value2.asInt()));
+    }
     @Override
     public String toString() {
         return String.format("%s %c %s", expr1, operation, expr2);

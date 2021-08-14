@@ -27,13 +27,23 @@ public enum TokenType {
     IN,
     LBRACE,
     RBRACE,
+    LBRACKET,
+    RBRACKET,
     WHILE,
+    DO,
     FOR,
     COMMA,
+    INC,
+    DEC,
+    STOP,
+    POW,
+    CONTINUE,
     // Keywords
     OUT,
+    INPUT,
     ADD,
     VAR,
-
+    FUN,
+    RETURN,
     WORD
 }

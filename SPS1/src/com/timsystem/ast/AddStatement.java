@@ -1,11 +1,9 @@
 package com.timsystem.ast;
 
 import com.timsystem.lib.Handler;
+import com.timsystem.lib.SPKException;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
 public class AddStatement implements Statement {
 
@@ -16,35 +14,33 @@ public class AddStatement implements Statement {
     }
 
     public static String readSource(String name) throws IOException {
-        InputStream is = AddStatement.class.getResourceAsStream("/" + name);
-        if (is != null) return readAndCloseStream(is);
-
-        is = new FileInputStream(name);
-        return readAndCloseStream(is);
-    }
-
-    public static String readAndCloseStream(InputStream is) throws IOException {
-        final ByteArrayOutputStream result = new ByteArrayOutputStream();
-        final int bufferSize = 1024;
-        final byte[] buffer = new byte[bufferSize];
-        int read;
-        while ((read = is.read(buffer)) != -1) {
-            result.write(buffer, 0, read);
+        try{
+            File file = new File(System.getProperty("user.dir") + "\\modules\\" + name + ".spk");
+            FileReader fr = new FileReader(file);
+            BufferedReader reader = new BufferedReader(fr);
+            String line = reader.readLine();
+            String content = "";
+            while (line != null) {
+                content += line + "\n";
+                line = reader.readLine();
+            }
+            return content;
         }
-        is.close();
-        return result.toString("UTF-8");
+        catch(FileNotFoundException ex){
+            throw new SPKException("ModuleError", "module '" + name + "' is not found");
+        }
     }
 
     @Override
     public void execute() {
-        if (arg.equals("stl"))
+        if (arg.equals("stl")) {
             STL.inject();
-        else {
-            try {
-                Handler.handle(readSource(arg));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            return;
+        }
+        try {
+            Handler.handle(readSource(arg));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

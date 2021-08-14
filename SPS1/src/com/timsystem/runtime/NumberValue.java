@@ -17,6 +17,13 @@ public final class NumberValue implements Value {
         this.value = value ? 1 : 0;
     }
 
+    public NumberValue(double value) {
+        this.value = value;
+    }
+    public NumberValue(int value) {
+        this.value = value;
+    }
+
     public static NumberValue fromBoolean(boolean b) {
         return b ? ONE : ZERO;
     }
@@ -66,6 +73,11 @@ public final class NumberValue implements Value {
     @Override
     public double asNumber() {
         return value.doubleValue();
+    }
+
+    @Override
+    public String asString() {
+        return value.toString();
     }
 
 

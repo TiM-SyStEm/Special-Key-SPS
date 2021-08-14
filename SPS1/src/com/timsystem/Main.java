@@ -6,8 +6,6 @@ import java.io.*;
 import java.util.Scanner;
 
 public class Main {
-    public static boolean stl_import = false;
-
     public static String getVer() {
         return "SPS1";
     }
@@ -35,6 +33,7 @@ public class Main {
                         content += line + "\n";
                         line = reader.readLine();
                     }
+                    Handler.pathToScript = path;
                     Handler.handle(content); // Класс Handler сделан для удобного отлова ошибок
                 } catch (FileNotFoundException e) {
                     System.out.println("File is not found!");
