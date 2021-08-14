@@ -102,7 +102,7 @@ public final class Parser {
     }
     private Statement inputStatement() {
         consume(TokenType.COLON);
-        return new InputStatement(expression());
+        return new StdInput(expression());
     }
     private Statement assignmentStatement() {
         final Token current = get(0);
@@ -166,9 +166,15 @@ public final class Parser {
         return function;
     }
     private Expression expression() {
-        return logicIn();
+        if(match(TokenType.INPUT)) {
+            return inputExpression();
+        }
+        else return logicIn();
     }
-
+    private Expression inputExpression() {
+        consume(TokenType.COLON);
+        return new StdInput(expression());
+    }
     private Expression logicIn() {
         Expression expr = logicOr();
 
