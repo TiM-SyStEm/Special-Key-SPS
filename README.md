@@ -31,7 +31,7 @@ Our small roadmap
 * Add modules from cwd
 * one-dimensional array
 * multidimensional array
-* design template <<Visitor>>
+* design template "Visitor"
 * optimization
 * Redesign site
 ## Usage
