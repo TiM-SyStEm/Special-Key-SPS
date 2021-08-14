@@ -5,7 +5,7 @@ import com.timsystem.lib.SPKException;
 import java.util.Arrays;
 
 public class ArrayValue implements Value{
-    private final Value[] elements;
+    private Value[] elements;
 
     public ArrayValue(int size) {
         this.elements = new Value[size];
@@ -24,13 +24,26 @@ public class ArrayValue implements Value{
         return elements[index];
     }
 
+    public void append(Value expr) {
+        elements = Arrays.copyOf(elements, elements.length + 1);
+        elements[elements.length - 1] = expr;
+    }
+
     public void set(int index, Value value) {
         elements[index] = value;
     }
 
+    public int length() {
+        return elements.length;
+    }
+
+    public Value[] array() {
+        return elements;
+    }
+
     @Override
     public Object raw() {
-        return asString();
+        return toString();
     }
 
     @Override

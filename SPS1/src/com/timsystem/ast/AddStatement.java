@@ -33,14 +33,14 @@ public class AddStatement implements Statement {
 
     @Override
     public void execute() {
-        if (arg.equals("stl"))
+        if (arg.equals("stl")) {
             STL.inject();
-        else {
-            try {
-                Handler.handle(readSource(arg));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            return;
+        }
+        try {
+            Handler.handle(readSource(arg));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
