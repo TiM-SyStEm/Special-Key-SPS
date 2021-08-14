@@ -1,4 +1,6 @@
 Add stl
 
-var test = Array([1,1])
+var test = Array([1, 1], [4, 8])
+out : test
+out : test[0]
 out : test[1]
