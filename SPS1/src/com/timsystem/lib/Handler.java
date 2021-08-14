@@ -20,7 +20,6 @@ public class Handler {
             final BlockStatement program = new Parser(tokens).parse();
             program.execute();
             Variables.clear();
-            Functions.clear();
         } catch (SPKException ex) {
             System.out.println(String.format("%s: %s", ex.getType(), ex.getText()));
             Variables.clear();

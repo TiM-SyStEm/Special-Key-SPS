@@ -40,25 +40,19 @@ public class STL {
             return new NumberValue(Math.round(args[0].asNumber()));
         });
         Functions.functions.put("random", (Value... args) -> {
-            if (args.length != 2) throw new SPKException("ArgumentExpected","One arg expected");
+            if (args.length != 2) throw new SPKException("ArgumentExpected","Two arg expected");
             return new NumberValue(args[0].asNumber() + (int) (Math.random() * args[1].asNumber()));
         });
-        Functions.functions.put("Array", (args) -> {
-            if (args.length == 0) return new ArrayValue(new Value[] {});
-            ArrayValue result = new ArrayValue(new Value[] {});
-            // System.out.println(args[0]); // Это было нужно для дебага
-            //for (Value x : ((ArrayValue) args[0]).array()) {
-            //    result.append(x);
-            //}
-            //List<Value> temporal = Arrays.asList(args);
-            //Value[] slice = temporal.subList(1, temporal.size()).toArray(new Value[0]);
-            //for (Value x : slice) {
-            //result.append(x);
-            //}
-            for (Value x : args) {
-                result.append(x);
+        Functions.functions.put("sleep", (Value... args) -> {
+            if (args.length == 1) {
+                try {
+                    Thread.sleep((long) args[0].asNumber());
+                } catch (InterruptedException ex) {
+                    Thread.currentThread().interrupt();
+                }
             }
-            return result;
+            else throw new SPKException("ArgumentExpected","One arg expected");
+            return NumberValue.ZERO;
         });
     }
 }
