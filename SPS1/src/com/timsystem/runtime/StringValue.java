@@ -23,6 +23,11 @@ public class StringValue implements Value {
     }
 
     @Override
+    public String asString() {
+        return string.toString();
+    }
+
+    @Override
     public int asInt() {
         throw new SPKException("TypeError", "Cannot cast string to number");
     }

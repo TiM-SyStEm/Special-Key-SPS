@@ -27,6 +27,8 @@ public enum TokenType {
     IN,
     LBRACE,
     RBRACE,
+    LBRACKET,
+    RBRACKET,
     WHILE,
     DO,
     FOR,

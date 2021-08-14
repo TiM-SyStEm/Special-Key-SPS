@@ -93,7 +93,15 @@ public final class Parser {
             consume(TokenType.EQ);
             return new ReAssignmentStatement(variable, expression());
         }
-        throw new SPKException("StatementError", String.format("unknown statement '%s'", current.getType()));
+        else if (lookMatch(0, TokenType.WORD) && lookMatch(1, TokenType.LBRACKET)) {
+            final String variable = consume(TokenType.WORD).getText();
+            consume(TokenType.LBRACKET);
+            final Expression index = expression();
+            consume(TokenType.RBRACKET);
+            consume(TokenType.EQ);
+            return new ArrayAssignmentStatement(variable, index, expression());
+        }
+        else throw new SPKException("StatementError", String.format("unknown statement '%s'", current.getType()));
     }
 
     private Statement outStatement() {
@@ -305,6 +313,10 @@ public final class Parser {
             return new ValueExpression(createNumber(current.getText(), 32));
         } else if (get(0).getType() == TokenType.WORD && get(1).getType() == TokenType.LPAREN) {
             return function();
+        } else if (get(0).getType() == TokenType.WORD && get(1).getType() == TokenType.LBRACKET) {
+            return element();
+        }else if (lookMatch(0, TokenType.LBRACKET)) {
+                return array();
         } else if (match(TokenType.WORD)) {
             return new VariableExpression(current.getText());
         } else if (match(TokenType.STRING)) {
@@ -315,6 +327,22 @@ public final class Parser {
             return result;
         }
         throw new SPKException("ExpressionError", String.format("unknown expression '%s'", current.getType()));
+    }
+    private Expression array() {
+        consume(TokenType.LBRACKET);
+        final List<Expression> elements = new ArrayList<>();
+        while (!match(TokenType.RBRACKET)) {
+            elements.add(expression());
+            match(TokenType.COMMA);
+        }
+        return new ArrayExpression(elements);
+    }
+    private Expression element() {
+        final String variable = consume(TokenType.WORD).getText();
+        consume(TokenType.LBRACKET);
+        final Expression index = expression();
+        consume(TokenType.RBRACKET);
+        return new ArrayAccessExpression(variable, index);
     }
 
     private Number createNumber(String text, int radix) {
@@ -349,5 +377,8 @@ public final class Parser {
         final int position = pos + relativePosition;
         if (position >= size) return EOF;
         return tokens.get(position);
+    }
+    private boolean lookMatch(int pos, TokenType type) {
+        return get(pos).getType() == type;
     }
 }

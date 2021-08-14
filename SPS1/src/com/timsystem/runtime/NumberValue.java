@@ -75,6 +75,11 @@ public final class NumberValue implements Value {
         return value.doubleValue();
     }
 
+    @Override
+    public String asString() {
+        return value.toString();
+    }
+
 
     @Override
     public boolean equals(Object obj) {

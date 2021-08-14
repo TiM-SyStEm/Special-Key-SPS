@@ -26,8 +26,8 @@ public class AddStatement implements Statement {
             }
             return content;
         }
-        catch(FileNotFoundException ex){ //
-            throw new SPKException("ModuleError", "module '" + name + "' not found");
+        catch(FileNotFoundException ex){
+            throw new SPKException("ModuleError", "module '" + name + "' is not found");
         }
     }
 

@@ -42,5 +42,6 @@ public class STL {
             if (args.length != 2) throw new SPKException("ArgumentExpected","One arg expected");
             return new NumberValue(args[0].asNumber() + (int) (Math.random() * args[1].asNumber()));
         });
+        Functions.functions.put("Array", (Function) ArrayValue::new);
     }
 }

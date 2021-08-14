@@ -1,2 +1,4 @@
-var num = input : "num: "
-out : num
+Add stl
+
+var test = Array([1,1])
+out : test[1]

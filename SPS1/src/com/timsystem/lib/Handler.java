@@ -10,6 +10,7 @@ import com.timsystem.runtime.Variables;
 import java.util.List;
 
 public class Handler {
+    public static String pathToScript = "";
     public static void handle(String input) {
         try {
             final List<Token> tokens = new Lexer(input).tokenize();

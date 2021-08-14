@@ -52,7 +52,7 @@ public final class BinaryExpression implements Expression {
         if (value2 instanceof Number) {
             final Number number2 = (Number) value2.raw();
             if (number1 instanceof Double || number2 instanceof Double) {
-                return NumberValue.of(number1.doubleValue() + number2.doubleValue());
+                return NumberValue.of(number1.intValue() + number2.doubleValue());
             }
             if (number1 instanceof Float || number2 instanceof Float) {
                 return NumberValue.of(number1.floatValue() + number2.floatValue());
