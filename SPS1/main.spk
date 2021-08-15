@@ -1,5 +1,1 @@
 Add stl
-
-var test = 2
-test++
-out : test
