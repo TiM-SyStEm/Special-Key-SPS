@@ -3,8 +3,6 @@ package com.timsystem.ast;
 import com.timsystem.lib.Function;
 import com.timsystem.runtime.*;
 
-import java.awt.LayoutManager;
-
 import javax.swing.*;
 
 public class WSGforms {

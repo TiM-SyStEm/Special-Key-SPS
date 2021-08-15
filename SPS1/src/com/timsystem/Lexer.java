@@ -196,10 +196,7 @@ public final class Lexer {
         clearBuffer();
         buffer.append(peek(0));
         char current = next();
-        while (true) {
-            if (!isIdentifierPart(current)) {
-                break;
-            }
+        while (isIdentifierPart(current)) {
             buffer.append(current);
             current = next();
         }

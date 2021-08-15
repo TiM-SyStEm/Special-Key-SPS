@@ -3,8 +3,6 @@ package com.timsystem.ast;
 import com.timsystem.runtime.NumberValue;
 import com.timsystem.runtime.Variables;
 
-import java.awt.event.KeyEvent;
-
 public class WSGcolors {
     public static void inject(){
         Variables.set("RED", new NumberValue(16711688));

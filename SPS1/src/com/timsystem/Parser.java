@@ -7,7 +7,6 @@ import com.timsystem.lib.TokenType;
 import com.timsystem.runtime.FunctionValue;
 import com.timsystem.runtime.UserDefinedFunction;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -119,7 +118,6 @@ public final class Parser {
         return new StdInput(expression());
     }
     private Statement assignmentStatement() {
-        final Token current = get(0);
         final String variable = consume(TokenType.WORD).getText();
         consume(TokenType.EQ);
         return new AssignmentStatement(variable, expression());
@@ -132,7 +130,6 @@ public final class Parser {
         final Expression conditional = expression();
         final Statement ifStatement = statementOrBlock();
         final Statement elseStatement;
-        final Token current = get(0);
         if (match(TokenType.ELSE)) {
             elseStatement = statementOrBlock();
         } else {
@@ -335,7 +332,7 @@ public final class Parser {
     private Expression value() {
         Token current = get(0);
         if (match(TokenType.NUMBER)) {
-            return new ValueExpression(createNumber(current.getText(), 16));
+            return new ValueExpression(createNumber(current.getText()));
         }else if (lookMatch(0, TokenType.LBRACKET)) {
             return array();
         } else if (match(TokenType.WORD)) {
@@ -380,7 +377,7 @@ public final class Parser {
         return args;
     }
 
-    private Number createNumber(String text, int radix) {
+    private Number createNumber(String text) {
         // Double
         if (text.contains(".")) {
             return Double.parseDouble(text);

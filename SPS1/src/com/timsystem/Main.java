@@ -1,9 +1,12 @@
 package com.timsystem;
 
 import com.timsystem.lib.Handler;
+import com.timsystem.lib.SPKException;
 
 import java.io.*;
-import java.util.Scanner;
+import java.net.URL;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
 
 public class Main {
     public static String getVer() {
@@ -28,18 +31,27 @@ public class Main {
                     FileReader fr = new FileReader(file);
                     BufferedReader reader = new BufferedReader(fr);
                     String line = reader.readLine();
-                    String content = "";
+                    StringBuilder content = new StringBuilder();
                     while (line != null) {
-                        content += line + "\n";
+                        content.append(line).append("\n");
                         line = reader.readLine();
                     }
                     Handler.pathToScript = path;
-                    Handler.handle(content); // Класс Handler сделан для удобного отлова ошибок
+                    Handler.handle(content.toString()); // Класс Handler сделан для удобного отлова ошибок
                 } catch (FileNotFoundException e) {
                     System.out.println("File is not found!");
                 } catch (IOException e) {
                     System.out.println("File read error!");
                 }
+            } else if (cmd.contains("special-pm")) {
+                String[] objs = cmd.split(" ");
+                if(objs[1].equals("install")){
+                    URL website = new URL("https://raw.githubusercontent.com/TiM-SyStEm/Spk-site/main/special-pm/" + objs[2] + ".spk");
+                    ReadableByteChannel rbc = Channels.newChannel(website.openStream());
+                    FileOutputStream fos = new FileOutputStream("modules\\" + objs[2] + ".spk");
+                    fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+                }
+                cls();
             } else if (cmd.equals("cls")) {
                 cls();
             } else {
@@ -50,7 +62,7 @@ public class Main {
 
     private static void cls() {
         for (int i = 0; i < 800; i++)
-            System.out.println("");
+            System.out.println();
         System.out.println("================");
         System.out.println("Special Key " + getVer());
         System.out.println("================\n");
