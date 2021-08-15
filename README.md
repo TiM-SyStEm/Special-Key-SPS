@@ -28,12 +28,11 @@ See more about it!
 
 ## Roadmap
 Our small roadmap
-* Add modules from cwd
-* one-dimensional array
-* multidimensional array
-* design template "Visitor"
+* Add classes
 * optimization
 * Redesign site
+* Add modules from cwd
+* WSGforms
 ## Usage
 Special Key shell provides you some functions to run code
 
