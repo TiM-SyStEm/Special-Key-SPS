@@ -5,7 +5,7 @@ import com.timsystem.runtime.Variables;
 
 public final class VariableExpression implements Expression {
 
-    private final String name;
+    public final String name;
 
     public VariableExpression(String name) {
         this.name = name;

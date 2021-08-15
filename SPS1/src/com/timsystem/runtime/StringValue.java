@@ -8,6 +8,10 @@ public class StringValue implements Value {
 
     private final byte[] string;
 
+    public StringValue(String str) {
+        this(str.getBytes(StandardCharsets.UTF_8));
+    }
+
     public StringValue(byte[] string) {
         this.string = string;
     }

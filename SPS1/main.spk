@@ -1,3 +1,7 @@
 Add stl
 
-fun test() out : 5
+var sum = fun (a, b) {
+    return a + b
+}
+
+out : asString(sum(5, 5))
