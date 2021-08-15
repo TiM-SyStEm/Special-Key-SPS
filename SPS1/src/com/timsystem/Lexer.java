@@ -13,7 +13,7 @@ import static java.lang.Character.isDigit;
 import static java.lang.Character.toLowerCase;
 
 public final class Lexer {
-    private static final String OPERATOR_CHARS = "+-*/()[]{}=:<>,!^";
+    private static final String OPERATOR_CHARS = "+-*/%()[]{}=:<>,!^";
     private static final Map<String, TokenType> OPERATORS;
     private static final Map<String, TokenType> KEYWORDS;
 
@@ -23,6 +23,7 @@ public final class Lexer {
         OPERATORS.put("-", TokenType.MINUS);
         OPERATORS.put("*", TokenType.STAR);
         OPERATORS.put("/", TokenType.SLASH);
+        OPERATORS.put("%", TokenType.REMAINDER);
         OPERATORS.put("(", TokenType.LPAREN);
         OPERATORS.put(")", TokenType.RPAREN);
         OPERATORS.put("{", TokenType.LBRACE);
@@ -90,11 +91,11 @@ public final class Lexer {
             if (current == '#') comment();
             else if (isDigit(current)) tokenizeNumber();
             else if (isIdentifier(current)) tokenizeWord();
-            else if (current == '$') {
-                next();
-                tokenizeHexNumber();
-            } else if (current == '"') {
+            else if (current == '"') {
                 tokenizeText();
+            }else if (current == '$') {
+                    next();
+                    tokenizeHexNumber();
             } else if (OPERATOR_CHARS.indexOf(current) != -1) {
                 tokenizeOperator();
             } else {
@@ -102,6 +103,16 @@ public final class Lexer {
             }
         }
         return tokens;
+    }
+
+    private void tokenizeHexNumber() {
+        final StringBuilder buffer = new StringBuilder();
+        char current = peek(0);
+        while (Character.isDigit(current) || isHexNumber(current)) {
+            buffer.append(current);
+            current = next();
+        }
+        addToken(TokenType.HEX_NUMBER, buffer.toString());
     }
 
     private void comment() {
@@ -228,16 +239,6 @@ public final class Lexer {
             buffer.append(current);
             current = next();
         }
-    }
-
-    private void tokenizeHexNumber() {
-        clearBuffer();
-        char current = peek(0);
-        while (isDigit(current) || isHexNumber(current)) {
-            buffer.append(current);
-            current = next();
-        }
-        addToken(TokenType.HEX_NUMBER, buffer.toString());
     }
 
     private boolean isIdentifierPart(char current) {

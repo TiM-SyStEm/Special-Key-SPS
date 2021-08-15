@@ -1,8 +1,10 @@
 package com.timsystem.runtime;
 
+import com.timsystem.lib.Arguments;
 import com.timsystem.lib.Function;
 import com.timsystem.lib.SPKException;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +15,7 @@ public class Functions {
     static {
         functions = new HashMap<>();
         functions.put("length", (Value... args) -> {
-            if (args.length != 1) throw new SPKException("ArgumentExpected","One arg expected");
+            Arguments.check(1, args.length);
             if(args[0] instanceof ArrayValue){
                 return new NumberValue(((ArrayValue) args[0]).length());
             }
@@ -29,6 +31,18 @@ public class Functions {
                 result.append(x);
             }
             return result;
+        });
+        Functions.functions.put("toStr", (args) -> {
+            Arguments.check(1, args.length);
+            return new StringValue(args[0].asString().getBytes(StandardCharsets.UTF_8));
+        });
+        Functions.functions.put("toInt", (args) -> {
+            Arguments.check(1, args.length);
+            return new NumberValue(args[0].asInt());
+        });
+        Functions.functions.put("toFloat", (args) -> {
+            Arguments.check(1, args.length);
+            return new NumberValue(args[0].asNumber());
         });
     }
 

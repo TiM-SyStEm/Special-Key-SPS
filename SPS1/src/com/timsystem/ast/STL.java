@@ -1,6 +1,5 @@
 package com.timsystem.ast;
 
-import com.sun.jdi.connect.Connector;
 import com.timsystem.lib.Arguments;
 import com.timsystem.lib.SPKException;
 import com.timsystem.runtime.*;
@@ -54,9 +53,5 @@ public class STL {
             }
             return NumberValue.ZERO;
         });
-
-        Functions.functions.put("asString", (args) -> {
-            Arguments.check(1, args.length);
-            return new StringValue(args[0].asString().getBytes(StandardCharsets.UTF_8));
-        });
-    
+    }
+}

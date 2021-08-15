@@ -7,6 +7,7 @@ import com.timsystem.lib.TokenType;
 import com.timsystem.runtime.FunctionValue;
 import com.timsystem.runtime.UserDefinedFunction;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,6 +77,12 @@ public final class Parser {
         }
         else if (match(TokenType.RETURN)) {
             return new ReturnStatement(expression());
+        }
+        else if (get(0).getType() == TokenType.WORD && get(1).getType() == TokenType.INC) {
+            return new IncrementStatement(current.getText());
+        }
+        else if (get(0).getType() == TokenType.WORD && get(1).getType() == TokenType.DEC) {
+            return new DecrementStatement(current.getText());
         }
         else if (get(0).getType() == TokenType.WORD && get(1).getType() == TokenType.LPAREN) {
             return new FunctionStatement(function());
@@ -261,7 +268,7 @@ public final class Parser {
     }
 
     private Expression multiplicative() {
-        Expression result = unary();
+        Expression result = remains();
 
         while (true) {
             if (match(TokenType.STAR)) {
@@ -278,10 +285,20 @@ public final class Parser {
             }
             break;
         }
-
         return result;
     }
+    private Expression remains() {
+        Expression result = unary();
 
+        while (true) {
+            if (match(TokenType.REMAINDER)) {
+                result = new BinaryExpression('%', result, unary());
+                continue;
+            }
+            break;
+        }
+        return result;
+    }
     private Expression unary() {
         if (match(TokenType.MINUS)) {
             return new UnaryExpression('-', primary());
@@ -294,9 +311,12 @@ public final class Parser {
         return primary();
     }
     private Expression primary() {
+        final Token current = get(0);
         if (match(TokenType.FUN)) {
-            var args = arguments();
+            ArrayList<String> args = arguments();
             return new ValueExpression(new FunctionValue(new UserDefinedFunction(args, statementOrBlock())));
+        } else if (match(TokenType.HEX_NUMBER)) {
+                return new ValueExpression(Long.parseLong(current.getText(), 16));
         } else if (get(0).getType() == TokenType.WORD && get(1).getType() == TokenType.LPAREN) {
             return function();
         } else if (get(0).getType() == TokenType.WORD && get(1).getType() == TokenType.LBRACKET) {
@@ -316,8 +336,6 @@ public final class Parser {
         Token current = get(0);
         if (match(TokenType.NUMBER)) {
             return new ValueExpression(createNumber(current.getText(), 16));
-        } else if (match(TokenType.HEX_NUMBER)) {
-            return new ValueExpression(createNumber(current.getText(), 32));
         }else if (lookMatch(0, TokenType.LBRACKET)) {
             return array();
         } else if (match(TokenType.WORD)) {
