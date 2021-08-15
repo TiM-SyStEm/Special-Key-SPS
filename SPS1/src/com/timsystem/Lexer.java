@@ -93,9 +93,9 @@ public final class Lexer {
             else if (isIdentifier(current)) tokenizeWord();
             else if (current == '"') {
                 tokenizeText();
-            }else if (current == '$') {
-                    next();
-                    tokenizeHexNumber();
+            } else if (current == '$') {
+                next();
+                tokenizeHexNumber();
             } else if (OPERATOR_CHARS.indexOf(current) != -1) {
                 tokenizeOperator();
             } else {

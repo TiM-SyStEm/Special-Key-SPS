@@ -31,7 +31,7 @@ public final class Parser {
         return result;
     }
 
-    private Statement block(){
+    private Statement block() {
         final BlockStatement block = new BlockStatement();
         consume(TokenType.LBRACE);
         while (!match(TokenType.RBRACE)) {
@@ -39,52 +39,35 @@ public final class Parser {
         }
         return block;
     }
+
     private Statement statement() {
         Token current = get(0);
         if (match(TokenType.OUT)) {
             return outStatement();
-        }
-        else if (match(TokenType.INPUT)) {
+        } else if (match(TokenType.INPUT)) {
             return inputStatement();
-        }
-        else if (match(TokenType.ADD)) {
+        } else if (match(TokenType.ADD)) {
             return new AddStatement(consume(TokenType.WORD).getText());
-        }
-        else if (match(TokenType.VAR)) {
+        } else if (match(TokenType.VAR)) {
             return assignmentStatement();
-        }
-        else if(match(TokenType.FUN)){
+        } else if (match(TokenType.FUN)) {
             return functionCreate();
-        }
-        else if (match(TokenType.IF)) {
+        } else if (match(TokenType.IF)) {
             return ifElse();
-        }
-        else if(match(TokenType.WHILE)){
+        } else if (match(TokenType.WHILE)) {
             return whileStatement();
-        }
-        else if(match(TokenType.DO)){
+        } else if (match(TokenType.DO)) {
             return doStatement();
-        }
-        else if (match(TokenType.FOR)) {
+        } else if (match(TokenType.FOR)) {
             return forStatement();
-        }
-        else if (match(TokenType.STOP)) {
+        } else if (match(TokenType.STOP)) {
             return new StopStatement();
-        }
-        else if (match(TokenType.CONTINUE)) {
+        } else if (match(TokenType.CONTINUE)) {
             return new ContinueStatement();
-        }
-        else if (match(TokenType.RETURN)) {
+        } else if (match(TokenType.RETURN)) {
             return new ReturnStatement(expression());
-        }
-        else if (get(0).getType() == TokenType.WORD && get(1).getType() == TokenType.INC) {
-            return new IncrementStatement(current.getText());
-        }
-        else if (get(0).getType() == TokenType.WORD && get(1).getType() == TokenType.DEC) {
-            return new DecrementStatement(current.getText());
-        }
-        else if (get(0).getType() == TokenType.WORD && get(1).getType() == TokenType.LPAREN) {
-            return new FunctionStatement(function());
+        } else if (get(0).getType() == TokenType.WORD && get(1).getType() == TokenType.LPAREN) {
+            return new ExprStatement(function());
         }
         return reAssignmentStatement();
     }
@@ -101,31 +84,37 @@ public final class Parser {
             consume(TokenType.EQ);
             return new AssignmentStatement(variable, expression());
         }
-        else if (lookMatch(0, TokenType.WORD) && lookMatch(1, TokenType.LBRACKET)) {
+
+        if (lookMatch(0, TokenType.WORD) && lookMatch(1, TokenType.LBRACKET)) {
             final ArrayAccessExpression array = (ArrayAccessExpression) element();
             consume(TokenType.EQ);
             return new ArrayAssignmentStatement(array, expression());
         }
-        else throw new SPKException("StatementError", String.format("unknown statement '%s'", current.getType()));
+
+        return new ExprStatement(expression());
     }
 
     private Statement outStatement() {
         consume(TokenType.COLON);
         return new OutStatement(expression());
     }
+
     private Statement inputStatement() {
         consume(TokenType.COLON);
         return new StdInput(expression());
     }
+
     private Statement assignmentStatement() {
         final String variable = consume(TokenType.WORD).getText();
         consume(TokenType.EQ);
         return new AssignmentStatement(variable, expression());
     }
-    private Statement statementOrBlock(){
-        if(get(0).getType() == TokenType.LBRACE) return block();
+
+    private Statement statementOrBlock() {
+        if (get(0).getType() == TokenType.LBRACE) return block();
         else return statement();
     }
+
     private Statement ifElse() {
         final Expression conditional = expression();
         final Statement ifStatement = statementOrBlock();
@@ -137,12 +126,14 @@ public final class Parser {
         }
         return new IfStatement(conditional, ifStatement, elseStatement);
     }
-    private Statement whileStatement(){
+
+    private Statement whileStatement() {
         final Expression conditional = expression();
         final Statement statement = statementOrBlock();
         return new WhileStatement(conditional, statement);
     }
-    private Statement forStatement(){
+
+    private Statement forStatement() {
         match(TokenType.LPAREN);
         consume(TokenType.VAR);
         final Statement initialization = assignmentStatement();
@@ -154,6 +145,7 @@ public final class Parser {
         final Statement statement = statementOrBlock();
         return new ForStatement(initialization, termination, increment, statement);
     }
+
     private FunctionalDefineStatement functionCreate() {
         final String name = consume(TokenType.WORD).getText();
         ArrayList<String> argNames = arguments();
@@ -171,8 +163,28 @@ public final class Parser {
         }
         return function;
     }
+
     private Expression expression() {
-        return logicIn();
+        return suffix();
+    }
+
+    private Expression suffix() {
+        Expression left = logicIn();
+
+        while (true) {
+            if (match(TokenType.DEC)) {
+                left = new SuffixExpression('-', left);
+            }
+
+            if (match(TokenType.INC)) {
+                left = new SuffixExpression('+', left);
+            }
+
+
+            break;
+        }
+
+        return left;
     }
 
     private Expression logicIn() {
@@ -253,8 +265,7 @@ public final class Parser {
             if (match(TokenType.PLUS)) {
                 result = new BinaryExpression('+', result, multiplicative());
                 continue;
-            }
-            else if (match(TokenType.MINUS)) {
+            } else if (match(TokenType.MINUS)) {
                 result = new BinaryExpression('-', result, multiplicative());
                 continue;
             }
@@ -271,12 +282,10 @@ public final class Parser {
             if (match(TokenType.STAR)) {
                 result = new BinaryExpression('*', result, unary());
                 continue;
-            }
-            else if (match(TokenType.SLASH)) {
+            } else if (match(TokenType.SLASH)) {
                 result = new BinaryExpression('/', result, unary());
                 continue;
-            }
-            else if (match(TokenType.POW)) {
+            } else if (match(TokenType.POW)) {
                 result = new BinaryExpression('^', result, unary());
                 continue;
             }
@@ -284,6 +293,7 @@ public final class Parser {
         }
         return result;
     }
+
     private Expression remains() {
         Expression result = unary();
 
@@ -296,6 +306,7 @@ public final class Parser {
         }
         return result;
     }
+
     private Expression unary() {
         if (match(TokenType.MINUS)) {
             return new UnaryExpression('-', primary());
@@ -307,18 +318,19 @@ public final class Parser {
 
         return primary();
     }
+
     private Expression primary() {
         final Token current = get(0);
         if (match(TokenType.FUN)) {
             ArrayList<String> args = arguments();
             return new ValueExpression(new FunctionValue(new UserDefinedFunction(args, statementOrBlock())));
         } else if (match(TokenType.HEX_NUMBER)) {
-                return new ValueExpression(Long.parseLong(current.getText(), 16));
+            return new ValueExpression(Long.parseLong(current.getText(), 16));
         } else if (get(0).getType() == TokenType.WORD && get(1).getType() == TokenType.LPAREN) {
             return function();
         } else if (get(0).getType() == TokenType.WORD && get(1).getType() == TokenType.LBRACKET) {
             return element();
-        } else if(match(TokenType.INPUT)) {
+        } else if (match(TokenType.INPUT)) {
             return inputExpression();
         }
         return value();
@@ -333,7 +345,7 @@ public final class Parser {
         Token current = get(0);
         if (match(TokenType.NUMBER)) {
             return new ValueExpression(createNumber(current.getText()));
-        }else if (lookMatch(0, TokenType.LBRACKET)) {
+        } else if (lookMatch(0, TokenType.LBRACKET)) {
             return array();
         } else if (match(TokenType.WORD)) {
             return new VariableExpression(current.getText());
@@ -346,6 +358,7 @@ public final class Parser {
         }
         throw new SPKException("ExpressionError", String.format("unknown expression '%s'", current.getType()));
     }
+
     private Expression array() {
         consume(TokenType.LBRACKET);
         final List<Expression> elements = new ArrayList<>();
@@ -355,15 +368,16 @@ public final class Parser {
         }
         return new ArrayExpression(elements);
     }
+
     private Expression element() {
         final String variable = consume(TokenType.WORD).getText();
         List<Expression> indices = new ArrayList<>();
-        do{
+        do {
             consume(TokenType.LBRACKET);
             indices.add(expression());
             consume(TokenType.RBRACKET);
         }
-        while(lookMatch(0, TokenType.LBRACKET));
+        while (lookMatch(0, TokenType.LBRACKET));
         return new ArrayAccessExpression(variable, indices);
     }
 
@@ -410,6 +424,7 @@ public final class Parser {
         if (position >= size) return EOF;
         return tokens.get(position);
     }
+
     private boolean lookMatch(int pos, TokenType type) {
         return get(pos).getType() == type;
     }
