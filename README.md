@@ -28,6 +28,7 @@ See more about it!
 
 ## Roadmap
 Our small roadmap
+* Add HexNumber
 * Add classes
 * optimization
 * Redesign site
