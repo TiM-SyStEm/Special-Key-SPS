@@ -15,9 +15,6 @@ git clone https://github.com/TiM-SyStEm/Special-Key-SPS spk
 ### By .jar
 You also can open SPK Shell by running compiler.jar in the src folder
 #
-### BY .exe
-If you don't need the SPK sources, then you can just run it through .an exe file that is distributed along with SPK
-#
 ## Contribution
 Special Key is open-source project. Almost all pull requests will be considered!
 
