@@ -1,13 +1,11 @@
 package com.timsystem.ast;
 
-import com.sun.jdi.connect.Connector;
 import com.timsystem.lib.Arguments;
 import com.timsystem.lib.SPKException;
 import com.timsystem.runtime.*;
 
+import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.List;
 
 import static com.timsystem.Main.getVer;
 
@@ -45,6 +43,22 @@ public class STL {
             Arguments.check(2, args.length);
             return new NumberValue(args[0].asNumber() + (int) (Math.random() * args[1].asNumber()));
         });
+        Functions.functions.put("typeof", (Value... args) -> {
+            Arguments.check(1, args.length);
+            if(args[0] instanceof NumberValue){
+                try{
+                    ((NumberValue) args[0]).asFloat();
+                    return new StringValue("Float");
+                }
+                catch (Exception exception2){
+                    return new StringValue("Number");
+                }
+            }
+            else if(args[0] instanceof StringValue){
+                return new StringValue("String");
+            }
+            else return new StringValue("UnknownType");
+        });
         Functions.functions.put("sleep", (Value... args) -> {
             Arguments.check(1, args.length);
             try {
@@ -54,9 +68,47 @@ public class STL {
             }
             return NumberValue.ZERO;
         });
-
-        Functions.functions.put("asString", (args) -> {
+        Functions.functions.put("readAllFile", (Value... args) -> {
             Arguments.check(1, args.length);
-            return new StringValue(args[0].asString().getBytes(StandardCharsets.UTF_8));
+            try(FileReader reader = new FileReader(args[0].raw().toString()))
+            {
+                // читаем посимвольно
+                int c;
+                StringBuilder all = new StringBuilder();
+                while((c=reader.read())!=-1){
+                    all.append((char) c);
+                }
+                return new StringValue(all.toString());
+            }
+            catch(IOException ex){
+                throw new SPKException("FileReadError", "the file cannot be read");
+            }
         });
-    
+        Functions.functions.put("writeFile", (Value... args) -> {
+            Arguments.check(2, args.length);
+            try(FileWriter writer = new FileWriter(args[0].raw().toString(), false))
+            {
+                String text = args[1].raw().toString();
+                writer.write(text);
+                writer.flush();
+            }
+            catch(IOException ex){
+                throw new SPKException("FileWriteError", "can't write a str to a file");
+            }
+            return NumberValue.ZERO;
+        });
+        Functions.functions.put("appendFile", (Value... args) -> {
+            Arguments.check(2, args.length);
+            try(FileWriter writer = new FileWriter(args[0].raw().toString(), true))
+            {
+                String text = args[1].raw().toString();
+                writer.write(text);
+                writer.flush();
+            }
+            catch(IOException ex){
+                throw new SPKException("FileWriteError", "can't write a str to a file");
+            }
+            return NumberValue.ZERO;
+        });
+    }
+}

@@ -53,7 +53,7 @@ public class FunctionalExpression implements Expression{
             final Value value = Variables.get(key);
             if (value instanceof FunctionValue) return ((FunctionValue)value).getValue();
         }
-        throw new RuntimeException("Unknown function " + key);
+        throw new SPKException("UnknownFunctionError", "Unknown function " + key);
     }
 
     @Override

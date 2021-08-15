@@ -78,7 +78,7 @@ public final class Parser {
             return new ReturnStatement(expression());
         }
         else if (get(0).getType() == TokenType.WORD && get(1).getType() == TokenType.LPAREN) {
-            return new FunctionStatement(function());
+            return new ExprStatement(function());
         }
         return reAssignmentStatement();
     }
@@ -95,12 +95,14 @@ public final class Parser {
             consume(TokenType.EQ);
             return new AssignmentStatement(variable, expression());
         }
-        else if (lookMatch(0, TokenType.WORD) && lookMatch(1, TokenType.LBRACKET)) {
+
+        if (lookMatch(0, TokenType.WORD) && lookMatch(1, TokenType.LBRACKET)) {
             final ArrayAccessExpression array = (ArrayAccessExpression) element();
             consume(TokenType.EQ);
             return new ArrayAssignmentStatement(array, expression());
         }
-        else throw new SPKException("StatementError", String.format("unknown statement '%s'", current.getType()));
+
+        return new ExprStatement(expression());
     }
 
     private Statement outStatement() {
@@ -112,7 +114,6 @@ public final class Parser {
         return new StdInput(expression());
     }
     private Statement assignmentStatement() {
-        final Token current = get(0);
         final String variable = consume(TokenType.WORD).getText();
         consume(TokenType.EQ);
         return new AssignmentStatement(variable, expression());
@@ -125,7 +126,6 @@ public final class Parser {
         final Expression conditional = expression();
         final Statement ifStatement = statementOrBlock();
         final Statement elseStatement;
-        final Token current = get(0);
         if (match(TokenType.ELSE)) {
             elseStatement = statementOrBlock();
         } else {
@@ -168,7 +168,26 @@ public final class Parser {
         return function;
     }
     private Expression expression() {
-        return logicIn();
+        return suffix();
+    }
+
+    private Expression suffix() {
+        Expression left = logicIn();
+
+        while (true) {
+            if (match(TokenType.DEC)) {
+                left = new SuffixExpression('-', left);
+            }
+
+            if (match(TokenType.INC)) {
+                left = new SuffixExpression('+', left);
+            }
+
+
+            break;
+        }
+
+        return left;
     }
 
     private Expression logicIn() {
@@ -261,7 +280,7 @@ public final class Parser {
     }
 
     private Expression multiplicative() {
-        Expression result = unary();
+        Expression result = remains();
 
         while (true) {
             if (match(TokenType.STAR)) {
@@ -278,10 +297,20 @@ public final class Parser {
             }
             break;
         }
-
         return result;
     }
+    private Expression remains() {
+        Expression result = unary();
 
+        while (true) {
+            if (match(TokenType.REMAINDER)) {
+                result = new BinaryExpression('%', result, unary());
+                continue;
+            }
+            break;
+        }
+        return result;
+    }
     private Expression unary() {
         if (match(TokenType.MINUS)) {
             return new UnaryExpression('-', primary());
@@ -294,9 +323,12 @@ public final class Parser {
         return primary();
     }
     private Expression primary() {
+        final Token current = get(0);
         if (match(TokenType.FUN)) {
-            var args = arguments();
+            ArrayList<String> args = arguments();
             return new ValueExpression(new FunctionValue(new UserDefinedFunction(args, statementOrBlock())));
+        } else if (match(TokenType.HEX_NUMBER)) {
+                return new ValueExpression(Long.parseLong(current.getText(), 16));
         } else if (get(0).getType() == TokenType.WORD && get(1).getType() == TokenType.LPAREN) {
             return function();
         } else if (get(0).getType() == TokenType.WORD && get(1).getType() == TokenType.LBRACKET) {
@@ -315,9 +347,7 @@ public final class Parser {
     private Expression value() {
         Token current = get(0);
         if (match(TokenType.NUMBER)) {
-            return new ValueExpression(createNumber(current.getText(), 16));
-        } else if (match(TokenType.HEX_NUMBER)) {
-            return new ValueExpression(createNumber(current.getText(), 32));
+            return new ValueExpression(createNumber(current.getText()));
         }else if (lookMatch(0, TokenType.LBRACKET)) {
             return array();
         } else if (match(TokenType.WORD)) {
@@ -362,7 +392,7 @@ public final class Parser {
         return args;
     }
 
-    private Number createNumber(String text, int radix) {
+    private Number createNumber(String text) {
         // Double
         if (text.contains(".")) {
             return Double.parseDouble(text);

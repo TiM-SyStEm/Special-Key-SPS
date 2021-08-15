@@ -37,6 +37,22 @@ public class AddStatement implements Statement {
             STL.inject();
             return;
         }
+        else if (arg.equals("WSGcanvas")) {
+            WSGcanvas.inject();
+            return;
+        }
+        else if (arg.equals("WSGkeys")) {
+            WSGkeys.inject();
+            return;
+        }
+        else if (arg.equals("WSGcolors")) {
+            WSGcolors.inject();
+            return;
+        }
+        /*else if (arg.equals("WSGforms")) {
+        *    WSGforms.inject();
+        *    return;
+        }*/
         try {
             Handler.handle(readSource(arg));
         } catch (IOException e) {

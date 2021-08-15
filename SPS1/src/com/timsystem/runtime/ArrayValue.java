@@ -70,4 +70,12 @@ public class ArrayValue implements Value{
     public String toString() {
         return asString();
     }
+    public static ArrayValue of(String[] array) {
+        final int size = array.length;
+        final ArrayValue result = new ArrayValue(size);
+        for (int i = 0; i < size; i++) {
+            result.set(i, new StringValue(array[i]));
+        }
+        return result;
+    }
 }

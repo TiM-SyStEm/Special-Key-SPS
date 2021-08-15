@@ -15,6 +15,9 @@ public final class Variables {
     static {
         stack = new Stack<>();
         variables = new HashMap<>();
+        Variables.set("True", new NumberValue(1));
+        Variables.set("False", new NumberValue(0));
+        Variables.set("Null", new StringValue("\0"));
     }
 
     public static boolean isExists(String key) {
