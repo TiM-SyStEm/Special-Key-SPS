@@ -93,9 +93,9 @@ public final class Lexer {
             else if (isIdentifier(current)) tokenizeWord();
             else if (current == '"') {
                 tokenizeText();
-            } else if (current == '$') {
-                next();
-                tokenizeHexNumber();
+            }else if (current == '$') {
+                    next();
+                    tokenizeHexNumber();
             } else if (OPERATOR_CHARS.indexOf(current) != -1) {
                 tokenizeOperator();
             } else {
@@ -243,7 +243,7 @@ public final class Lexer {
     }
 
     private boolean isIdentifier(char current) {
-        return (Character.isLetter(current) || (current == '_') || (current == '$'));
+        return (Character.isLetter(current) || (current == '_'));
     }
 
     private void clearBuffer() {
@@ -269,3 +269,4 @@ public final class Lexer {
         tokens.add(new Token(type, text));
     }
 }
+
