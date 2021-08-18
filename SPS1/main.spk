@@ -1,4 +1,7 @@
 Add stl
 
-out : $547
-
+class Test{
+    fun test1(){
+        out : test1
+    }
+}
