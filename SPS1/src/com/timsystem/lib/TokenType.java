@@ -47,6 +47,8 @@ public enum TokenType {
     ADD,
     VAR,
     FUN,
+    STATIC,
+    CLASS,
     RETURN,
     CONTINUE,
     WORD

@@ -41,9 +41,9 @@ public class WSGcanvas {
         Functions.set("rect", intConsumer4Convert(WSGcanvas::rect));
         Functions.set("frect", intConsumer4Convert(WSGcanvas::frect));
         Functions.set("clip", intConsumer4Convert(WSGcanvas::clip));
-        Functions.set("drawtext", new DrawString());
+        Functions.set("drawtext", new DrawText());
         Functions.set("setcolor", new SetColor());
-        Functions.set("redraw", new Repaint());
+        Functions.set("redraw", new Redraw());
         lastKey = MINUS_ONE;
         mouseHover = new ArrayValue(new Value[] { NumberValue.ZERO, NumberValue.ZERO });
     }
@@ -172,7 +172,7 @@ public class WSGcanvas {
         }
     }
 
-    private static class DrawString implements Function {
+    private static class DrawText implements Function {
 
         @Override
         public Value execute(Value... args) {
@@ -193,7 +193,7 @@ public class WSGcanvas {
         }
     }
 
-    private static class Repaint implements Function {
+    private static class Redraw implements Function {
 
         @Override
         public Value execute(Value... args) {

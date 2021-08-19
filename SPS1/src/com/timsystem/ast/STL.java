@@ -3,10 +3,11 @@ package com.timsystem.ast;
 import com.timsystem.lib.Arguments;
 import com.timsystem.lib.SPKException;
 import com.timsystem.runtime.*;
-
 import java.io.*;
+import java.net.URL;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
 import java.nio.charset.StandardCharsets;
-
 import static com.timsystem.Main.getVer;
 
 public class STL {
@@ -104,6 +105,21 @@ public class STL {
                 String text = args[1].raw().toString();
                 writer.write(text);
                 writer.flush();
+            }
+            catch(IOException ex){
+                throw new SPKException("FileWriteError", "can't write a str to a file");
+            }
+            return NumberValue.ZERO;
+        });
+        Functions.functions.put("downloadWithURL", (Value... args) -> {
+            Arguments.check(2, args.length);
+            try
+            {
+                URL website = new URL(args[0].raw().toString());
+                ReadableByteChannel rbc = Channels.newChannel(website.openStream());
+                FileOutputStream fos = new FileOutputStream(args[1].raw().toString());
+                fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+                fos.close();
             }
             catch(IOException ex){
                 throw new SPKException("FileWriteError", "can't write a str to a file");

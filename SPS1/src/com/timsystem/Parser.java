@@ -50,8 +50,8 @@ public final class Parser {
         else if (match(TokenType.ADD)) {
             return new AddStatement(consume(TokenType.WORD).getText());
         }
-        else if (match(TokenType.VAR)) {
-            return assignmentStatement();
+        else if (match(TokenType.CLASS)) {
+            return classStatement();
         }
         else if(match(TokenType.FUN)){
             return functionCreate();
@@ -81,6 +81,11 @@ public final class Parser {
             return new ExprStatement(function());
         }
         return reAssignmentStatement();
+    }
+    private Statement classStatement() {
+        final String name = consume(TokenType.WORD).getText();
+        final Statement body = statementOrBlock();
+        return new ClassStatement(name, body);
     }
 
     private Statement doStatement() {

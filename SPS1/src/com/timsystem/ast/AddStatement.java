@@ -49,10 +49,6 @@ public class AddStatement implements Statement {
             WSGcolors.inject();
             return;
         }
-        /*else if (arg.equals("WSGforms")) {
-        *    WSGforms.inject();
-        *    return;
-        }*/
         try {
             Handler.handle(readSource(arg));
         } catch (IOException e) {

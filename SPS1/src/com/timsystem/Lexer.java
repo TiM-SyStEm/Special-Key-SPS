@@ -54,6 +54,7 @@ public final class Lexer {
         KEYWORDS.put("Add", TokenType.ADD);
         KEYWORDS.put("var", TokenType.VAR);
         KEYWORDS.put("fun", TokenType.FUN);
+        KEYWORDS.put("class", TokenType.CLASS);
         KEYWORDS.put("return", TokenType.RETURN);
         KEYWORDS.put("if", TokenType.IF);
         KEYWORDS.put("else", TokenType.ELSE);
