@@ -6,7 +6,7 @@ import com.timsystem.runtime.Value;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
-public class StdInput implements Expression, Statement{
+public class StdInput implements Expression, Statement {
     private final Expression expr;
 
     public StdInput(Expression expr) {
@@ -24,6 +24,7 @@ public class StdInput implements Expression, Statement{
         Scanner sc = new Scanner(System.in);
         return new StringValue(sc.nextLine().getBytes(StandardCharsets.UTF_8));
     }
+
     @Override
     public String toString() {
         return "input : " + expr;

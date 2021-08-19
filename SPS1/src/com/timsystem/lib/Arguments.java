@@ -2,10 +2,11 @@ package com.timsystem.lib;
 
 public final class Arguments {
 
-    private Arguments() { }
+    private Arguments() {
+    }
 
     public static void check(int expected, int got) {
-        if (got != expected) throw new SPKException("ArgumentError",String.format(
+        if (got != expected) throw new SPKException("ArgumentError", String.format(
                 "%d %s expected, got %d", expected, pluralize(expected), got));
     }
 

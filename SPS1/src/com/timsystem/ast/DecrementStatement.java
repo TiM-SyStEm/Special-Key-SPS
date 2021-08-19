@@ -1,6 +1,6 @@
 package com.timsystem.ast;
 
-public class DecrementStatement implements Statement{
+public class DecrementStatement implements Statement {
     private final String variable;
 
     public DecrementStatement(String variable) {

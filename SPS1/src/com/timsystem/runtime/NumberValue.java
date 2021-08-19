@@ -20,6 +20,7 @@ public final class NumberValue implements Value {
     public NumberValue(double value) {
         this.value = value;
     }
+
     public NumberValue(int value) {
         this.value = value;
     }

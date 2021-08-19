@@ -15,17 +15,16 @@ public class Functions {
         functions = new HashMap<>();
         functions.put("length", (Value... args) -> {
             Arguments.check(1, args.length);
-            if(args[0] instanceof ArrayValue){
+            if (args[0] instanceof ArrayValue) {
                 return new NumberValue(((ArrayValue) args[0]).length());
-            }
-            else if(args[0] instanceof StringValue){
+            } else if (args[0] instanceof StringValue) {
                 return new NumberValue(args[0].toString().length());
             }
             throw new SPKException("TypeError", "Array or String expected");
         });
         Functions.functions.put("Array", (Value... args) -> {
-            if (args.length == 0) return new ArrayValue(new Value[] {});
-            ArrayValue result = new ArrayValue(new Value[] {});
+            if (args.length == 0) return new ArrayValue(new Value[]{});
+            ArrayValue result = new ArrayValue(new Value[]{});
             for (Value x : args) {
                 result.append(x);
             }
@@ -61,9 +60,9 @@ public class Functions {
             final String[] parts = input.split(regex, limit);
             return ArrayValue.of(parts);
         });
-        Functions.set("toByte", args -> NumberValue.of((byte)args[0].asInt()));
-        Functions.set("toShort", args -> NumberValue.of((short)args[0].asInt()));
-        Functions.set("toLong", args -> NumberValue.of((long)args[0].asNumber()));
+        Functions.set("toByte", args -> NumberValue.of((byte) args[0].asInt()));
+        Functions.set("toShort", args -> NumberValue.of((short) args[0].asInt()));
+        Functions.set("toLong", args -> NumberValue.of((long) args[0].asNumber()));
         Functions.set("toDouble", args -> NumberValue.of(args[0].asNumber()));
     }
 

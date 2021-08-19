@@ -1,6 +1,6 @@
 package com.timsystem.ast;
 
-public interface Statement{
+public interface Statement {
 
     void execute();
 }

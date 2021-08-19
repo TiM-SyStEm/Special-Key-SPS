@@ -3,32 +3,54 @@ package com.timsystem.runtime;
 import com.timsystem.ast.ReturnStatement;
 import com.timsystem.ast.Statement;
 import com.timsystem.lib.Function;
+import com.timsystem.lib.SPKException;
 
 import java.util.List;
 
 public class UserDefinedFunction implements Function {
-    private final List<String> argNames;
-    private final Statement body;
 
-    public UserDefinedFunction(List<String> argNames, Statement body) {
-        this.argNames = argNames;
+    public final List<String> arguments;
+    public final Statement body;
+
+    public UserDefinedFunction(List<String> arguments, Statement body) {
+        this.arguments = arguments;
         this.body = body;
     }
-    public int getArgsCount(){
-        return argNames.size();
+
+    public int getArgsCount() {
+        return arguments.size();
     }
-    public String getArgName(int index){
-        if(index < 0 || index >= getArgsCount()) return "";
-        return argNames.get(index);
+
+    public String getArgsName(int index) {
+        if (index < 0 || index >= getArgsCount()) return "";
+        return arguments.get(index);
     }
+
     @Override
-    public Value execute(Value... args) {
-        try{
+    public Value execute(Value... values) {
+        final int size = values.length;
+        final int requiredArgsCount = arguments.size();
+        if (size < requiredArgsCount) {
+            throw new SPKException("ArgumentError", String.format(
+                    "Arguments count mismatch. Required %d, got %d", requiredArgsCount, size));
+        }
+
+        try {
+            Variables.push();
+            for (int i = 0; i < size; i++) {
+                Variables.define(getArgsName(i), values[i]);
+            }
             body.execute();
             return NumberValue.ZERO;
+        } catch (ReturnStatement rt) {
+            return rt.getReturnValue();
+        } finally {
+            Variables.pop();
         }
-        catch (ReturnStatement rs){
-            return rs.getReturnValue();
-        }
+    }
+
+    @Override
+    public String toString() {
+        return String.format("def%s %s", arguments, body);
     }
 }

@@ -2,6 +2,6 @@ package com.timsystem.lib;
 
 import com.timsystem.runtime.Value;
 
-public interface Function {
+public interface SPKClass {
     Value execute(Value... args);
 }

@@ -196,12 +196,14 @@ public final class BinaryExpression implements Expression {
         }
         return NumberValue.of(number1.intValue() / value2.asInt());
     }
+
     private Value pow(Value value1, Value value2) {
         if (value1 instanceof NumberValue)
             return pow2((NumberValue) value1, (NumberValue) value2);
         else
             throw new SPKException("UnsupportedOperationException", "Operation '^' supported only for numbers");
     }
+
     private Value pow2(NumberValue value1, NumberValue value2) {
         final Number number1 = value1.raw();
         if (value2 instanceof NumberValue) {
@@ -221,21 +223,21 @@ public final class BinaryExpression implements Expression {
         // number1 / other
         else if (number1 instanceof Double) {
             return NumberValue.of(Math.pow(number1.doubleValue(), value2.asNumber()));
-        }
-        else if (number1 instanceof Float) {
+        } else if (number1 instanceof Float) {
             return NumberValue.of(Math.pow(number1.floatValue(), value2.asNumber()));
-        }
-        else if (number1 instanceof Long) {
+        } else if (number1 instanceof Long) {
             return NumberValue.of(Math.pow(number1.longValue(), value2.asInt()));
         }
         return NumberValue.of(Math.pow(number1.intValue(), value2.asInt()));
     }
+
     private Value remains(Value value1, Value value2) {
         if (value1 instanceof NumberValue)
             return remains2((NumberValue) value1, (NumberValue) value2);
         else
             throw new SPKException("UnsupportedOperationException", "Operation '%' supported only for numbers");
     }
+
     private Value remains2(NumberValue value1, NumberValue value2) {
         final Number number1 = value1.raw();
         if (value2 instanceof NumberValue) {
@@ -255,15 +257,14 @@ public final class BinaryExpression implements Expression {
         // number1 / other
         else if (number1 instanceof Double) {
             return NumberValue.of(number1.doubleValue() % value2.asNumber());
-        }
-        else if (number1 instanceof Float) {
+        } else if (number1 instanceof Float) {
             return NumberValue.of(number1.floatValue() % value2.asNumber());
-        }
-        else if (number1 instanceof Long) {
+        } else if (number1 instanceof Long) {
             return NumberValue.of(number1.longValue() % value2.asInt());
         }
         return NumberValue.of(number1.intValue() % value2.asInt());
     }
+
     @Override
     public String toString() {
         return String.format("%s %c %s", expr1, operation, expr2);

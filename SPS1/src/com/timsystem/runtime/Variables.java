@@ -1,47 +1,114 @@
 package com.timsystem.runtime;
 
-import com.timsystem.lib.SPKException;
-
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Stack;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 public final class Variables {
 
-    private static final Stack<Map<String, Value>> stack;
-    private static Map<String, Value> variables;
+    private static final Object lock = new Object();
+    private static volatile Scope scope;
 
     static {
-        stack = new Stack<>();
-        variables = new HashMap<>();
-        Variables.set("True", new NumberValue(1));
-        Variables.set("False", new NumberValue(0));
-        Variables.set("Null", new StringValue("\0"));
+        Variables.clear();
     }
 
-    public static boolean isExists(String key) {
-        return variables.containsKey(key);
+    private Variables() {
     }
 
-    public static Value get(String key) {
-        if (!isExists(key))
-            throw new SPKException("UnboundVariableException", String.format("Unbound local or global variable '%s'", key));
-        return variables.get(key);
-    }
-
-    public static void set(String key, Value value) {
-        variables.put(key, value);
+    public static Map<String, Value> variables() {
+        return scope.variables;
     }
 
     public static void clear() {
-        variables.clear();
+        scope = new Scope();
+        scope.variables.clear();
+        scope.variables.put("True", NumberValue.ONE);
+        scope.variables.put("False", NumberValue.ZERO);
+        scope.variables.put("Null", new StringValue("\0"));
     }
+
     public static void push() {
-        stack.push(new HashMap<>(variables));
+        synchronized (lock) {
+            scope = new Scope(scope);
+        }
     }
 
     public static void pop() {
-        variables = stack.pop();
+        synchronized (lock) {
+            if (scope.parent != null) {
+                scope = scope.parent;
+            }
+        }
+    }
+
+    public static boolean isExists(String key) {
+        synchronized (lock) {
+            return findScope(key).isFound;
+        }
+    }
+
+    public static Value get(String key) {
+        synchronized (lock) {
+            final ScopeFindData scopeData = findScope(key);
+            if (scopeData.isFound) {
+                return scopeData.scope.variables.get(key);
+            }
+        }
+        return NumberValue.ZERO;
+    }
+
+    public static void set(String key, Value value) {
+        synchronized (lock) {
+            findScope(key).scope.variables.put(key, value);
+        }
+    }
+
+    public static void define(String key, Value value) {
+        synchronized (lock) {
+            scope.variables.put(key, value);
+        }
+    }
+
+    public static void remove(String key) {
+        synchronized (lock) {
+            findScope(key).scope.variables.remove(key);
+        }
+    }
+
+    private static ScopeFindData findScope(String variable) {
+        final ScopeFindData result = new ScopeFindData();
+
+        Scope current = scope;
+        do {
+            if (current.variables.containsKey(variable)) {
+                result.isFound = true;
+                result.scope = current;
+                return result;
+            }
+        } while ((current = current.parent) != null);
+
+        result.isFound = false;
+        result.scope = scope;
+        return result;
+    }
+
+    private static class Scope {
+        final Scope parent;
+        final Map<String, Value> variables;
+
+        Scope() {
+            this(null);
+        }
+
+        Scope(Scope parent) {
+            this.parent = parent;
+            variables = new ConcurrentHashMap<>();
+        }
+    }
+
+    private static class ScopeFindData {
+        boolean isFound;
+        Scope scope;
     }
 }

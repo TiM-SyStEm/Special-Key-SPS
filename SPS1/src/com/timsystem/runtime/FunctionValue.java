@@ -32,7 +32,7 @@ public class FunctionValue implements Value, Function {
 
     @Override
     public boolean asBool() {
-       throw new SPKException("CastError", "Unable cast function to boolean");
+        throw new SPKException("CastError", "Unable cast function to boolean");
     }
 
     @Override

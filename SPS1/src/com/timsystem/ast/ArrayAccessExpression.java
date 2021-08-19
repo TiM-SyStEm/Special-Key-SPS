@@ -25,7 +25,7 @@ public class ArrayAccessExpression implements Expression {
         ArrayValue array = consumeArray(Variables.get(variable));
         final int last = indices.size() - 1;
         for (int i = 0; i < last; i++) {
-            array = consumeArray( array.get(index(i)) );
+            array = consumeArray(array.get(index(i)));
         }
         return array;
     }

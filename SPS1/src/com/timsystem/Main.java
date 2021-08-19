@@ -1,7 +1,6 @@
 package com.timsystem;
 
 import com.timsystem.lib.Handler;
-import com.timsystem.lib.SPKException;
 
 import java.io.*;
 import java.net.URL;
@@ -36,8 +35,7 @@ public class Main {
                         content.append(line).append("\n");
                         line = reader.readLine();
                     }
-                    Handler.pathToScript = path;
-                    Handler.handle(content.toString()); // Класс Handler сделан для удобного отлова ошибок
+                    Handler.handle(content.toString(), path); // Класс Handler сделан для удобного отлова ошибок
                 } catch (FileNotFoundException e) {
                     System.out.println("File is not found!");
                 } catch (IOException e) {
@@ -45,7 +43,7 @@ public class Main {
                 }
             } else if (cmd.contains("special-pm")) {
                 String[] objs = cmd.split(" ");
-                if(objs[1].equals("install")){
+                if (objs[1].equals("install")) {
                     URL website = new URL("https://raw.githubusercontent.com/TiM-SyStEm/Spk-site/main/special-pm/" + objs[2] + ".spk");
                     ReadableByteChannel rbc = Channels.newChannel(website.openStream());
                     FileOutputStream fos = new FileOutputStream("modules\\" + objs[2] + ".spk");

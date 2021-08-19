@@ -38,6 +38,7 @@ public enum TokenType {
     DEC,
     STOP,
     POW,
+    DOT,
 
     MATCH,
 
@@ -47,6 +48,8 @@ public enum TokenType {
     ADD,
     VAR,
     FUN,
+    STATIC,
+    CLASS,
     RETURN,
     CONTINUE,
     WORD

@@ -1,11 +1,7 @@
 package com.timsystem.ast;
 
-import com.timsystem.lib.SPKException;
-import com.timsystem.runtime.ArrayValue;
-import com.timsystem.runtime.Value;
-import com.timsystem.runtime.Variables;
-
-public final class ArrayAssignmentStatement implements Statement {private final ArrayAccessExpression array;
+public final class ArrayAssignmentStatement implements Statement {
+    private final ArrayAccessExpression array;
     private final Expression expression;
 
     public ArrayAssignmentStatement(ArrayAccessExpression array, Expression expression) {

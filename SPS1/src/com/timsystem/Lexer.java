@@ -13,7 +13,7 @@ import static java.lang.Character.isDigit;
 import static java.lang.Character.toLowerCase;
 
 public final class Lexer {
-    private static final String OPERATOR_CHARS = "+-*/%()[]{}=:<>,!^";
+    private static final String OPERATOR_CHARS = "+-*/%()[]{}=:<>,!^.";
     private static final Map<String, TokenType> OPERATORS;
     private static final Map<String, TokenType> KEYWORDS;
 
@@ -35,6 +35,7 @@ public final class Lexer {
         OPERATORS.put("<", TokenType.LT);
         OPERATORS.put(">", TokenType.GT);
         OPERATORS.put(",", TokenType.COMMA);
+        OPERATORS.put(".", TokenType.DOT);
         OPERATORS.put("^", TokenType.POW);
 
         OPERATORS.put("!=", TokenType.NOTEQ);
@@ -54,6 +55,7 @@ public final class Lexer {
         KEYWORDS.put("Add", TokenType.ADD);
         KEYWORDS.put("var", TokenType.VAR);
         KEYWORDS.put("fun", TokenType.FUN);
+        KEYWORDS.put("class", TokenType.CLASS);
         KEYWORDS.put("return", TokenType.RETURN);
         KEYWORDS.put("if", TokenType.IF);
         KEYWORDS.put("else", TokenType.ELSE);
@@ -93,9 +95,9 @@ public final class Lexer {
             else if (isIdentifier(current)) tokenizeWord();
             else if (current == '"') {
                 tokenizeText();
-            }else if (current == '$') {
-                    next();
-                    tokenizeHexNumber();
+            } else if (current == '$') {
+                next();
+                tokenizeHexNumber();
             } else if (OPERATOR_CHARS.indexOf(current) != -1) {
                 tokenizeOperator();
             } else {
