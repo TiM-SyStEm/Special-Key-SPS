@@ -14,7 +14,7 @@ public class AddStatement implements Statement {
     }
 
     public static String readSource(String name) throws IOException {
-        try{
+        try {
             File file = new File(System.getProperty("user.dir") + "\\modules\\" + name + ".spk");
             FileReader fr = new FileReader(file);
             BufferedReader reader = new BufferedReader(fr);
@@ -25,8 +25,7 @@ public class AddStatement implements Statement {
                 line = reader.readLine();
             }
             return content;
-        }
-        catch(FileNotFoundException ex){
+        } catch (FileNotFoundException ex) {
             throw new SPKException("ModuleError", "module '" + name + "' is not found");
         }
     }
@@ -36,21 +35,18 @@ public class AddStatement implements Statement {
         if (arg.equals("stl")) {
             STL.inject();
             return;
-        }
-        else if (arg.equals("WSGcanvas")) {
+        } else if (arg.equals("WSGcanvas")) {
             WSGcanvas.inject();
             return;
-        }
-        else if (arg.equals("WSGkeys")) {
+        } else if (arg.equals("WSGkeys")) {
             WSGkeys.inject();
             return;
-        }
-        else if (arg.equals("WSGcolors")) {
+        } else if (arg.equals("WSGcolors")) {
             WSGcolors.inject();
             return;
         }
         try {
-            Handler.handle(readSource(arg));
+            Handler.handle(readSource(arg), arg);
         } catch (IOException e) {
             e.printStackTrace();
         }

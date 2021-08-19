@@ -4,7 +4,7 @@ import com.timsystem.runtime.NumberValue;
 import com.timsystem.runtime.Variables;
 
 public class WSGcolors {
-    public static void inject(){
+    public static void inject() {
         Variables.set("RED", new NumberValue(16711688));
         Variables.set("GREEN", new NumberValue(65309));
         Variables.set("BLUE", new NumberValue(5887));

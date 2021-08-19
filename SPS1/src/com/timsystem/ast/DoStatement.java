@@ -9,14 +9,19 @@ public class DoStatement implements Statement {
 
     @Override
     public void execute() {
-        while (true){
-            try{statement.execute();}
-            catch (StopStatement st){break;}
-            catch (ContinueStatement ct){continue;}
+        while (true) {
+            try {
+                statement.execute();
+            } catch (StopStatement st) {
+                break;
+            } catch (ContinueStatement ct) {
+                continue;
+            }
         }
     }
+
     @Override
-    public String toString(){
+    public String toString() {
         return "do " + statement;
     }
 }

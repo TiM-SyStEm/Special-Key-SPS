@@ -6,7 +6,7 @@ import com.timsystem.runtime.Variables;
 import java.awt.event.KeyEvent;
 
 public class WSGkeys {
-    public static void inject(){
+    public static void inject() {
         Variables.set("Key_UP", new NumberValue(KeyEvent.VK_UP));
         Variables.set("Key_DOWN", new NumberValue(KeyEvent.VK_DOWN));
         Variables.set("Key_LEFT", new NumberValue(KeyEvent.VK_LEFT));

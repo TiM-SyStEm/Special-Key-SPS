@@ -2,6 +2,6 @@ package com.timsystem.ast;
 
 import com.timsystem.runtime.Value;
 
-public interface Expression{
+public interface Expression {
     Value eval();
 }

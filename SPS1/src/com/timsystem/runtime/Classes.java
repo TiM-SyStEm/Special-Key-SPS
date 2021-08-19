@@ -1,30 +1,40 @@
-package com.timsystem.runtime;
-import com.timsystem.lib.SPKClass;
-import com.timsystem.lib.SPKException;
+package com.timsystem.lib;
+
+
+import com.timsystem.runtime.UserDefinedClass;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Classes {
-    public static final Map<String, SPKClass> classes;
+public final class Classes {
+
+    private static final Map<String, UserDefinedClass> classes;
+
     static {
         classes = new HashMap<>();
     }
-    public static boolean isExists(String key) {
-        return classes.containsKey(key);
-    }
 
-    public static SPKClass get(String key) {
-        if (!isExists(key))
-            throw new SPKException("UnboundFunctionException", String.format("Unbound function '%s'", key));
-        return classes.get(key);
-    }
-
-    public static void set(String key, SPKClass spkClass) {
-        classes.put(key, spkClass);
+    private Classes() {
     }
 
     public static void clear() {
         classes.clear();
+    }
+
+    public static Map<String, UserDefinedClass> getFunctions() {
+        return classes;
+    }
+
+    public static boolean isExists(String key) {
+        return classes.containsKey(key);
+    }
+
+    public static UserDefinedClass get(String key) {
+        if (!isExists(key)) throw new SPKException("UnknownInstantiable", "Unknown class or instantiable object");
+        return classes.get(key);
+    }
+
+    public static void set(String key, UserDefinedClass classDef) {
+        classes.put(key, classDef);
     }
 }

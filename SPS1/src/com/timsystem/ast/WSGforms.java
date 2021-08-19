@@ -11,20 +11,20 @@ public class WSGforms {
     private static ArrayValue mouseHover;
     private static JFrame frame;
 
-    public static void inject(){
+    public static void inject() {
         Functions.set("Form", new WSGforms.DrawForm());
         Functions.set("Prompt", new WSGforms.DrawPrompt());
         Functions.set("Button", new WSGforms.DrawButton());
         Functions.set("TextBox", new WSGforms.DrawTextBox());
         Functions.set("Label", new WSGforms.DrawLabel());
         lastKey = MINUS_ONE;
-        mouseHover = new ArrayValue(new Value[] { NumberValue.ZERO, NumberValue.ZERO });
+        mouseHover = new ArrayValue(new Value[]{NumberValue.ZERO, NumberValue.ZERO});
     }
 
     private static class DrawForm implements Function {
 
         @Override
-        public Value execute(Value... args){
+        public Value execute(Value... args) {
             String title = "";
             int width = 640;
             int height = 480;
@@ -54,7 +54,7 @@ public class WSGforms {
 
     private static class DrawButton implements Function {
         @Override
-        public Value execute(Value... args){
+        public Value execute(Value... args) {
             String title;
             int width = 100;
             int height = 30;
@@ -65,7 +65,7 @@ public class WSGforms {
                 case 1:
                     title = args[0].raw().toString();
                     button = new JButton(title);
-                    button.setBounds(x,y,width,height);
+                    button.setBounds(x, y, width, height);
                     frame.add(button);
                     break;
                 case 3:
@@ -73,7 +73,7 @@ public class WSGforms {
                     x = (int) args[1].raw();
                     y = (int) args[2].raw();
                     button = new JButton(title);
-                    button.setBounds(x,y,width,height);
+                    button.setBounds(x, y, width, height);
                     frame.add(button);
                     break;
                 case 5:
@@ -83,7 +83,7 @@ public class WSGforms {
                     width = (int) args[3].raw();
                     height = (int) args[4].raw();
                     button = new JButton(title);
-                    button.setBounds(x,y,width,height);
+                    button.setBounds(x, y, width, height);
                     frame.add(button);
                     break;
             }
@@ -93,7 +93,7 @@ public class WSGforms {
 
     private static class DrawTextBox implements Function {
         @Override
-        public Value execute(Value... args){
+        public Value execute(Value... args) {
             String text;
             int width = 150;
             int height = 30;
@@ -104,7 +104,7 @@ public class WSGforms {
                 case 1:
                     text = args[0].raw().toString();
                     txtbox = new JTextField(text);
-                    txtbox.setBounds(x,y,width,height);
+                    txtbox.setBounds(x, y, width, height);
                     frame.add(txtbox);
                     break;
                 case 3:
@@ -112,7 +112,7 @@ public class WSGforms {
                     x = (int) args[1].raw();
                     y = (int) args[2].raw();
                     txtbox = new JTextField(text);
-                    txtbox.setBounds(x,y,width,height);
+                    txtbox.setBounds(x, y, width, height);
                     frame.add(txtbox);
                     break;
                 case 4:
@@ -122,7 +122,7 @@ public class WSGforms {
                     width = (int) args[2].raw();
                     height = (int) args[3].raw();
                     txtbox = new JTextField(text);
-                    txtbox.setBounds(x,y,width,height);
+                    txtbox.setBounds(x, y, width, height);
                     frame.add(txtbox);
                     break;
                 case 5:
@@ -132,7 +132,7 @@ public class WSGforms {
                     width = (int) args[3].raw();
                     height = (int) args[4].raw();
                     txtbox = new JTextField(text);
-                    txtbox.setBounds(x,y,width,height);
+                    txtbox.setBounds(x, y, width, height);
                     frame.add(txtbox);
                     break;
             }
@@ -142,7 +142,7 @@ public class WSGforms {
 
     private static class DrawLabel implements Function {
         @Override
-        public Value execute(Value... args){
+        public Value execute(Value... args) {
             String text;
             int width = 150;
             int height = 30;
@@ -153,7 +153,7 @@ public class WSGforms {
                 case 1:
                     text = args[0].raw().toString();
                     label = new JLabel(text);
-                    label.setBounds(x,y,width,height);
+                    label.setBounds(x, y, width, height);
                     frame.add(label);
                     break;
                 case 3:
@@ -161,7 +161,7 @@ public class WSGforms {
                     x = (int) args[1].raw();
                     y = (int) args[2].raw();
                     label = new JLabel(text);
-                    label.setBounds(x,y,width,height);
+                    label.setBounds(x, y, width, height);
                     frame.add(label);
                     break;
                 case 5:
@@ -171,7 +171,7 @@ public class WSGforms {
                     width = (int) args[3].raw();
                     height = (int) args[4].raw();
                     label = new JLabel(text);
-                    label.setBounds(x,y,width,height);
+                    label.setBounds(x, y, width, height);
                     frame.add(label);
                     break;
             }

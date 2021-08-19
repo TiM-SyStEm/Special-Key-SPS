@@ -38,6 +38,7 @@ public enum TokenType {
     DEC,
     STOP,
     POW,
+    DOT,
 
     MATCH,
 

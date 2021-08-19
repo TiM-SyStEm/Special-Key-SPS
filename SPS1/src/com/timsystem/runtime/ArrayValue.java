@@ -4,7 +4,7 @@ import com.timsystem.lib.SPKException;
 
 import java.util.Arrays;
 
-public class ArrayValue implements Value{
+public class ArrayValue implements Value {
     private Value[] elements;
 
     public ArrayValue(int size) {
@@ -18,6 +18,15 @@ public class ArrayValue implements Value{
 
     public ArrayValue(ArrayValue array) {
         this(array.elements);
+    }
+
+    public static ArrayValue of(String[] array) {
+        final int size = array.length;
+        final ArrayValue result = new ArrayValue(size);
+        for (int i = 0; i < size; i++) {
+            result.set(i, new StringValue(array[i]));
+        }
+        return result;
     }
 
     public Value get(int index) {
@@ -48,7 +57,7 @@ public class ArrayValue implements Value{
 
     @Override
     public int asInt() {
-        throw new SPKException("TypeError","Cannot cast array to int");
+        throw new SPKException("TypeError", "Cannot cast array to int");
     }
 
     @Override
@@ -58,7 +67,7 @@ public class ArrayValue implements Value{
 
     @Override
     public double asNumber() {
-        throw new SPKException("TypeError","Cannot cast array to number");
+        throw new SPKException("TypeError", "Cannot cast array to number");
     }
 
     @Override
@@ -69,13 +78,5 @@ public class ArrayValue implements Value{
     @Override
     public String toString() {
         return asString();
-    }
-    public static ArrayValue of(String[] array) {
-        final int size = array.length;
-        final ArrayValue result = new ArrayValue(size);
-        for (int i = 0; i < size; i++) {
-            result.set(i, new StringValue(array[i]));
-        }
-        return result;
     }
 }

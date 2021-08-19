@@ -1,6 +1,6 @@
 package com.timsystem.ast;
 
-public class ForStatement implements Statement{
+public class ForStatement implements Statement {
     private final Statement initialization;
     private final Expression termination;
     private final Statement increment;
@@ -16,9 +16,13 @@ public class ForStatement implements Statement{
     @Override
     public void execute() {
         for (initialization.execute(); termination.eval().asNumber() != 0; increment.execute()) {
-            try{statement.execute();}
-            catch (StopStatement st){break;}
-            catch (ContinueStatement ct){continue;}
+            try {
+                statement.execute();
+            } catch (StopStatement st) {
+                break;
+            } catch (ContinueStatement ct) {
+                continue;
+            }
         }
     }
 

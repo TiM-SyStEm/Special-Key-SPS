@@ -5,7 +5,7 @@ import com.timsystem.runtime.UserDefinedFunction;
 
 import java.util.List;
 
-public class FunctionalDefineStatement implements Statement{
+public class FunctionalDefineStatement implements Statement {
     private final String name;
     private final List<String> argNames;
     private final Statement body;

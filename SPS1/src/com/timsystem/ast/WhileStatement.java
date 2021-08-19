@@ -11,14 +11,19 @@ public class WhileStatement implements Statement {
 
     @Override
     public void execute() {
-        while (condition.eval().asNumber() != 0){
-            try{statement.execute();}
-            catch (StopStatement st){break;}
-            catch (ContinueStatement ct){continue;}
+        while (condition.eval().asNumber() != 0) {
+            try {
+                statement.execute();
+            } catch (StopStatement st) {
+                break;
+            } catch (ContinueStatement ct) {
+                continue;
+            }
         }
     }
+
     @Override
-    public String toString(){
+    public String toString() {
         return "while " + condition + " " + statement;
     }
 }

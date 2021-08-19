@@ -1,22 +1,15 @@
 package com.timsystem.ast;
 
-import com.timsystem.lib.*;
+import com.timsystem.lib.Function;
 import com.timsystem.runtime.*;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import javax.swing.*;
 
 public class WSGcanvas {
 
@@ -30,7 +23,7 @@ public class WSGcanvas {
     private static NumberValue lastKey;
     private static ArrayValue mouseHover;
 
-    public static void inject(){
+    public static void inject() {
         Functions.set("Canvas", new CreateWindow());
         Functions.set("Prompt", new Prompt());
         Functions.set("keypressed", new KeyPressed());
@@ -45,12 +38,7 @@ public class WSGcanvas {
         Functions.set("setcolor", new SetColor());
         Functions.set("redraw", new Redraw());
         lastKey = MINUS_ONE;
-        mouseHover = new ArrayValue(new Value[] { NumberValue.ZERO, NumberValue.ZERO });
-    }
-
-    @FunctionalInterface
-    private interface IntConsumer4 {
-        void accept(int i1, int i2, int i3, int i4);
+        mouseHover = new ArrayValue(new Value[]{NumberValue.ZERO, NumberValue.ZERO});
     }
 
     private static void line(int x1, int y1, int x2, int y2) {
@@ -89,6 +77,11 @@ public class WSGcanvas {
         };
     }
 
+    @FunctionalInterface
+    private interface IntConsumer4 {
+        void accept(int i1, int i2, int i3, int i4);
+    }
+
     private static class CanvasPanel extends JPanel {
 
         public CanvasPanel(int width, int height) {
@@ -103,6 +96,7 @@ public class WSGcanvas {
                 public void keyPressed(KeyEvent e) {
                     lastKey = new NumberValue(e.getKeyCode());
                 }
+
                 @Override
                 public void keyReleased(KeyEvent e) {
                     lastKey = MINUS_ONE;
@@ -127,7 +121,7 @@ public class WSGcanvas {
     private static class CreateWindow implements Function {
 
         @Override
-        public Value execute(Value... args){
+        public Value execute(Value... args) {
             String title = "";
             int width = 640;
             int height = 480;
@@ -156,6 +150,7 @@ public class WSGcanvas {
             return NumberValue.ZERO;
         }
     }
+
     private static class KeyPressed implements Function {
 
         @Override
