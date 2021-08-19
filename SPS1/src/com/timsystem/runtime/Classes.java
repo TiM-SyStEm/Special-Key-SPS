@@ -1,6 +1,7 @@
-package com.timsystem.runtime;
+package com.timsystem.lib;
 
-import com.timsystem.lib.SPKException;
+
+import com.timsystem.runtime.UserDefinedClass;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +30,7 @@ public final class Classes {
     }
 
     public static UserDefinedClass get(String key) {
-        if (!isExists(key)) throw new SPKException("UnknownClass", "Unknown class '" + key + "'");
+        if (!isExists(key)) throw new SPKException("UnknownInstantiable", "Unknown class or instantiable object");
         return classes.get(key);
     }
 
