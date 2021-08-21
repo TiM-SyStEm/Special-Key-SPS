@@ -9,7 +9,7 @@ First install Java JDK.
 You can clone this repository and create new project Your IDE.
 
 `
-git clone https://github.com/TiM-SyStEm/Special-Key-SPS spk
+git clone https://github.com/TiM-SyStEm/Special-Key-SPS
 `
 #
 ### By .jar
