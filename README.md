@@ -4,7 +4,7 @@ Special key is a dynamic, fast and object-oriented programming language for buin
 It is in heavy develpoment now, but ready to try out!
 ## Installation
 ### Building from source
-First install Java JDK.
+First install Java JDK 16.
 
 You can clone this repository and create new project Your IDE.
 
