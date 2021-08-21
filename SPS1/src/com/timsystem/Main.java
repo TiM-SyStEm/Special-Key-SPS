@@ -1,7 +1,6 @@
 package com.timsystem;
 
 import com.timsystem.lib.Handler;
-
 import java.io.*;
 import java.net.URL;
 import java.nio.channels.Channels;
@@ -49,20 +48,9 @@ public class Main {
                     FileOutputStream fos = new FileOutputStream("modules\\" + objs[2] + ".spk");
                     fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
                 }
-                cls();
-            } else if (cmd.equals("cls")) {
-                cls();
             } else {
                 System.out.println("Command not found!");
             }
         }
-    }
-
-    private static void cls() {
-        for (int i = 0; i < 800; i++)
-            System.out.println();
-        System.out.println("================");
-        System.out.println("Special Key " + getVer());
-        System.out.println("================\n");
     }
 }
