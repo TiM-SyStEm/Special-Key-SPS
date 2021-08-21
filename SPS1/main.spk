@@ -1,8 +1,4 @@
-Add stl
-
-class Test{
-    fun test1(){
-        out : test1
-    }
+fun test(){
+    out : 5
 }
-Test.test1()
+test()
