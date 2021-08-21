@@ -5,3 +5,4 @@ class Test{
         out : test1
     }
 }
+Test.test1()

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exe4j version="8.0" transformSequenceNumber="3">
+  <directoryPresets config="C:/Users/79333/OneDrive/Рабочий стол/Project-Special Key/SpecialKey" />
+  <application name="Compiler" distributionSourceDir="C:/Users/79333/OneDrive/Рабочий стол/Project-Special Key/SpecialKey" />
+  <executable name="Compiler" wrapperType="embed" iconSet="true" iconFile="C:/Users/79333/OneDrive/Рабочий стол/Project-Special Key/SpecialKey/icon-app.ico" executableDir="." redirectStderr="false" executableMode="console" dpiAware="false">
+    <versionInfo include="true" fileVersion="0.1.1" fileDescription="Special Key Compiler" legalCopyright="TIM SYSTEM" companyName="TIM SYSTEM" productVersion="0.1.1" />
+  </executable>
+  <java mainClass="com.timsystem.Main" minVersion="1.8" maxVersion="1.9">
+    <classPath>
+      <archive location="C:/Users/79333/OneDrive/Рабочий стол/Project-Special Key/SpecialKey/Compiler.jar" />
+    </classPath>
+  </java>
+</exe4j>
