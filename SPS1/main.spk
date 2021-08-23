@@ -1,4 +1,4 @@
-fun test(){
-    out : 5
+fun test(a,b){
+    return a*b
 }
-test()
+out : Test::test(4,5)
