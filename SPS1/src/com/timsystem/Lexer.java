@@ -32,6 +32,7 @@ public final class Lexer {
         OPERATORS.put("]", TokenType.RBRACKET);
         OPERATORS.put("=", TokenType.EQ);
         OPERATORS.put(":", TokenType.COLON);
+        OPERATORS.put("::", TokenType.COLONCOLON);
         OPERATORS.put("<", TokenType.LT);
         OPERATORS.put(">", TokenType.GT);
         OPERATORS.put(",", TokenType.COMMA);
@@ -55,7 +56,6 @@ public final class Lexer {
         KEYWORDS.put("Add", TokenType.ADD);
         KEYWORDS.put("var", TokenType.VAR);
         KEYWORDS.put("fun", TokenType.FUN);
-        KEYWORDS.put("class", TokenType.CLASS);
         KEYWORDS.put("return", TokenType.RETURN);
         KEYWORDS.put("if", TokenType.IF);
         KEYWORDS.put("else", TokenType.ELSE);
