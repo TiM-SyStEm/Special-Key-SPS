@@ -2,13 +2,16 @@ package com.timsystem;
 
 import com.timsystem.ast.*;
 import com.timsystem.lib.SPKException;
+import com.timsystem.runtime.ClassValue;
 import com.timsystem.lib.Token;
 import com.timsystem.lib.TokenType;
 import com.timsystem.runtime.FunctionValue;
 import com.timsystem.runtime.UserDefinedFunction;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public final class Parser {
     private static final Token EOF = new Token(TokenType.EOF, "");
@@ -78,9 +81,41 @@ public final class Parser {
             return new ReturnStatement(expression());
         }
         else if (get(0).getType() == TokenType.WORD && get(1).getType() == TokenType.LPAREN) {
-            return new ExprStatement(function());
+            return new ExprStatement(functionChain(qualifiedName()));
+        } else if (match(TokenType.STRUCT)) {
+            return klass();
         }
         return reAssignmentStatement();
+    }
+
+    private Statement klass() {
+        Map<String, Expression> targets = new HashMap<>();
+        String name = consume(TokenType.WORD).getText();
+        targets.put("__class__", new ValueExpression(name));
+        List<String> argNames = arguments();
+        boolean extended = false;
+        String extension = "";
+        if (match(TokenType.EXTENDS)) {
+            extended = true;
+            extension = consume(TokenType.WORD).getText();
+        }
+        ClassValue result = new ClassValue(name, argNames);
+        consume(TokenType.LBRACE);
+        do {
+            if (match(TokenType.FUN)) {
+                String fun_name = consume(TokenType.WORD).getText();
+                List<String> args = arguments();
+                targets.put(fun_name, new ValueExpression(new FunctionValue(new UserDefinedFunction(args, statementOrBlock()))));
+                continue;
+            }
+            if (match(TokenType.VAR)) {
+                String var_name = consume(TokenType.WORD).getText();
+                consume(TokenType.EQ);
+                targets.put(var_name, expression());
+                continue;
+            }
+        } while(!match(TokenType.RBRACE));
+        return extended ? new ExtendedClassDeclaration(result, name, argNames, targets, extension) : new ClassDeclaration(result, name, argNames, targets);
     }
 
     private Statement doStatement() {
@@ -157,16 +192,17 @@ public final class Parser {
         return new FunctionalDefineStatement(name, argNames, body);
     }
 
-    private FunctionalExpression function() {
-        final String name = consume(TokenType.WORD).getText();
+    private FunctionalExpression function(Expression qualifiedNameExpr) {
+        // function(arg1, arg2, ...)
         consume(TokenType.LPAREN);
-        final FunctionalExpression function = new FunctionalExpression(name);
+        final FunctionalExpression function = new FunctionalExpression(qualifiedNameExpr);
         while (!match(TokenType.RPAREN)) {
             function.addArgument(expression());
             match(TokenType.COMMA);
         }
         return function;
     }
+
     private Expression expression() {
         return suffix();
     }
@@ -329,14 +365,77 @@ public final class Parser {
             return new ValueExpression(new FunctionValue(new UserDefinedFunction(args, statementOrBlock())));
         } else if (match(TokenType.HEX_NUMBER)) {
             return new ValueExpression(Long.parseLong(current.getText(), 16));
-        } else if (get(0).getType() == TokenType.WORD && get(1).getType() == TokenType.LPAREN) {
-            return function();
-        } else if (get(0).getType() == TokenType.WORD && get(1).getType() == TokenType.LBRACKET) {
-            return element();
         } else if(match(TokenType.INPUT)) {
             return inputExpression();
         }
+
+        if (lookMatch(0, TokenType.WORD) && lookMatch(1, TokenType.LPAREN)) {
+            return functionChain(new ValueExpression(consume(TokenType.WORD).getText()));
+        }
+
+        Expression qualifiedNameExpr = qualifiedName();
+        if (qualifiedNameExpr != null) {
+            if (lookMatch(0, TokenType.LPAREN)) {
+                return functionChain(qualifiedNameExpr);
+            }
+
+            return qualifiedNameExpr;
+        }
         return value();
+    }
+
+    private Expression qualifiedName() {
+        // var || var.key[index].key2
+        final Token current = get(0);
+        if (!match(TokenType.WORD)) return null;
+
+        final List<Expression> indices = variableSuffix();
+        if (indices == null || indices.isEmpty()) {
+            return new VariableExpression(current.getText());
+        }
+        return new ContainerAccessExpression(current.getText(), indices);
+    }
+
+    private List<Expression> variableSuffix() {
+        // .key1.arr1[expr1][expr2].key2
+        if (!lookMatch(0, TokenType.DOT) && !lookMatch(0, TokenType.LBRACKET)) {
+            return null;
+        }
+        final List<Expression> indices = new ArrayList<>();
+        while (lookMatch(0, TokenType.DOT) || lookMatch(0, TokenType.LBRACKET)) {
+            if (match(TokenType.DOT)) {
+                final String fieldName = consume(TokenType.WORD).getText();
+                final Expression key = new ValueExpression(fieldName);
+                indices.add(key);
+            }
+            if (match(TokenType.LBRACKET)) {
+                indices.add(expression());
+                consume(TokenType.RBRACKET);
+            }
+        }
+        return indices;
+    }
+
+    private Expression functionChain(Expression qualifiedNameExpr) {
+        // f1()()() || f1().f2().f3() || f1().key
+        final Expression expr = function(qualifiedNameExpr);
+        if (lookMatch(0, TokenType.LPAREN)) {
+            return functionChain(expr);
+        }
+        if (lookMatch(0, TokenType.DOT)) {
+            final List<Expression> indices = variableSuffix();
+            if (indices == null || indices.isEmpty()) {
+                return expr;
+            }
+
+            if (lookMatch(0, TokenType.LPAREN)) {
+                // next function call
+                return functionChain(new ContainerAccessExpression(expr, indices));
+            }
+            // container access
+            return new ContainerAccessExpression(expr, indices);
+        }
+        return expr;
     }
 
     private Expression inputExpression() {

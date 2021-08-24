@@ -67,6 +67,8 @@ public final class Lexer {
         KEYWORDS.put("do", TokenType.DO);
         KEYWORDS.put("stop", TokenType.STOP);
         KEYWORDS.put("continue", TokenType.CONTINUE);
+        KEYWORDS.put("class", TokenType.STRUCT);
+        KEYWORDS.put("extends", TokenType.EXTENDS);
     }
 
 

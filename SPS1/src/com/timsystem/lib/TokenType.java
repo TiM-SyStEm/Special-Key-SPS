@@ -41,6 +41,9 @@ public enum TokenType {
     POW,
     DOT,
 
+    STRUCT,
+    EXTENDS,
+
     MATCH,
 
     // Keywords

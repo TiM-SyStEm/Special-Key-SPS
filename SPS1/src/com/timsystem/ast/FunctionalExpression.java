@@ -3,26 +3,31 @@ package com.timsystem.ast;
 import com.timsystem.lib.Arguments;
 import com.timsystem.lib.Function;
 import com.timsystem.lib.SPKException;
+import com.timsystem.lib.UnboundVariableException;
 import com.timsystem.runtime.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FunctionalExpression implements Expression{
-    private final String name;
-    private final List<Expression> arguments;
+public final class FunctionalExpression implements Expression, Statement {
 
-    public FunctionalExpression(String name, List<Expression> arguments) {
-        this.name = name;
-        this.arguments = arguments;
+    public final Expression functionExpr;
+    public final List<Expression> arguments;
+
+    public FunctionalExpression(Expression functionExpr) {
+        this.functionExpr = functionExpr;
+        arguments = new ArrayList<>();
     }
-    public FunctionalExpression(String name) {
-        this.name = name;
-        this.arguments = new ArrayList<>();
-    }
-    public void addArgument(Expression arg){
+
+    public void addArgument(Expression arg) {
         arguments.add(arg);
     }
+
+    @Override
+    public void execute() {
+        eval();
+    }
+
     @Override
     public Value eval() {
         final int size = arguments.size();
@@ -30,34 +35,37 @@ public class FunctionalExpression implements Expression{
         for (int i = 0; i < size; i++) {
             values[i] = arguments.get(i).eval();
         }
-
-        final Function function = getFunction(name);
-        if (function instanceof UserDefinedFunction) {
-            final UserDefinedFunction userFunction = (UserDefinedFunction) function;
-            Arguments.check(userFunction.getArgsCount(), size);
-
-            Variables.push();
-            for (int i = 0; i < size; i++) {
-                Variables.set(userFunction.getArgName(i), values[i]);
-            }
-            final Value result = userFunction.execute(values);
-            Variables.pop();
+        final Function f = consumeFunction(functionExpr);
+        try {
+            final Value result = f.execute(values);
             return result;
+        } catch (SPKException ex) {
+            throw new SPKException("InFunctionException", ex.getType() + " -> " + ex.getText()+  " in function " + functionExpr);
         }
-        return function.execute(values);
+    }
+
+    private Function consumeFunction(Expression expr) {
+        try {
+            final Value value = expr.eval();
+            if (value instanceof Function) {
+                return ((FunctionValue) value).getValue();
+            }
+            return getFunction(value.toString());
+        } catch (UnboundVariableException ex) {
+            return getFunction(ex.getVariable());
+        }
     }
 
     private Function getFunction(String key) {
-        if (Functions.isExists(key)) return Functions.get(key);
-        if (Variables.isExists(key)) {
-            final Value value = Variables.get(key);
-            if (value instanceof FunctionValue) return ((FunctionValue)value).getValue();
+        if (Functions.isExists(key)) {
+            return Functions.get(key);
         }
-        throw new SPKException("UnknownFunctionError", "Unknown function " + key);
-    }
-
-    @Override
-    public String toString() {
-        return name + "(" + arguments.toString() + ")";
+        if (Variables.isExists(key)) {
+            final Value variable = Variables.get(key);
+            if (variable instanceof Function) {
+                return ((FunctionValue)variable).getValue();
+            }
+        }
+        throw new SPKException("UnboundFunctionException", "Unbound function '" + key + "'");
     }
 }

@@ -21,35 +21,35 @@ public class STL {
         Variables.set("E", NumberValue.of(Math.E));
         Variables.set("__ver__", new StringValue(("Special Key " + getVer()).getBytes(StandardCharsets.UTF_8)));
         Variables.set("__about__", new StringValue(("SPK is dynamic a interpreted programming language built on Java Virtual Machine\nCreated by Timofey Gorlov in Russia with his team").getBytes(StandardCharsets.UTF_8)));
-        Functions.functions.put("sin", args -> {
+        Functions.set("sin", args -> {
             Arguments.check(1, args.length);
             return new NumberValue(Math.sin(args[0].asNumber()));
         });
-        Functions.functions.put("cos", (Value... args) -> {
+        Functions.set("cos", (Value... args) -> {
             Arguments.check(1, args.length);
             return new NumberValue(Math.cos(args[0].asNumber()));
         });
-        Functions.functions.put("tan", (Value... args) -> {
+        Functions.set("tan", (Value... args) -> {
             Arguments.check(1, args.length);
             return new NumberValue(Math.tan(args[0].asNumber()));
         });
-        Functions.functions.put("sqrt", (Value... args) -> {
+        Functions.set("sqrt", (Value... args) -> {
             Arguments.check(1, args.length);
             return new NumberValue(Math.sqrt(args[0].asNumber()));
         });
-        Functions.functions.put("cbrt", (Value... args) -> {
+        Functions.set("cbrt", (Value... args) -> {
             Arguments.check(1, args.length);
             return new NumberValue(Math.cbrt(args[0].asNumber()));
         });
-        Functions.functions.put("round", (Value... args) -> {
+        Functions.set("round", (Value... args) -> {
             Arguments.check(1, args.length);
             return new NumberValue(Math.round(args[0].asNumber()));
         });
-        Functions.functions.put("random", (Value... args) -> {
+        Functions.set("random", (Value... args) -> {
             Arguments.check(2, args.length);
             return new NumberValue(args[0].asNumber() + (int) (Math.random() * args[1].asNumber()));
         });
-        Functions.functions.put("typeof", (Value... args) -> {
+        Functions.set("typeof", (Value... args) -> {
             Arguments.check(1, args.length);
             if (args[0] instanceof NumberValue) {
                 try {
@@ -62,7 +62,7 @@ public class STL {
                 return new StringValue("String");
             } else return new StringValue("UnknownType");
         });
-        Functions.functions.put("sleep", (Value... args) -> {
+        Functions.set("sleep", (Value... args) -> {
             Arguments.check(1, args.length);
             try {
                 Thread.sleep((long) args[0].asNumber());
@@ -71,7 +71,7 @@ public class STL {
             }
             return NumberValue.ZERO;
         });
-        Functions.functions.put("readAllFile", (Value... args) -> {
+        Functions.set("readAllFile", (Value... args) -> {
             Arguments.check(1, args.length);
             try (FileReader reader = new FileReader(args[0].raw().toString())) {
                 // читаем посимвольно
@@ -85,7 +85,7 @@ public class STL {
                 throw new SPKException("FileReadError", "the file cannot be read");
             }
         });
-        Functions.functions.put("writeFile", (Value... args) -> {
+        Functions.set("writeFile", (Value... args) -> {
             Arguments.check(2, args.length);
             try (FileWriter writer = new FileWriter(args[0].raw().toString(), false)) {
                 String text = args[1].raw().toString();
@@ -96,7 +96,7 @@ public class STL {
             }
             return NumberValue.ZERO;
         });
-        Functions.functions.put("appendFile", (Value... args) -> {
+        Functions.set("appendFile", (Value... args) -> {
             Arguments.check(2, args.length);
             try (FileWriter writer = new FileWriter(args[0].raw().toString(), true)) {
                 String text = args[1].raw().toString();
@@ -107,7 +107,7 @@ public class STL {
             }
             return NumberValue.ZERO;
         });
-        Functions.functions.put("downloadWithURL", (Value... args) -> {
+        Functions.set("downloadWithURL", (Value... args) -> {
             Arguments.check(2, args.length);
             try {
                 URL website = new URL(args[0].raw().toString());
@@ -119,6 +119,15 @@ public class STL {
                 throw new SPKException("FileWriteError", "can't write a str to a file");
             }
             return NumberValue.ZERO;
+        });
+        Functions.set("createVariable", (args) -> {
+            Arguments.check(2, args.length);
+            Variables.set(args[0].toString(), args[1]);
+            return args[1];
+        });
+        Functions.set("getVariable", (args) -> {
+            Arguments.check(1, args.length);
+            return Variables.get(args[0].toString());
         });
     }
 }

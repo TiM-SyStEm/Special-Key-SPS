@@ -5,6 +5,8 @@ import com.timsystem.lib.SPKException;
 
 public class FunctionValue implements Value, Function {
 
+    public static final FunctionValue EMPTY = new FunctionValue(args -> NumberValue.ZERO);
+
     private Function function;
 
     public FunctionValue(Function function) {
@@ -43,5 +45,10 @@ public class FunctionValue implements Value, Function {
     @Override
     public String asString() {
         return "#Function<" + hashCode() + ">";
+    }
+
+    @Override
+    public String toString() {
+        return asString();
     }
 }

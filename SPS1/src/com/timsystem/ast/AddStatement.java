@@ -1,5 +1,6 @@
 package com.timsystem.ast;
 
+import com.timsystem.Reflection;
 import com.timsystem.lib.Handler;
 import com.timsystem.lib.SPKException;
 
@@ -43,6 +44,10 @@ public class AddStatement implements Statement {
             return;
         } else if (arg.equals("WSGcolors")) {
             WSGcolors.inject();
+            return;
+        } else if (arg.equals("reflection")) {
+            Reflection ref = new Reflection();
+            ref.inject();
             return;
         }
         try {
