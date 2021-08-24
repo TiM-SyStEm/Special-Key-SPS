@@ -20,6 +20,7 @@ public enum TokenType {
     OR,
     AND,
     COLON,
+    COLONCOLON,
     LT,
     GT,
     IF,
@@ -40,6 +41,9 @@ public enum TokenType {
     POW,
     DOT,
 
+    STRUCT,
+    EXTENDS,
+
     MATCH,
 
     // Keywords
@@ -48,8 +52,6 @@ public enum TokenType {
     ADD,
     VAR,
     FUN,
-    STATIC,
-    CLASS,
     RETURN,
     CONTINUE,
     WORD

@@ -1,9 +1,10 @@
 package com.timsystem.ast;
 
 import com.timsystem.lib.GettableSettable;
+import com.timsystem.runtime.MapValue;
 import com.timsystem.lib.SPKException;
+import com.timsystem.runtime.ClassValue;
 import com.timsystem.runtime.ArrayValue;
-import com.timsystem.runtime.UserDefinedClass;
 import com.timsystem.runtime.Value;
 
 import java.util.List;
@@ -43,8 +44,12 @@ public final class ContainerAccessExpression implements Expression, GettableSett
         final Value lastIndex = lastIndex();
         if (container instanceof ArrayValue)
             return ((ArrayValue) container).get(lastIndex.asInt());
-        else if (container instanceof UserDefinedClass)
-            return ((UserDefinedClass) container).access(lastIndex);
+        else if (container instanceof ClassValue) {
+            // StringValue key = (StringValue) lastIndex;
+            return ((ClassValue) container).getField(lastIndex.toString());
+        } else if (container instanceof MapValue) {
+            return (((MapValue) container).get(lastIndex));
+        }
         else
             throw new SPKException("TypeException", "Array or map expected. Got " + container.getClass().getSimpleName());
     }

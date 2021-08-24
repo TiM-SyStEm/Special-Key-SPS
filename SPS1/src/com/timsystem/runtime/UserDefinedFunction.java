@@ -2,9 +2,10 @@ package com.timsystem.runtime;
 
 import com.timsystem.ast.ReturnStatement;
 import com.timsystem.ast.Statement;
+import com.timsystem.lib.Arguments;
 import com.timsystem.lib.Function;
-import com.timsystem.lib.SPKException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDefinedFunction implements Function {
@@ -29,11 +30,7 @@ public class UserDefinedFunction implements Function {
     @Override
     public Value execute(Value... values) {
         final int size = values.length;
-        final int requiredArgsCount = arguments.size();
-        if (size < requiredArgsCount) {
-            throw new SPKException("ArgumentError", String.format(
-                    "Arguments count mismatch. Required %d, got %d", requiredArgsCount, size));
-        }
+        Arguments.check(arguments.size(), values.length);
 
         try {
             Variables.push();
@@ -51,6 +48,9 @@ public class UserDefinedFunction implements Function {
 
     @Override
     public String toString() {
+        if (body instanceof ReturnStatement) {
+            return String.format("def%s = %s", arguments, ((ReturnStatement)body).getReturnValue());
+        }
         return String.format("def%s %s", arguments, body);
     }
 }

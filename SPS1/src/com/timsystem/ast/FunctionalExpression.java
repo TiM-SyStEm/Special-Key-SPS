@@ -1,11 +1,10 @@
 package com.timsystem.ast;
 
+import com.timsystem.lib.Arguments;
 import com.timsystem.lib.Function;
 import com.timsystem.lib.SPKException;
-import com.timsystem.runtime.FunctionValue;
-import com.timsystem.runtime.Functions;
-import com.timsystem.runtime.Value;
-import com.timsystem.runtime.Variables;
+import com.timsystem.lib.UnboundVariableException;
+import com.timsystem.runtime.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +30,6 @@ public final class FunctionalExpression implements Expression, Statement {
 
     @Override
     public Value eval() {
-        System.out.println("func expr - " + functionExpr.getClass().getSimpleName());
         final int size = arguments.size();
         final Value[] values = new Value[size];
         for (int i = 0; i < size; i++) {
@@ -42,12 +40,20 @@ public final class FunctionalExpression implements Expression, Statement {
             final Value result = f.execute(values);
             return result;
         } catch (SPKException ex) {
-            throw new SPKException(ex.getType(), ex.getText() + " in " + functionExpr);
+            throw new SPKException("InFunctionException", ex.getType() + " -> " + ex.getText()+  " in function " + functionExpr);
         }
     }
 
     private Function consumeFunction(Expression expr) {
-        return getFunction(expr.toString());
+        try {
+            final Value value = expr.eval();
+            if (value instanceof Function) {
+                return ((FunctionValue) value).getValue();
+            }
+            return getFunction(value.toString());
+        } catch (UnboundVariableException ex) {
+            return getFunction(ex.getVariable());
+        }
     }
 
     private Function getFunction(String key) {
@@ -57,10 +63,9 @@ public final class FunctionalExpression implements Expression, Statement {
         if (Variables.isExists(key)) {
             final Value variable = Variables.get(key);
             if (variable instanceof Function) {
-                return ((FunctionValue) variable).getValue();
+                return ((FunctionValue)variable).getValue();
             }
         }
         throw new SPKException("UnboundFunctionException", "Unbound function '" + key + "'");
     }
-
 }

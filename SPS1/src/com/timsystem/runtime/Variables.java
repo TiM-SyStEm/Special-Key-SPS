@@ -1,5 +1,8 @@
 package com.timsystem.runtime;
 
+import com.timsystem.lib.SPKException;
+import com.timsystem.lib.UnboundVariableException;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -55,7 +58,7 @@ public final class Variables {
                 return scopeData.scope.variables.get(key);
             }
         }
-        return NumberValue.ZERO;
+        throw new UnboundVariableException("UnboundVariableException", "Unbound variable '" + key + "'", key);
     }
 
     public static void set(String key, Value value) {

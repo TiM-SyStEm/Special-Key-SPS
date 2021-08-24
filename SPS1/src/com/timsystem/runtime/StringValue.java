@@ -3,6 +3,7 @@ package com.timsystem.runtime;
 import com.timsystem.lib.SPKException;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 public class StringValue implements Value {
 
@@ -49,4 +50,15 @@ public class StringValue implements Value {
     public String toString() {
         return new String(string);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass())
+            return false;
+        final StringValue other = (StringValue) obj;
+        return Objects.equals(this.decode(), other.toString());
+    }
+
 }
