@@ -1,7 +1,4 @@
-Add stl
-
-class Test{
-    fun test1(){
-        out : test1
-    }
+fun test(a,b){
+    return a*b
 }
+out : Test::test(4,5)
