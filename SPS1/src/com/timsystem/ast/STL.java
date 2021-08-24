@@ -3,6 +3,7 @@ package com.timsystem.ast;
 import com.timsystem.lib.Arguments;
 import com.timsystem.lib.SPKException;
 import com.timsystem.runtime.*;
+import com.timsystem.runtime.ClassValue;
 
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -12,43 +13,49 @@ import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static com.timsystem.Main.getVer;
 
 public class STL {
     public static void inject() {
+        Map<String, Value> math = new HashMap<>();
+        Map<String, Value> file = new HashMap<>();
         Variables.set("PI", NumberValue.of(Math.PI));
         Variables.set("E", NumberValue.of(Math.E));
         Variables.set("__ver__", new StringValue(("Special Key " + getVer()).getBytes(StandardCharsets.UTF_8)));
         Variables.set("__about__", new StringValue(("SPK is dynamic a interpreted programming language built on Java Virtual Machine\nCreated by Timofey Gorlov in Russia with his team").getBytes(StandardCharsets.UTF_8)));
-        Functions.set("sin", args -> {
+        math.put("sin", new FunctionValue(args -> {
             Arguments.check(1, args.length);
             return new NumberValue(Math.sin(args[0].asNumber()));
-        });
-        Functions.set("cos", (Value... args) -> {
+        }));
+        math.put("cos", new FunctionValue(args -> {
             Arguments.check(1, args.length);
             return new NumberValue(Math.cos(args[0].asNumber()));
-        });
-        Functions.set("tan", (Value... args) -> {
+        }));
+        math.put("tan",  new FunctionValue(args ->{
             Arguments.check(1, args.length);
             return new NumberValue(Math.tan(args[0].asNumber()));
-        });
-        Functions.set("sqrt", (Value... args) -> {
+        }));
+        math.put("sqrt", new FunctionValue(args ->{
             Arguments.check(1, args.length);
             return new NumberValue(Math.sqrt(args[0].asNumber()));
-        });
-        Functions.set("cbrt", (Value... args) -> {
+        }));
+        math.put("cbrt", new FunctionValue(args ->{
             Arguments.check(1, args.length);
             return new NumberValue(Math.cbrt(args[0].asNumber()));
-        });
-        Functions.set("round", (Value... args) -> {
+        }));
+        math.put("round", new FunctionValue(args ->{
             Arguments.check(1, args.length);
             return new NumberValue(Math.round(args[0].asNumber()));
-        });
-        Functions.set("random", (Value... args) -> {
+        }));
+        math.put("random", new FunctionValue(args ->{
             Arguments.check(2, args.length);
             return new NumberValue(args[0].asNumber() + (int) (Math.random() * args[1].asNumber()));
-        });
+        }));
         Functions.set("typeof", (Value... args) -> {
             Arguments.check(1, args.length);
             if (args[0] instanceof NumberValue) {
@@ -71,7 +78,7 @@ public class STL {
             }
             return NumberValue.ZERO;
         });
-        Functions.set("readAllFile", (Value... args) -> {
+        file.put("read", new FunctionValue(args ->{
             Arguments.check(1, args.length);
             try (FileReader reader = new FileReader(args[0].raw().toString())) {
                 // читаем посимвольно
@@ -84,8 +91,8 @@ public class STL {
             } catch (IOException ex) {
                 throw new SPKException("FileReadError", "the file cannot be read");
             }
-        });
-        Functions.set("writeFile", (Value... args) -> {
+        }));
+        file.put("write", new FunctionValue(args ->{
             Arguments.check(2, args.length);
             try (FileWriter writer = new FileWriter(args[0].raw().toString(), false)) {
                 String text = args[1].raw().toString();
@@ -95,8 +102,8 @@ public class STL {
                 throw new SPKException("FileWriteError", "can't write a str to a file");
             }
             return NumberValue.ZERO;
-        });
-        Functions.set("appendFile", (Value... args) -> {
+        }));
+        file.put("append", new FunctionValue(args ->{
             Arguments.check(2, args.length);
             try (FileWriter writer = new FileWriter(args[0].raw().toString(), true)) {
                 String text = args[1].raw().toString();
@@ -106,7 +113,7 @@ public class STL {
                 throw new SPKException("FileWriteError", "can't write a str to a file");
             }
             return NumberValue.ZERO;
-        });
+        }));
         Functions.set("downloadWithURL", (Value... args) -> {
             Arguments.check(2, args.length);
             try {
@@ -129,5 +136,16 @@ public class STL {
             Arguments.check(1, args.length);
             return Variables.get(args[0].toString());
         });
+        newClass("math", new ArrayList<>(), math);
+        newClass("file", new ArrayList<>(), file);
+    }
+    private static void newClass(String name, List<String> structArgs, Map<String, Value> targets) {
+        ClassValue result = new ClassValue(name, structArgs);
+        for (Map.Entry<String, Value> entry : targets.entrySet()) {
+            Value expr = entry.getValue();
+            result.setField(entry.getKey(), expr);
+        }
+
+        Variables.set(name, result);
     }
 }
