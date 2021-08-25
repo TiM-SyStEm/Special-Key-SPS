@@ -22,40 +22,10 @@ import static com.timsystem.Main.getVer;
 
 public class STL {
     public static void inject() {
-        Map<String, Value> math = new HashMap<>();
-        Map<String, Value> file = new HashMap<>();
         Variables.set("PI", NumberValue.of(Math.PI));
         Variables.set("E", NumberValue.of(Math.E));
         Variables.set("__ver__", new StringValue(("Special Key " + getVer()).getBytes(StandardCharsets.UTF_8)));
         Variables.set("__about__", new StringValue(("SPK is dynamic a interpreted programming language built on Java Virtual Machine\nCreated by Timofey Gorlov in Russia with his team").getBytes(StandardCharsets.UTF_8)));
-        math.put("sin", new FunctionValue(args -> {
-            Arguments.check(1, args.length);
-            return new NumberValue(Math.sin(args[0].asNumber()));
-        }));
-        math.put("cos", new FunctionValue(args -> {
-            Arguments.check(1, args.length);
-            return new NumberValue(Math.cos(args[0].asNumber()));
-        }));
-        math.put("tan",  new FunctionValue(args ->{
-            Arguments.check(1, args.length);
-            return new NumberValue(Math.tan(args[0].asNumber()));
-        }));
-        math.put("sqrt", new FunctionValue(args ->{
-            Arguments.check(1, args.length);
-            return new NumberValue(Math.sqrt(args[0].asNumber()));
-        }));
-        math.put("cbrt", new FunctionValue(args ->{
-            Arguments.check(1, args.length);
-            return new NumberValue(Math.cbrt(args[0].asNumber()));
-        }));
-        math.put("round", new FunctionValue(args ->{
-            Arguments.check(1, args.length);
-            return new NumberValue(Math.round(args[0].asNumber()));
-        }));
-        math.put("random", new FunctionValue(args ->{
-            Arguments.check(2, args.length);
-            return new NumberValue(args[0].asNumber() + (int) (Math.random() * args[1].asNumber()));
-        }));
         Functions.set("typeof", (Value... args) -> {
             Arguments.check(1, args.length);
             if (args[0] instanceof NumberValue) {
@@ -78,7 +48,36 @@ public class STL {
             }
             return NumberValue.ZERO;
         });
-        file.put("read", new FunctionValue(args ->{
+        Functions.set("downloadWithURL", (Value... args) -> {
+            Arguments.check(2, args.length);
+            try {
+                URL website = new URL(args[0].raw().toString());
+                ReadableByteChannel rbc = Channels.newChannel(website.openStream());
+                FileOutputStream fos = new FileOutputStream(args[1].raw().toString());
+                fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+                fos.close();
+            } catch (IOException ex) {
+                throw new SPKException("FileWriteError", "can't write a str to a file");
+            }
+            return NumberValue.ZERO;
+        });
+        Functions.set("createVariable", (args) -> {
+            Arguments.check(2, args.length);
+            Variables.set(args[0].toString(), args[1]);
+            return args[1];
+        });
+        Functions.set("getVariable", (args) -> {
+            Arguments.check(1, args.length);
+            return Variables.get(args[0].toString());
+        });
+
+        initFileClass();
+        initMathClass();
+    }
+
+    private static void initFileClass() {
+        Map<String, Value> file = new HashMap<>();
+        file.put("read", new FunctionValue(args -> {
             Arguments.check(1, args.length);
             try (FileReader reader = new FileReader(args[0].raw().toString())) {
                 // читаем посимвольно
@@ -114,31 +113,45 @@ public class STL {
             }
             return NumberValue.ZERO;
         }));
-        Functions.set("downloadWithURL", (Value... args) -> {
-            Arguments.check(2, args.length);
-            try {
-                URL website = new URL(args[0].raw().toString());
-                ReadableByteChannel rbc = Channels.newChannel(website.openStream());
-                FileOutputStream fos = new FileOutputStream(args[1].raw().toString());
-                fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
-                fos.close();
-            } catch (IOException ex) {
-                throw new SPKException("FileWriteError", "can't write a str to a file");
-            }
-            return NumberValue.ZERO;
-        });
-        Functions.set("createVariable", (args) -> {
-            Arguments.check(2, args.length);
-            Variables.set(args[0].toString(), args[1]);
-            return args[1];
-        });
-        Functions.set("getVariable", (args) -> {
-            Arguments.check(1, args.length);
-            return Variables.get(args[0].toString());
-        });
-        newClass("math", new ArrayList<>(), math);
-        newClass("file", new ArrayList<>(), file);
+
+        newClass("File", new ArrayList<>(), file);
     }
+
+    private static void initMathClass() {
+        Map<String, Value> math = new HashMap<>();
+
+        math.put("sin", new FunctionValue(args -> {
+            Arguments.check(1, args.length);
+            return new NumberValue(Math.sin(args[0].asNumber()));
+        }));
+        math.put("cos", new FunctionValue(args -> {
+            Arguments.check(1, args.length);
+            return new NumberValue(Math.cos(args[0].asNumber()));
+        }));
+        math.put("tan",  new FunctionValue(args ->{
+            Arguments.check(1, args.length);
+            return new NumberValue(Math.tan(args[0].asNumber()));
+        }));
+        math.put("sqrt", new FunctionValue(args ->{
+            Arguments.check(1, args.length);
+            return new NumberValue(Math.sqrt(args[0].asNumber()));
+        }));
+        math.put("cbrt", new FunctionValue(args ->{
+            Arguments.check(1, args.length);
+            return new NumberValue(Math.cbrt(args[0].asNumber()));
+        }));
+        math.put("round", new FunctionValue(args ->{
+            Arguments.check(1, args.length);
+            return new NumberValue(Math.round(args[0].asNumber()));
+        }));
+        math.put("random", new FunctionValue(args ->{
+            Arguments.check(2, args.length);
+            return new NumberValue(args[0].asNumber() + (int) (Math.random() * args[1].asNumber()));
+        }));
+
+        newClass("Math", new ArrayList<>(), math);
+    }
+
     private static void newClass(String name, List<String> structArgs, Map<String, Value> targets) {
         ClassValue result = new ClassValue(name, structArgs);
         for (Map.Entry<String, Value> entry : targets.entrySet()) {

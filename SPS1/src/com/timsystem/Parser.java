@@ -1,6 +1,7 @@
 package com.timsystem;
 
 import com.timsystem.ast.*;
+import com.timsystem.lib.GettableSettable;
 import com.timsystem.lib.SPKException;
 import com.timsystem.runtime.ClassValue;
 import com.timsystem.lib.Token;
@@ -92,7 +93,7 @@ public final class Parser {
         Map<String, Expression> targets = new HashMap<>();
         String name = consume(TokenType.WORD).getText();
         targets.put("__class__", new ValueExpression(name));
-        List<String> argNames = arguments();
+        List<String> argNames = lookMatch(0, TokenType.LPAREN) ? arguments() : new ArrayList<>();
         boolean extended = false;
         String extension = "";
         if (match(TokenType.EXTENDS)) {
@@ -149,9 +150,9 @@ public final class Parser {
         return new StdInput(expression());
     }
     private Statement assignmentStatement() {
-        final String variable = consume(TokenType.WORD).getText();
+        Expression target = qualifiedName();
         consume(TokenType.EQ);
-        return new AssignmentStatement(variable, expression());
+        return new AssignmentExpression((GettableSettable) target, expression());
     }
     private Statement statementOrBlock(){
         if(get(0).getType() == TokenType.LBRACE) return block();
