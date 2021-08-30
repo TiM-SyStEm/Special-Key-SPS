@@ -67,6 +67,7 @@ public class STL {
 
     private static void initFileClass() {
         Map<String, Value> file = new HashMap<>();
+        Map<String, Value> str = new HashMap<>();
         file.put("read", new FunctionValue(args -> {
             Arguments.check(1, args.length);
             try (FileReader reader = new FileReader(args[0].raw().toString())) {
@@ -103,8 +104,28 @@ public class STL {
             }
             return NumberValue.ZERO;
         }));
+        str.put("replace", new FunctionValue((args -> {
+            Arguments.check(3, args.length);
+            final String input = args[0].toString();
+            final String regex = args[1].toString();
+            final String replacement = args[2].toString();
 
+            return new StringValue(input.replaceAll(regex, replacement));
+        })));
+        str.put("split", new FunctionValue((args -> {
+            Arguments.check(2, args.length);
+            final String input = args[0].toString();
+            final String spl = args[1].toString();
+
+            return ArrayValue.of(input.split(spl));
+        })));
+        str.put("chars", new FunctionValue((args -> {
+            Arguments.check(1, args.length);
+            char[] chars = args[0].toString().toCharArray();
+            return ArrayValue.of(chars);
+        })));
         newClass("File", new ArrayList<>(), file);
+        newClass("str", new ArrayList<>(), str);
     }
 
     private static void initMathClass() {
