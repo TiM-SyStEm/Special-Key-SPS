@@ -1,2 +1,3 @@
-Add stl
-out : file.read("main.spk")
+Add strings
+
+out : String.contains("test", "es")

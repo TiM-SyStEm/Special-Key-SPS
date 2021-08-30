@@ -30,10 +30,10 @@ public class STL {
             Arguments.check(1, args.length);
             if (args[0] instanceof NumberValue) {
                 try {
-                    ((NumberValue) args[0]).asFloat();
-                    return new StringValue("Float");
+                    args[0].asInt();
+                    return new StringValue("Int");
                 } catch (Exception exception2) {
-                    return new StringValue("Number");
+                    return new StringValue("Float");
                 }
             } else if (args[0] instanceof StringValue) {
                 return new StringValue("String");
@@ -61,16 +61,6 @@ public class STL {
             }
             return NumberValue.ZERO;
         });
-        Functions.set("createVariable", (args) -> {
-            Arguments.check(2, args.length);
-            Variables.set(args[0].toString(), args[1]);
-            return args[1];
-        });
-        Functions.set("getVariable", (args) -> {
-            Arguments.check(1, args.length);
-            return Variables.get(args[0].toString());
-        });
-
         initFileClass();
         initMathClass();
     }

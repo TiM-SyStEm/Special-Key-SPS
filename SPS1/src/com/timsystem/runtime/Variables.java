@@ -28,7 +28,7 @@ public final class Variables {
         scope.variables.clear();
         scope.variables.put("True", NumberValue.ONE);
         scope.variables.put("False", NumberValue.ZERO);
-        scope.variables.put("Null", new StringValue("\0"));
+        scope.variables.put("Null", NumberValue.MINUS_ONE);
     }
 
     public static void push() {
@@ -42,6 +42,11 @@ public final class Variables {
             if (scope.parent != null) {
                 scope = scope.parent;
             }
+        }
+    }
+    public static void del(String name) {
+        synchronized (lock) {
+            findScope(name).scope.variables.remove(name);
         }
     }
 
@@ -70,12 +75,6 @@ public final class Variables {
     public static void define(String key, Value value) {
         synchronized (lock) {
             scope.variables.put(key, value);
-        }
-    }
-
-    public static void remove(String key) {
-        synchronized (lock) {
-            findScope(key).scope.variables.remove(key);
         }
     }
 

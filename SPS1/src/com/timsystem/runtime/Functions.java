@@ -2,6 +2,7 @@ package com.timsystem.runtime;
 
 import com.timsystem.lib.Arguments;
 import com.timsystem.lib.Function;
+import com.timsystem.lib.Handler;
 import com.timsystem.lib.SPKException;
 
 import java.nio.charset.StandardCharsets;
@@ -49,6 +50,29 @@ public class Functions {
             Arguments.check(1, args.length);
             return new NumberValue(args[0].asNumber());
         });
+        Functions.set("exec", (args) -> {
+            Arguments.check(1, args.length);
+            Handler.handle(args[0].toString(), "exec()", true);
+            return NumberValue.ZERO;
+        });
+        Functions.set("eval", (args) -> {
+            Arguments.check(1, args.length);
+            return Handler.returnHandle(args[0].toString(), "eval()");
+        });
+        Functions.set("createVariable", (args) -> {
+            Arguments.check(2, args.length);
+            Variables.set(args[0].toString(), args[1]);
+            return args[1];
+        });
+        Functions.set("getVariable", (args) -> {
+            Arguments.check(1, args.length);
+            return Variables.get(args[0].toString());
+        });
+        Functions.set("destruct", (args) -> {
+            Arguments.check(1, args.length);
+            Variables.del(args[0].toString());
+            return NumberValue.ZERO;
+        });
         str.put("replace", new FunctionValue((args -> {
             Arguments.check(3, args.length);
             final String input = args[0].toString();
@@ -64,6 +88,11 @@ public class Functions {
             final String replacement = args[2].asString();
 
             return new StringValue(input.replaceAll(regex, replacement));
+        })));
+        str.put("chars", new FunctionValue((args -> {
+            Arguments.check(1, args.length);
+            char[] chars = args[0].toString().toCharArray();
+            return ArrayValue.of(chars);
         })));
         Functions.set("toByte", args -> NumberValue.of((byte) args[0].asInt()));
         Functions.set("toShort", args -> NumberValue.of((short) args[0].asInt()));

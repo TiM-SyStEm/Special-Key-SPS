@@ -51,7 +51,7 @@ public class AddStatement implements Statement {
             return;
         }
         try {
-            Handler.handle(readSource(arg), arg);
+            Handler.handle(readSource(arg), arg, true);
         } catch (IOException e) {
             e.printStackTrace();
         }

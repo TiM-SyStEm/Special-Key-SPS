@@ -34,6 +34,9 @@ public final class Parser {
         }
         return result;
     }
+    public Expression parseExpr() {
+        return expression();
+    }
 
     private Statement block(){
         final BlockStatement block = new BlockStatement();
@@ -181,7 +184,7 @@ public final class Parser {
         consume(TokenType.COMMA);
         final Expression termination = expression();
         consume(TokenType.COMMA);
-        final Statement increment = assignmentStatement();
+        final Statement increment = statement();
         match(TokenType.RPAREN);
         final Statement statement = statementOrBlock();
         return new ForStatement(initialization, termination, increment, statement);
@@ -317,7 +320,7 @@ public final class Parser {
     }
 
     private Expression multiplicative() {
-        Expression result = remains();
+        Expression result = unary();
 
         while (true) {
             if (match(TokenType.STAR)) {
@@ -332,15 +335,7 @@ public final class Parser {
                 result = new BinaryExpression('^', result, unary());
                 continue;
             }
-            break;
-        }
-        return result;
-    }
-    private Expression remains() {
-        Expression result = unary();
-
-        while (true) {
-            if (match(TokenType.REMAINDER)) {
+            else if (match(TokenType.REMAINDER)) {
                 result = new BinaryExpression('%', result, unary());
                 continue;
             }
@@ -356,7 +351,9 @@ public final class Parser {
         if (match(TokenType.NOT)) {
             return new UnaryExpression('!', primary());
         }
-
+        if (match(TokenType.TILDA)){
+            return new UnaryExpression('~', primary());
+        }
         return primary();
     }
     private Expression primary() {
