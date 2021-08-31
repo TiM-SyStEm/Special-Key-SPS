@@ -74,6 +74,7 @@ public final class Variables {
 
     public static void define(String key, Value value) {
         synchronized (lock) {
+            if (scope.parent != null) scope.parent.variables.put(key, value);
             scope.variables.put(key, value);
         }
     }

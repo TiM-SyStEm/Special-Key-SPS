@@ -6,7 +6,6 @@ import com.timsystem.lib.Handler;
 import com.timsystem.lib.SPKException;
 
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,13 +59,14 @@ public class Functions {
         });
         Functions.set("createVariable", (args) -> {
             Arguments.check(2, args.length);
-            Variables.set(args[0].toString(), args[1]);
+            Variables.define(args[0].toString(), args[1]);
             return args[1];
         });
         Functions.set("getVariable", (args) -> {
             Arguments.check(1, args.length);
             return Variables.get(args[0].toString());
         });
+
         Functions.set("destruct", (args) -> {
             Arguments.check(1, args.length);
             Variables.del(args[0].toString());

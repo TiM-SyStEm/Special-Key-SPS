@@ -159,7 +159,6 @@ public class STL {
             Arguments.check(2, args.length);
             return new NumberValue(args[0].asNumber() + (int) (Math.random() * args[1].asNumber()));
         }));
-
         newClass("Math", new ArrayList<>(), math);
     }
 
