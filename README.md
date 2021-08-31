@@ -29,9 +29,7 @@ See more about it!
 ## Roadmap
 Our small roadmap
 * TIM SYSTEM Bridge
-* Add classes
 * normal clear console
-* optimization
 * Add modules from cwd
 * WSGforms
 ## Usage
