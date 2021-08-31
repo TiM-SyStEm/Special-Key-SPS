@@ -15,8 +15,8 @@ public class ClassMethod extends UserDefinedFunction {
 
     @Override
     public Value execute(Value[] values) {
-        Variables.push();
-        Variables.set("this", classInstance);
+        //Variables.push();
+        Variables.define("this", classInstance);
 
         try {
             return super.execute(values);

@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public final class Variables {
 
     private static final Object lock = new Object();
-    private static volatile Scope scope;
+    public static volatile Scope scope;
 
     static {
         Variables.clear();
@@ -74,7 +74,10 @@ public final class Variables {
 
     public static void define(String key, Value value) {
         synchronized (lock) {
-            if (scope.parent != null) scope.parent.variables.put(key, value);
+            if (scope.parent != null) {
+                scope.parent.variables.put(key, value);
+                return;
+            }
             scope.variables.put(key, value);
         }
     }
@@ -107,6 +110,14 @@ public final class Variables {
         Scope(Scope parent) {
             this.parent = parent;
             variables = new ConcurrentHashMap<>();
+        }
+
+        @Override
+        public String toString() {
+            return "Scope{" +
+                    "parent=" + parent +
+                    ", variables=" + variables +
+                    '}';
         }
     }
 

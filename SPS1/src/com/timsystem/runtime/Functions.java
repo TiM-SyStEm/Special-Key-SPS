@@ -64,9 +64,8 @@ public class Functions {
         });
         Functions.set("getVariable", (args) -> {
             Arguments.check(1, args.length);
-            return Variables.get(args[0].toString());
+            return Variables.get(args[0].asString());
         });
-
         Functions.set("destruct", (args) -> {
             Arguments.check(1, args.length);
             Variables.del(args[0].toString());
