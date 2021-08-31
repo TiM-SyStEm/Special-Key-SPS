@@ -1,3 +1,2 @@
-Add strings
-
-out : String.contains("test", "es")
+createVariable("test", 0)
+out : test
