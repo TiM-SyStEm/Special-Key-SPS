@@ -1,0 +1,8 @@
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\TIM SYSTEM Bridge\obj\Release\TIM_SYSTEM_Bridge.Form1.resources
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\TIM SYSTEM Bridge\obj\Release\TIM_SYSTEM_Bridge.Properties.Resources.resources
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\TIM SYSTEM Bridge\obj\Release\TIM SYSTEM Bridge.csproj.GenerateResource.cache
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\TIM SYSTEM Bridge\obj\Release\TIM SYSTEM Bridge.csproj.CoreCompileInputs.cache
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\TIM SYSTEM Bridge\obj\Release\TIM SYSTEM Bridge.TrustInfo.xml
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\TIM SYSTEM Bridge\obj\Release\TIM SYSTEM Bridge.exe.manifest
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\TIM SYSTEM Bridge\obj\Release\TIM SYSTEM Bridge.exe
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\TIM SYSTEM Bridge\obj\Release\TIM SYSTEM Bridge.pdb
