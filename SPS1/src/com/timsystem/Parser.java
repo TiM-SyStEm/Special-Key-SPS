@@ -1,30 +1,34 @@
 package com.timsystem;
 
 import com.timsystem.ast.*;
-import com.timsystem.lib.GettableSettable;
-import com.timsystem.lib.SPKException;
+import com.timsystem.lib.*;
 import com.timsystem.runtime.ClassValue;
-import com.timsystem.lib.Token;
-import com.timsystem.lib.TokenType;
 import com.timsystem.runtime.FunctionValue;
 import com.timsystem.runtime.UserDefinedFunction;
 
+import java.security.spec.ECParameterSpec;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public final class Parser {
-    private static final Token EOF = new Token(TokenType.EOF, "");
+
+    private static final Token EOF = new Token(TokenType.EOF, "", -1);
 
     private final List<Token> tokens;
     private final int size;
+
+    private final Map<String, Integer> macros;
+    private final Map<String, Function> macrosBody;
 
     private int pos;
 
     public Parser(List<Token> tokens) {
         this.tokens = tokens;
         size = tokens.size();
+        this.macros = new HashMap<>();
+        this.macrosBody = new HashMap<>();
     }
 
     public BlockStatement parse() {
@@ -33,6 +37,9 @@ public final class Parser {
             result.add(statement());
         }
         return result;
+    }
+    public Expression parseExpr() {
+        return expression();
     }
 
     private Statement block(){
@@ -45,6 +52,9 @@ public final class Parser {
     }
     private Statement statement() {
         Token current = get(0);
+        if (lookMatch(0, TokenType.WORD) && macros.containsKey(current.getText())) {
+            return macroUsage();
+        }
         if (match(TokenType.OUT)) {
             return outStatement();
         }
@@ -85,8 +95,29 @@ public final class Parser {
             return new ExprStatement(functionChain(qualifiedName()));
         } else if (match(TokenType.STRUCT)) {
             return klass();
+        } else if (match(TokenType.DEFMACRO)) {
+            return defmacro();
         }
         return reAssignmentStatement();
+    }
+
+    private Statement macroUsage() {
+        String name = consume(TokenType.WORD).getText();
+        ArrayList<Expression> exprs = new ArrayList<>();
+        for (int i = 0; i < macros.get(name); i++) {
+            exprs.add(expression());
+        }
+        FunctionalExpression func = new FunctionalExpression(new VariableExpression(name), exprs);
+        return func;
+    }
+
+    private Statement defmacro() {
+        String name = consume(TokenType.WORD).getText();
+        ArrayList<String> args = arguments();
+        Statement block = statementOrBlock();
+        macros.put(name, args.size());
+        macrosBody.put(name, new FunctionValue(new UserDefinedFunction(args, block)));
+        return new FunctionalDefineStatement(name, args, block);
     }
 
     private Statement klass() {
@@ -181,7 +212,7 @@ public final class Parser {
         consume(TokenType.COMMA);
         final Expression termination = expression();
         consume(TokenType.COMMA);
-        final Statement increment = assignmentStatement();
+        final Statement increment = statement();
         match(TokenType.RPAREN);
         final Statement statement = statementOrBlock();
         return new ForStatement(initialization, termination, increment, statement);
@@ -317,7 +348,7 @@ public final class Parser {
     }
 
     private Expression multiplicative() {
-        Expression result = remains();
+        Expression result = unary();
 
         while (true) {
             if (match(TokenType.STAR)) {
@@ -332,15 +363,7 @@ public final class Parser {
                 result = new BinaryExpression('^', result, unary());
                 continue;
             }
-            break;
-        }
-        return result;
-    }
-    private Expression remains() {
-        Expression result = unary();
-
-        while (true) {
-            if (match(TokenType.REMAINDER)) {
+            else if (match(TokenType.REMAINDER)) {
                 result = new BinaryExpression('%', result, unary());
                 continue;
             }
@@ -356,7 +379,9 @@ public final class Parser {
         if (match(TokenType.NOT)) {
             return new UnaryExpression('!', primary());
         }
-
+        if (match(TokenType.TILDA)){
+            return new UnaryExpression('~', primary());
+        }
         return primary();
     }
     private Expression primary() {
@@ -368,6 +393,9 @@ public final class Parser {
             return new ValueExpression(Long.parseLong(current.getText(), 16));
         } else if(match(TokenType.INPUT)) {
             return inputExpression();
+        } else if (lookMatch(0, TokenType.LBRACE)) {
+            FunctionValue fun = new FunctionValue(new UserDefinedFunction(new ArrayList<>(), statementOrBlock()));
+            return new ValueExpression(fun);
         }
 
         if (lookMatch(0, TokenType.WORD) && lookMatch(1, TokenType.LPAREN)) {
@@ -459,7 +487,7 @@ public final class Parser {
             match(TokenType.RPAREN);
             return result;
         }
-        throw new SPKException("ExpressionError", String.format("unknown expression '%s'", current.getType()));
+        throw new SPKException("ExpressionError", String.format("unknown expression '%s' at line %s", current.getType(), current.getLine()));
     }
     private Expression array() {
         consume(TokenType.LBRACKET);
@@ -508,7 +536,7 @@ public final class Parser {
     private Token consume(TokenType type) {
         final Token current = get(0);
         if (type != current.getType())
-            throw new SPKException("TokenError", "Token '" + current.getType() + "' doesn't match " + type);
+            throw new SPKException("TokenError", "Token '" + current.getType() + "' doesn't match " + type + " at line " + current.getLine());
         pos++;
         return current;
     }

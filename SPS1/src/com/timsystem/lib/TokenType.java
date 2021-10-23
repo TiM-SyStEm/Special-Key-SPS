@@ -21,6 +21,7 @@ public enum TokenType {
     AND,
     COLON,
     COLONCOLON,
+    TILDA,
     LT,
     GT,
     IF,
@@ -54,5 +55,6 @@ public enum TokenType {
     FUN,
     RETURN,
     CONTINUE,
-    WORD
+    WORD,
+    DEFMACRO
 }

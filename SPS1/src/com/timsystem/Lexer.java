@@ -13,7 +13,7 @@ import static java.lang.Character.isDigit;
 import static java.lang.Character.toLowerCase;
 
 public final class Lexer {
-    private static final String OPERATOR_CHARS = "+-*/%()[]{}=:<>,!^.";
+    private static final String OPERATOR_CHARS = "+-*/%()[]{}=:<>,!^.~";
     private static final Map<String, TokenType> OPERATORS;
     private static final Map<String, TokenType> KEYWORDS;
 
@@ -33,6 +33,7 @@ public final class Lexer {
         OPERATORS.put("=", TokenType.EQ);
         OPERATORS.put(":", TokenType.COLON);
         OPERATORS.put("::", TokenType.COLONCOLON);
+        OPERATORS.put("~", TokenType.TILDA);
         OPERATORS.put("<", TokenType.LT);
         OPERATORS.put(">", TokenType.GT);
         OPERATORS.put(",", TokenType.COMMA);
@@ -69,6 +70,7 @@ public final class Lexer {
         KEYWORDS.put("continue", TokenType.CONTINUE);
         KEYWORDS.put("class", TokenType.STRUCT);
         KEYWORDS.put("extends", TokenType.EXTENDS);
+        KEYWORDS.put("defmacro", TokenType.DEFMACRO);
     }
 
 
@@ -77,6 +79,7 @@ public final class Lexer {
     private final StringBuilder buffer;
     public List<Token> tokens;
     private int pos;
+    private int line = 1;
 
     public Lexer(String input) {
         this.input = input;
@@ -262,7 +265,9 @@ public final class Lexer {
 
     private char next() {
         pos++;
-        return peek(0);
+        char result = peek(0);
+        if (result == '\n') line++;
+        return result;
     }
 
     private void addToken(TokenType type) {
@@ -270,7 +275,7 @@ public final class Lexer {
     }
 
     private void addToken(TokenType type, String text) {
-        tokens.add(new Token(type, text));
+        tokens.add(new Token(type, text, line));
     }
 }
 

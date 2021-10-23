@@ -45,6 +45,7 @@ public class FunctionValue implements Value, Function {
     @Override
     public String asString() {
         return "#Function<" + hashCode() + ">";
+        //return function.toString();
     }
 
     @Override

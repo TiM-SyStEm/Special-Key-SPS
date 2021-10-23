@@ -24,7 +24,7 @@ public class Main {
                     content.append(line).append("\n");
                     line = reader.readLine();
                 }
-                Handler.handle(content.toString(), path);
+                Handler.handle(content.toString(), path, false);
             }
             /*
              * Стававим консоль на паузу,
@@ -57,7 +57,7 @@ public class Main {
                             content.append(line).append("\n");
                             line = reader.readLine();
                         }
-                        Handler.handle(content.toString(), path); // Класс Handler сделан для удобного отлова ошибок
+                        Handler.handle(content.toString(), path, false); // Класс Handler сделан для удобного отлова ошибок
                     } catch (FileNotFoundException e) {
                         System.out.println("File is not found!");
                     } catch (IOException e) {
@@ -73,7 +73,7 @@ public class Main {
                     }
                 } else if (cmd.contains("ver")) {
                     System.out.println("============");
-                    System.out.println("SPS1");
+                    System.out.println(getVer());
                     System.out.println("Patch 0");
                     System.out.println("============");
                 } else {

@@ -19,6 +19,11 @@ public final class FunctionalExpression implements Expression, Statement {
         arguments = new ArrayList<>();
     }
 
+    public FunctionalExpression(Expression functionExpr, List<Expression> arguments) {
+        this.functionExpr = functionExpr;
+        this.arguments = arguments;
+    }
+
     public void addArgument(Expression arg) {
         arguments.add(arg);
     }

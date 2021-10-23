@@ -2,22 +2,27 @@ package com.timsystem.runtime;
 
 import com.timsystem.lib.SPKException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class ArrayValue implements Value {
-    private Value[] elements;
+
+    private List<Value> elements;
 
     public ArrayValue(int size) {
-        this.elements = new Value[size];
+        this.elements = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            elements.add(null);
+        }
     }
 
     public ArrayValue(Value[] elements) {
-        this.elements = new Value[elements.length];
-        System.arraycopy(elements, 0, this.elements, 0, elements.length);
+        this.elements = Arrays.asList(elements);
     }
 
     public ArrayValue(ArrayValue array) {
-        this(array.elements);
+        this(array.array());
     }
 
     public static ArrayValue of(String[] array) {
@@ -29,25 +34,34 @@ public class ArrayValue implements Value {
         return result;
     }
 
+    public static ArrayValue of(char[] array) {
+        final int size = array.length;
+        final ArrayValue result = new ArrayValue(size);
+        for (int i = 0; i < size; i++) {
+            String _char = Character.toString(array[i]);
+            result.set(i, new StringValue(_char));
+        }
+        return result;
+    }
+
     public Value get(int index) {
-        return elements[index];
+        return elements.get(index);
     }
 
     public void append(Value expr) {
-        elements = Arrays.copyOf(elements, elements.length + 1);
-        elements[elements.length - 1] = expr;
+        elements.add(expr);
     }
 
     public void set(int index, Value value) {
-        elements[index] = value;
+        elements.set(index, value);
     }
 
     public int length() {
-        return elements.length;
+        return elements.size();
     }
 
     public Value[] array() {
-        return elements;
+        return elements.toArray(new Value[] {});
     }
 
     @Override
@@ -72,7 +86,7 @@ public class ArrayValue implements Value {
 
     @Override
     public String asString() {
-        return Arrays.toString(elements);
+        return elements.toString();
     }
 
     @Override

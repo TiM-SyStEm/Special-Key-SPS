@@ -30,10 +30,10 @@ public class STL {
             Arguments.check(1, args.length);
             if (args[0] instanceof NumberValue) {
                 try {
-                    ((NumberValue) args[0]).asFloat();
-                    return new StringValue("Float");
+                    args[0].asInt();
+                    return new StringValue("Int");
                 } catch (Exception exception2) {
-                    return new StringValue("Number");
+                    return new StringValue("Float");
                 }
             } else if (args[0] instanceof StringValue) {
                 return new StringValue("String");
@@ -61,22 +61,13 @@ public class STL {
             }
             return NumberValue.ZERO;
         });
-        Functions.set("createVariable", (args) -> {
-            Arguments.check(2, args.length);
-            Variables.set(args[0].toString(), args[1]);
-            return args[1];
-        });
-        Functions.set("getVariable", (args) -> {
-            Arguments.check(1, args.length);
-            return Variables.get(args[0].toString());
-        });
-
         initFileClass();
         initMathClass();
     }
 
     private static void initFileClass() {
         Map<String, Value> file = new HashMap<>();
+        Map<String, Value> str = new HashMap<>();
         file.put("read", new FunctionValue(args -> {
             Arguments.check(1, args.length);
             try (FileReader reader = new FileReader(args[0].raw().toString())) {
@@ -113,8 +104,28 @@ public class STL {
             }
             return NumberValue.ZERO;
         }));
+        str.put("replace", new FunctionValue((args -> {
+            Arguments.check(3, args.length);
+            final String input = args[0].toString();
+            final String regex = args[1].toString();
+            final String replacement = args[2].toString();
 
+            return new StringValue(input.replaceAll(regex, replacement));
+        })));
+        str.put("split", new FunctionValue((args -> {
+            Arguments.check(2, args.length);
+            final String input = args[0].toString();
+            final String spl = args[1].toString();
+
+            return ArrayValue.of(input.split(spl));
+        })));
+        str.put("chars", new FunctionValue((args -> {
+            Arguments.check(1, args.length);
+            char[] chars = args[0].toString().toCharArray();
+            return ArrayValue.of(chars);
+        })));
         newClass("File", new ArrayList<>(), file);
+        newClass("str", new ArrayList<>(), str);
     }
 
     private static void initMathClass() {
@@ -148,7 +159,6 @@ public class STL {
             Arguments.check(2, args.length);
             return new NumberValue(args[0].asNumber() + (int) (Math.random() * args[1].asNumber()));
         }));
-
         newClass("Math", new ArrayList<>(), math);
     }
 
