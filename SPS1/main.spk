@@ -1,4 +1,2 @@
-fun test(a,b){
-    return a*b
-}
-out : Test::test(4,5)
+createVariable("test", 0)
+out : test

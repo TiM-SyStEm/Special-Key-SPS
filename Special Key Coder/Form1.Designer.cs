@@ -186,8 +186,8 @@ namespace Special_KeyCoder
             // скопмилироватьToolStripMenuItem
             // 
             this.скопмилироватьToolStripMenuItem.Name = "скопмилироватьToolStripMenuItem";
-            this.скопмилироватьToolStripMenuItem.Size = new System.Drawing.Size(151, 24);
-            this.скопмилироватьToolStripMenuItem.Text = "Скопимилировать";
+            this.скопмилироватьToolStripMenuItem.Size = new System.Drawing.Size(142, 24);
+            this.скопмилироватьToolStripMenuItem.Text = "Скомпилировать";
             this.скопмилироватьToolStripMenuItem.Click += new System.EventHandler(this.скопмилироватьToolStripMenuItem_Click);
             // 
             // openFileDialog1
@@ -232,6 +232,7 @@ namespace Special_KeyCoder
             this.fastColoredTextBox1.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fastColoredTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fastColoredTextBox1.FoldingIndicatorColor = System.Drawing.Color.DodgerBlue;
+            this.fastColoredTextBox1.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fastColoredTextBox1.IndentBackColor = System.Drawing.Color.White;
             this.fastColoredTextBox1.IsReplaceMode = false;
             this.fastColoredTextBox1.LineNumberColor = System.Drawing.Color.DodgerBlue;

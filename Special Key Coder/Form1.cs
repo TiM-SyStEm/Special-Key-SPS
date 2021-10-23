@@ -43,6 +43,7 @@ namespace Special_KeyCoder
             if (openFileDialog1.ShowDialog() != DialogResult.Cancel)
             {
                 openfile = openFileDialog1.FileName;
+                path = openfile;
                 fastColoredTextBox1.Text = File.ReadAllText(openfile, Encoding.ASCII);
                 button1.Text = openfile;
             }
@@ -251,7 +252,10 @@ namespace Special_KeyCoder
 
         private void скопмилироватьToolStripMenuItem_Click(object sender, EventArgs e) 
         {
-            Process.Start("Compiler.exe", "\"" + path + "\"");
+            if (button1.Text != "Нет информации об пути")
+                Process.Start("Compiler.exe", "\"" + path + "\"");
+            else
+                MessageBox.Show("Сначала сохраните файл!", "Файл не найден");
         }
     }
 }
