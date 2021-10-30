@@ -61,6 +61,11 @@ public class STL {
             }
             return NumberValue.ZERO;
         });
+        Functions.set("arrayAppend", (args -> {
+            Arguments.check(2, args.length);
+            ((ArrayValue) args[0]).append(args[1]);
+            return args[0];
+        }));
         initFileClass();
         initMathClass();
     }
