@@ -74,7 +74,7 @@ public class Main {
                 } else if (cmd.contains("ver")) {
                     System.out.println("============");
                     System.out.println(getVer());
-                    System.out.println("Patch 0");
+                    System.out.println("Patch 1");
                     System.out.println("============");
                 } else {
                     System.out.println("Command not found!");
