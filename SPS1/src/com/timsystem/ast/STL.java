@@ -37,6 +37,8 @@ public class STL {
                 }
             } else if (args[0] instanceof StringValue) {
                 return new StringValue("String");
+            }else if (args[0] instanceof ArrayValue){
+                return new StringValue("Array");
             } else return new StringValue("UnknownType");
         });
         Functions.set("sleep", (Value... args) -> {
