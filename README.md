@@ -26,12 +26,6 @@ Special key is relseased under <a href="https://en.wikipedia.org/wiki/Apache_Lic
 
 See more about it!
 
-## Roadmap
-Our small roadmap
-* TIM SYSTEM Bridge
-* normal clear console
-* Add modules from cwd
-* WSGforms
 ## Usage
 Special Key shell provides you some functions to run code
 
@@ -45,5 +39,7 @@ Example of usage:
 Notice that extension of file is not required
 
 `cls` - clears the screen
+
+Documentation: https://github.com/TiM-SyStEm/Special-Key-SPS/wiki on Russian and English
 
 <h1 align="middle" style="font-size: 72px;">WE 💖⚙️ SPECIAL KEY</h1>
