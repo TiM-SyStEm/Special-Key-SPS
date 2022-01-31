@@ -4,7 +4,7 @@ Special key is a dynamic, fast and object-oriented programming language for buin
 It is in heavy develpoment now, but ready to try out!
 ## Readiness SPS2
 95%
-Approximate release date: End of January 2022
+Approximate release date: february 2022
 
 ## Installation
 ### Building from source
