@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exe4j version="8.0" transformSequenceNumber="3">
+  <directoryPresets config="C:/Users/79333/OneDrive/Рабочий стол/Project-Special Key" />
+  <application name="SpecialKey" distributionSourceDir="C:/Users/79333/OneDrive/Рабочий стол/Project-Special Key/build" />
+  <executable name="SpecialKey" wrapperType="embed" iconSet="true" iconFile="C:/Users/79333/OneDrive/Рабочий стол/Project-Special Key/SpecialKey/SPKprogram.ico" executableDir="." redirectStderr="false" executableMode="console">
+    <messageSet>
+      <message id="NoJvmFound" text="JDK16 is required to run the compiler!&#xA;" />
+    </messageSet>
+    <versionInfo include="true" fileVersion="2.0.0" fileDescription="Special Key Compiler SPS2 beta1" legalCopyright="TIM SYSTEM" companyName="TIM SYSTEM" productVersion="2.0.0" />
+  </executable>
+  <java mainClass="com.timsystem.Main" minVersion="15" maxVersion="16">
+    <classPath>
+      <archive location="C:/Users/79333/OneDrive/Рабочий стол/Project-Special Key/SpecialKey/SpecialKey.jar" failOnError="false" />
+    </classPath>
+  </java>
+</exe4j>
