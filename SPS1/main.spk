@@ -1,2 +1,0 @@
-createVariable("test", 0)
-out : test
