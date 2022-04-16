@@ -1,0 +1,31 @@
+Add sgl
+Add stl
+
+
+var v_pos =
+[
+    0.0, 0.5, 0.0,
+    -0.5, -0.5, 0.0,
+    0.5, -0.5, 0.0,
+]
+var uv = [
+    1.0, 0.0,
+    0.0, 0.0,
+    0.0, 1.0,
+    1.1, 0.0
+]
+
+fun update(){
+    sgl.viewEvents()
+    sgl.clearColor(0, 0, 0, 1)
+    # шейдеры с поддержкой 2D текстур
+    sgl.useShader(File.read("sgl/std_shaders/TexObject.vert"), File.read("sgl/std_shaders/TexObject.frag"))
+    # создаём uniform для самплирования текстуры
+    sgl.shaderUniforms(0.0, "texSampler")
+    # рисуем теугольник с самой текстурой
+    sgl.drawTriangles(v_pos, uv, ["brick.png", SGL_LINEAR])
+
+    sgl.swapBuffers()
+}
+sgl.windowCenterPos()
+sgl.createWindow("Title", ref update)
