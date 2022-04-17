@@ -21,7 +21,7 @@ public class Handler {
                     log.append(String.format("Start compiling (%s)\n", new Date()));
                 }
             }
-            catch (Exception ex2){}
+            catch (Exception ignored){}
             final List<Token> tokens = new Lexer(input).tokenize();
             final BlockStatement program = new Parser(tokens).parse();
             program.execute();

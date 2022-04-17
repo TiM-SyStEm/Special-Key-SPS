@@ -7,6 +7,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class StdInput implements Expression, Statement {
+
+    private static final Scanner sc = new Scanner(System.in);
     private final Expression expr;
 
     public StdInput(Expression expr) {
@@ -20,9 +22,8 @@ public class StdInput implements Expression, Statement {
 
     @Override
     public Value eval() {
-        System.out.print(expr.eval().raw());
-        Scanner sc = new Scanner(System.in);
-        return new StringValue(sc.nextLine().getBytes(StandardCharsets.UTF_8));
+        System.out.print(expr.eval());
+        return new StringValue(sc.nextLine());
     }
 
     @Override

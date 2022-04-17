@@ -21,8 +21,9 @@ public final class AssignmentExpression implements Expression, Statement {
     @Override
     public Value eval() {
         // Simple assignment
-        target.set(expression.eval());
-        return expression.eval();
+        Value result = expression.eval();
+        target.set(result);
+        return result;
     }
 
     @Override

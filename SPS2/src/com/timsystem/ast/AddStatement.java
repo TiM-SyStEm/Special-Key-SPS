@@ -50,7 +50,7 @@ public class AddStatement implements Statement {
             ref.inject();
             return;
         } else if (arg.equals("spkunit")) {
-            spkunit.inject();
+            SPKUnit.inject();
             return;
         } else if(arg.equals("sgl")){
             com.timsystem.sgl.Init.inject();
