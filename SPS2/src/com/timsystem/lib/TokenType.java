@@ -25,7 +25,6 @@ public enum TokenType {
     AND,
     COLON,
     FIELD,
-    TILDA,
     LT,
     GT,
     IF,
