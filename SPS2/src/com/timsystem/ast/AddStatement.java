@@ -58,6 +58,12 @@ public class AddStatement implements Statement {
         } else if(arg.equals("MouseButtons")) {
             MouseButtons.inject();
             return;
+        } else if(arg.equals("zip")) {
+            Zip.inject();
+            return;
+        } else if(arg.equals("json")) {
+            Json.inject();
+            return;
         }
         try {
             Handler.handle(readSource(arg), arg, true);

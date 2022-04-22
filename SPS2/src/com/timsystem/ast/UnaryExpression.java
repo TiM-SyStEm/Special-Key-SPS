@@ -24,9 +24,6 @@ public final class UnaryExpression implements Expression {
                 return NumberValue.of(-expr1.eval().asNumber());
             case '!':
                 return NumberValue.fromBoolean(!expr1.eval().asBool());
-            case '~':
-                Variables.del(expr1.toString());
-                return NumberValue.ZERO;
             case '+':
             default:
                 return expr1.eval();

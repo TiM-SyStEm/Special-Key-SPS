@@ -207,7 +207,7 @@ public class STL {
             deleteDir(file);
             return NumberValue.MINUS_ONE;
         })));
-        dir.put("isempty", new FunctionValue((args -> {
+        dir.put("isEmpty", new FunctionValue((args -> {
             Arguments.check(1, args.length);
             File[] contents = new File(args[0].raw().toString()).listFiles();
             if (contents == null) {
@@ -411,7 +411,7 @@ public class STL {
             }
             return NumberValue.MINUS_ONE;
         }));
-        newClass("File", new ArrayList<>(), file);
+        newClass("file", new ArrayList<>(), file);
     }
 
     private static void initMathClass() {
@@ -446,7 +446,7 @@ public class STL {
             Arguments.check(2, args.length);
             return new NumberValue(args[0].asNumber() + (int) (Math.random() * args[1].asNumber()));
         }));
-        newClass("Math", new ArrayList<>(), math);
+        newClass("math", new ArrayList<>(), math);
     }
     private static void deleteDir(File file) {
         File[] contents = file.listFiles();
