@@ -553,10 +553,6 @@ public final class Parser {
         if (match(TokenType.NOT)) {
             return new UnaryExpression('!', primary());
         }
-        if (match(TokenType.TILDA)){
-            return new UnaryExpression('~', primary());
-        }
-
         if (match(TokenType.REF)) {
             return new FunctionReferenceExpression(consume(TokenType.WORD).getText());
         }

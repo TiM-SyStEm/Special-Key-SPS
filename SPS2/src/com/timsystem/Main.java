@@ -1,11 +1,14 @@
 package com.timsystem;
 
 import com.timsystem.lib.Handler;
+import com.timsystem.runtime.StringValue;
+import com.timsystem.runtime.Variables;
 import org.fusesource.jansi.AnsiConsole;
 import java.io.*;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 public class Main {
@@ -51,6 +54,12 @@ public class Main {
                             cmd.split(" ")[1] :
                             cmd.split(" ")[1] + ".spk";
                     try {
+                        if(!path.contains("\\")){
+                            Variables.set("__cwd_run__", new StringValue((System.getProperty("user.dir")).getBytes(StandardCharsets.UTF_8)));
+                        }
+                        else{
+                            Variables.set("__cwd_run__", new StringValue(new File(path).getParent()));
+                        }
                         File file = new File(path);
                         FileReader fr = new FileReader(file);
                         BufferedReader reader = new BufferedReader(fr);
@@ -69,7 +78,7 @@ public class Main {
                 } else if (cmd.contains("special-pm")) {
                     String[] objs = cmd.split(" ");
                     if (objs[1].equals("install")) {
-                        URL website = new URL("https://raw.githubusercontent.com/TiM-SyStEm/Spk-site/main/special-pm/" + objs[2] + ".spk");
+                        URL website = new URL("https://raw.githubusercontent.com/TiM-SyStEm/Special-Key-SPS/main/special-pm" + objs[2] + ".spk");
                         ReadableByteChannel rbc = Channels.newChannel(website.openStream());
                         FileOutputStream fos = new FileOutputStream("modules\\" + objs[2] + ".spk");
                         fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);

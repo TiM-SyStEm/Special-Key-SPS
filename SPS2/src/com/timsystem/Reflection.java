@@ -20,7 +20,7 @@ public final class Reflection {
 
     public void inject() {
         initConstants();
-        Variables.define("null", NULL);
+        Variables.define("RNull", NULL);
         Variables.define("boolean.class", new ClassValue(boolean.class));
         Variables.define("boolean[].class", new ClassValue(boolean[].class));
         Variables.define("boolean[][].class", new ClassValue(boolean[][].class));
@@ -52,7 +52,7 @@ public final class Reflection {
         Variables.define("Object[].class", new ClassValue(Object[].class));
         Variables.define("Object[][].class", new ClassValue(Object[][].class));
 
-        Functions.set("isNull", this::isNull);
+        Functions.set("isRNull", this::isNull);
         Functions.set("newClass", this::newClass);
         Functions.set("toObject", this::toObject);
         Functions.set("toValue", this::toValue);
