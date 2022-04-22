@@ -19,7 +19,7 @@ fun update(){
     sgl.viewEvents()
     sgl.clearColor(0, 0, 0, 1)
     # шейдеры с поддержкой 2D текстур
-    sgl.useShader(File.read("sgl/std_shaders/TexObject.vert"), File.read("sgl/std_shaders/TexObject.frag"))
+    sgl.useShader(file.read("sgl/std_shaders/TexObject.vert"), file.read("sgl/std_shaders/TexObject.frag"))
     # создаём uniform для самплирования текстуры
     sgl.shaderUniforms(0.0, "texSampler")
     # рисуем теугольник с самой текстурой

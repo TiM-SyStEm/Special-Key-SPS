@@ -23,7 +23,7 @@ fun update(){
     sgl.clearColor(0, 0, 0, 1)
     # вершинный будет стандартным, а фрагментный кастомным
     # [arg0: vert_shr; arg1: frag_shr]
-    sgl.useShader(File.read("sgl/std_shaders/Object.vert"), frag_shr)
+    sgl.useShader(file.read("sgl/std_shaders/Object.vert"), frag_shr)
     sgl.drawTriangles(v_pos)
     sgl.swapBuffers()
 }

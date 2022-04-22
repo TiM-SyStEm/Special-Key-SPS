@@ -20,7 +20,7 @@ fun update(){
     sgl.viewEvents()
     sgl.clearColor(0, 0, 0, 1)
     # используем базовые шейдеры с цветом
-    sgl.useShader(File.read("sgl/std_shaders/ColorObject.vert"), File.read("sgl/std_shaders/ColorObject.frag"))
+    sgl.useShader(file.read("sgl/std_shaders/ColorObject.vert"), file.read("sgl/std_shaders/ColorObject.frag"))
     # рисуем треугольник с цветом
     sgl.drawTriangles(v_pos, v_colors)
     sgl.swapBuffers()
