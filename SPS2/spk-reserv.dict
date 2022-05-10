@@ -28,7 +28,5 @@ protected:
 private:
 stop
 continue
-switch
-case
 enum
 ref
