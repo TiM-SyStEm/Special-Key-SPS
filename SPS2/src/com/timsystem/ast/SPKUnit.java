@@ -1,9 +1,14 @@
 package com.timsystem.ast;
 
 import com.timsystem.lib.Arguments;
+import com.timsystem.lib.SPKException;
 import com.timsystem.log;
 import com.timsystem.runtime.*;
 import com.timsystem.runtime.ClassValue;
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class SPKUnit {
@@ -15,6 +20,18 @@ public class SPKUnit {
             boolean eq = args[0].equals(args[1]);
             try {
                 if (eq) res = "✔";
+                else res = "✖";
+                log.append(String.format("UnitTest Result: %s [%s]", res, args[2].toString()));
+            }
+            catch (Exception ex2){}
+            return new NumberValue(eq);
+        })));
+        spkunit.put("assertNotEquals", new FunctionValue((args -> {
+            Arguments.check(3, args.length);
+            String res = "";
+            boolean eq = args[0].equals(args[1]);
+            try {
+                if (!eq) res = "✔";
                 else res = "✖";
                 log.append(String.format("UnitTest Result: %s [%s]", res, args[2].toString()));
             }
@@ -63,6 +80,29 @@ public class SPKUnit {
                 log.append(String.format("UnitTest point: ✔ [%s]", args[0].toString()));
             }
             catch (Exception ignored){}
+            return NumberValue.MINUS_ONE;
+        })));
+        spkunit.put("getLog", new FunctionValue((args -> {
+            try (FileReader reader = new FileReader("log.txt")) {
+                // читаем посимвольно
+                int c;
+                StringBuilder all = new StringBuilder();
+                while ((c = reader.read()) != -1) {
+                    all.append((char) c);
+                }
+                return new StringValue(all.toString());
+            } catch (IOException ex) {
+                throw new SPKException("FileReadError", "the file cannot be read");
+            }
+        })));
+        spkunit.put("clearLog", new FunctionValue((args -> {
+            try (FileWriter writer = new FileWriter("log.txt", false)) {
+                String text = "";
+                writer.write(text);
+                writer.flush();
+            } catch (IOException ex) {
+                throw new SPKException("FileWriteError", "can't write a str to a file");
+            }
             return NumberValue.MINUS_ONE;
         })));
         newClass("spkunit", new ArrayList<>(), spkunit);

@@ -94,7 +94,7 @@ public final class Lexer {
     private final StringBuilder buffer;
     public List<Token> tokens;
     private int pos;
-    private int line = 1;
+    private int line = 0;
 
     public Lexer(String input) {
         this.input = input;
