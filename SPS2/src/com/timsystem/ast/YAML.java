@@ -80,7 +80,7 @@ public class YAML {
         }));
 
         yamlClass.put("bake", new FunctionValue(args -> {
-            Arguments.check(2, args.length);
+            Arguments.check(1, args.length);
             YAMLValue value = (YAMLValue) args[0];
             Map<String, Object> file = value.getComplex();
             StringWriter writer = new StringWriter();
