@@ -1,0 +1,19 @@
+Add yaml        # Include 'yaml' module to use it's functions in code
+
+var data = yaml.load("customers.yaml")      # Load .yaml file
+out : data      # Print file's content
+out : yaml.get(data, "firstName")       # Get value by key
+
+var nested = yaml.getNested(data, "contacts")       # Get data of nested segments
+# It returns a new yaml value
+
+out : yaml.get(nested, "address")
+
+var data = yaml.set(data, "firstName", "Timofei")       # Modify segments of yaml file
+out : data
+
+out : "\n################################"
+out : yaml.bake(data)       # Get human-readable presentation of YAML value
+out : "################################\n"
+
+yaml.write(data, "new_customers.yaml")       # Write to the file
