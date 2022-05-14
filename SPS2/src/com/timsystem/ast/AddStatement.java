@@ -64,6 +64,9 @@ public class AddStatement implements Statement {
         } else if(arg.equals("json")) {
             Json.inject();
             return;
+        } else if (arg.equals("yaml")) {
+            new YAML().inject();
+            return;
         }
         try {
             Handler.handle(readSource(arg), arg, true);
