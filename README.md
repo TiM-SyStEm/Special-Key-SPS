@@ -23,7 +23,7 @@ You also can open SPK Shell by running compiler.jar in the src folder or via deb
 Special Key is open-source project. Almost all pull requests will be considered!
 
 ## License
-Special key is relseased under <a href="https://en.wikipedia.org/wiki/Apache_License">Apache license 2.0</a>
+Special key is relseased under <a href="https://en.wikipedia.org/w/index.php?search=MIT%20License&title=Special%3ASearch&ns0=1">MIT License 2.0</a>
 
 See more about it!
 
