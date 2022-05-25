@@ -19,5 +19,6 @@
     <orderEntry type="library" exported="" name="lwgl" level="project" />
     <orderEntry type="library" exported="" name="slick-util3" level="project" />
     <orderEntry type="library" exported="" name="json-simple-1.1.1" level="project" />
+    <orderEntry type="library" name="snakeyaml-1.301" level="project" />
   </component>
 </module>

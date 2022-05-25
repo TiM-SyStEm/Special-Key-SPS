@@ -6,7 +6,7 @@
     <messageSet>
       <message id="NoJvmFound" text="SpecialKey needs Java 16 SE&#xA;" />
     </messageSet>
-    <versionInfo include="true" fileVersion="2.0.0" fileDescription="Special Key Compiler SPS2 beta3" legalCopyright="TIM SYSTEM" companyName="TIM SYSTEM" productVersion="2.0.0" />
+    <versionInfo include="true" fileVersion="2.0.0" fileDescription="Special Key Compiler SPS2" legalCopyright="TIM SYSTEM" companyName="TIM SYSTEM" productVersion="2.0.0" />
   </executable>
   <java mainClass="com.timsystem.Main" minVersion="15" maxVersion="16">
     <classPath>
