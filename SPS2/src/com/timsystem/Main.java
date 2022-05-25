@@ -1,8 +1,10 @@
 package com.timsystem;
 
+import com.sun.jdi.event.ExceptionEvent;
 import com.timsystem.lib.Handler;
 import com.timsystem.runtime.StringValue;
 import com.timsystem.runtime.Variables;
+import jdk.jshell.EvalException;
 import org.fusesource.jansi.AnsiConsole;
 import java.io.*;
 import java.net.URL;
