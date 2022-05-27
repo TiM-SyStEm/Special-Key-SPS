@@ -1,0 +1,15 @@
+Dossier;
+Ouvert;
+Sauvegarder;
+Enregistrer sous;
+Courir;
+Exécutez la console;
+Exécutez la compilation;
+Documentation;
+Signaler;
+Voir;
+Exemples;
+Aucune information sur le chemin;
+Erreur de couleur;
+Dans un premier temps, enregistrez le fichier;
+Fichier introuvable;
