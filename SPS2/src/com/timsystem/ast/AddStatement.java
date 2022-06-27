@@ -28,40 +28,56 @@ public class AddStatement implements Statement {
     }
     @Override
     public void execute() {
-        if (arg.equals("stl")) {
-            STL.inject();
-            return;
-        } else if (arg.equals("CanvasAPI")) {
-            CanvasAPI.inject();
-            return;
-        } else if (arg.equals("Keys")) {
-            Keys.inject();
-            return;
-        } else if (arg.equals("Colors")) {
-            Colors.inject();
-            return;
-        } else if (arg.equals("reflection")) {
-            Reflection ref = new Reflection();
-            ref.inject();
-            return;
-        } else if (arg.equals("spkunit")) {
-            SPKUnit.inject();
-            return;
-        } else if(arg.equals("sgl")){
-            com.timsystem.sgl.Init.inject();
-            return;
-        } else if(arg.equals("MouseButtons")) {
-            MouseButtons.inject();
-            return;
-        } else if(arg.equals("zip")) {
-            Zip.inject();
-            return;
-        } else if(arg.equals("json")) {
-            Json.inject();
-            return;
-        } else if (arg.equals("yaml")) {
-            new YAML().inject();
-            return;
+        switch (arg) {
+            case "stl" -> {
+                STL.inject();
+                return;
+            }
+            case "CanvasAPI" -> {
+                CanvasAPI.inject();
+                return;
+            }
+            case "Keys" -> {
+                Keys.inject();
+                return;
+            }
+            case "Colors" -> {
+                Colors.inject();
+                return;
+            }
+            case "reflection" -> {
+                Reflection ref = new Reflection();
+                ref.inject();
+                return;
+            }
+            case "spkunit" -> {
+                SPKUnit.inject();
+                return;
+            }
+            case "sgl" -> {
+                com.timsystem.sgl.Init.inject();
+                return;
+            }
+            case "MouseButtons" -> {
+                MouseButtons.inject();
+                return;
+            }
+            case "zip" -> {
+                Zip.inject();
+                return;
+            }
+            case "json" -> {
+                Json.inject();
+                return;
+            }
+            case "yaml" -> {
+                new YAML().inject();
+                return;
+            }
+            case "xml" -> {
+                XML.inject();
+                return;
+            }
         }
         try {
             Handler.handle(readSource(arg), arg, true);
