@@ -1,0 +1,90 @@
+C:\Users\79333\Desktop\SPKcoder\Special KeyCoder\bin\Debug\Special KeyCoder.exe.config
+C:\Users\79333\Desktop\SPKcoder\Special KeyCoder\bin\Debug\Special KeyCoder.exe
+C:\Users\79333\Desktop\SPKcoder\Special KeyCoder\bin\Debug\Special KeyCoder.pdb
+C:\Users\79333\Desktop\SPKcoder\Special KeyCoder\bin\Debug\FastColoredTextBox.dll
+C:\Users\79333\Desktop\SPKcoder\Special KeyCoder\bin\Debug\FastColoredTextBox.xml
+C:\Users\79333\Desktop\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.csprojAssemblyReference.cache
+C:\Users\79333\Desktop\SPKcoder\Special KeyCoder\obj\Debug\Special_KeyCoder.Form1.resources
+C:\Users\79333\Desktop\SPKcoder\Special KeyCoder\obj\Debug\Special_KeyCoder.Properties.Resources.resources
+C:\Users\79333\Desktop\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.csproj.GenerateResource.cache
+C:\Users\79333\Desktop\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.csproj.CoreCompileInputs.cache
+C:\Users\79333\Desktop\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.csproj.CopyComplete
+C:\Users\79333\Desktop\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.exe
+C:\Users\79333\Desktop\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.pdb
+C:\Users\79333\Desktop\SPKcoder\Special KeyCoder\bin\Debug\AutocompleteMenu.dll
+C:\Users\79333\Desktop\Project - Special Key\SPKcoder\Special KeyCoder\bin\Debug\Special KeyCoder.exe.config
+C:\Users\79333\Desktop\Project - Special Key\SPKcoder\Special KeyCoder\bin\Debug\Special KeyCoder.exe
+C:\Users\79333\Desktop\Project - Special Key\SPKcoder\Special KeyCoder\bin\Debug\Special KeyCoder.pdb
+C:\Users\79333\Desktop\Project - Special Key\SPKcoder\Special KeyCoder\bin\Debug\FastColoredTextBox.xml
+C:\Users\79333\Desktop\Project - Special Key\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.csprojAssemblyReference.cache
+C:\Users\79333\Desktop\Project - Special Key\SPKcoder\Special KeyCoder\obj\Debug\Special_KeyCoder.Form1.resources
+C:\Users\79333\Desktop\Project - Special Key\SPKcoder\Special KeyCoder\obj\Debug\Special_KeyCoder.Properties.Resources.resources
+C:\Users\79333\Desktop\Project - Special Key\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.csproj.GenerateResource.cache
+C:\Users\79333\Desktop\Project - Special Key\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.csproj.CoreCompileInputs.cache
+C:\Users\79333\Desktop\Project - Special Key\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.csproj.CopyComplete
+C:\Users\79333\Desktop\Project - Special Key\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.exe
+C:\Users\79333\Desktop\Project - Special Key\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.pdb
+C:\Users\User\Desktop\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.csprojAssemblyReference.cache
+C:\Users\User\Desktop\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.exe
+C:\Users\User\Desktop\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.pdb
+C:\Users\User\Desktop\SPKcoder_1\SPKcoder\Special KeyCoder\bin\Debug\Special KeyCoder.exe.config
+C:\Users\User\Desktop\SPKcoder_1\SPKcoder\Special KeyCoder\bin\Debug\Special KeyCoder.exe
+C:\Users\User\Desktop\SPKcoder_1\SPKcoder\Special KeyCoder\bin\Debug\Special KeyCoder.pdb
+C:\Users\User\Desktop\SPKcoder_1\SPKcoder\Special KeyCoder\bin\Debug\FastColoredTextBox.xml
+C:\Users\User\Desktop\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special_KeyCoder.Form1.resources
+C:\Users\User\Desktop\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special_KeyCoder.Properties.Resources.resources
+C:\Users\User\Desktop\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.csproj.GenerateResource.cache
+C:\Users\User\Desktop\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.csproj.CopyComplete
+C:\Users\79333\Downloads\SPKCoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.csprojAssemblyReference.cache
+C:\Users\79333\Downloads\SPKCoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.exe
+C:\Users\79333\Downloads\SPKCoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.pdb
+C:\Users\79333\Downloads\SPKCoder\SPKcoder_1\SPKcoder\Special KeyCoder\bin\Debug\Special KeyCoder.exe.config
+C:\Users\79333\Downloads\SPKCoder\SPKcoder_1\SPKcoder\Special KeyCoder\bin\Debug\Special KeyCoder.exe
+C:\Users\79333\Downloads\SPKCoder\SPKcoder_1\SPKcoder\Special KeyCoder\bin\Debug\Special KeyCoder.pdb
+C:\Users\79333\Downloads\SPKCoder\SPKcoder_1\SPKcoder\Special KeyCoder\bin\Debug\FastColoredTextBox.xml
+C:\Users\79333\Downloads\SPKCoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special_KeyCoder.Form1.resources
+C:\Users\79333\Downloads\SPKCoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special_KeyCoder.Properties.Resources.resources
+C:\Users\79333\Downloads\SPKCoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.csproj.GenerateResource.cache
+C:\Users\79333\Downloads\SPKCoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.csproj.CoreCompileInputs.cache
+C:\Users\79333\Downloads\SPKCoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.csproj.CopyComplete
+C:\Users\79333\Desktop\Project - Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\bin\Debug\Special KeyCoder.exe.config
+C:\Users\79333\Desktop\Project - Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\bin\Debug\Special KeyCoder.exe
+C:\Users\79333\Desktop\Project - Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\bin\Debug\Special KeyCoder.pdb
+C:\Users\79333\Desktop\Project - Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\bin\Debug\FastColoredTextBox.xml
+C:\Users\79333\Desktop\Project - Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.csprojAssemblyReference.cache
+C:\Users\79333\Desktop\Project - Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special_KeyCoder.Form1.resources
+C:\Users\79333\Desktop\Project - Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special_KeyCoder.Properties.Resources.resources
+C:\Users\79333\Desktop\Project - Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.csproj.GenerateResource.cache
+C:\Users\79333\Desktop\Project - Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.csproj.CoreCompileInputs.cache
+C:\Users\79333\Desktop\Project - Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.csproj.CopyComplete
+C:\Users\79333\Desktop\Project - Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.exe
+C:\Users\79333\Desktop\Project - Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.pdb
+C:\Users\79333\Desktop\Project - Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special_KeyCoder.module.resources
+C:\Users\79333\Desktop\Project - Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special_KeyCoder.docs.resources
+C:\Users\79333\OneDrive\Рабочий стол\Project - Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\bin\Debug\Special KeyCoder.exe.config
+C:\Users\79333\OneDrive\Рабочий стол\Project - Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\bin\Debug\Special KeyCoder.exe
+C:\Users\79333\OneDrive\Рабочий стол\Project - Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\bin\Debug\Special KeyCoder.pdb
+C:\Users\79333\OneDrive\Рабочий стол\Project - Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\bin\Debug\FastColoredTextBox.xml
+C:\Users\79333\OneDrive\Рабочий стол\Project - Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.csprojAssemblyReference.cache
+C:\Users\79333\OneDrive\Рабочий стол\Project - Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special_KeyCoder.docs.resources
+C:\Users\79333\OneDrive\Рабочий стол\Project - Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special_KeyCoder.Form1.resources
+C:\Users\79333\OneDrive\Рабочий стол\Project - Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special_KeyCoder.Properties.Resources.resources
+C:\Users\79333\OneDrive\Рабочий стол\Project - Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.csproj.GenerateResource.cache
+C:\Users\79333\OneDrive\Рабочий стол\Project - Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.csproj.CoreCompileInputs.cache
+C:\Users\79333\OneDrive\Рабочий стол\Project - Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.csproj.CopyComplete
+C:\Users\79333\OneDrive\Рабочий стол\Project - Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.exe
+C:\Users\79333\OneDrive\Рабочий стол\Project - Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.pdb
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\bin\Debug\Special KeyCoder.exe.config
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\bin\Debug\Special KeyCoder.exe
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\bin\Debug\Special KeyCoder.pdb
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\bin\Debug\FastColoredTextBox.xml
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special_KeyCoder.Form1.resources
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special_KeyCoder.Properties.Resources.resources
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.csproj.GenerateResource.cache
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.csproj.CoreCompileInputs.cache
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.csproj.CopyComplete
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.exe
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.pdb
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special KeyCoder.csproj.AssemblyReference.cache
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special_KeyCoder.allmodules.resources
