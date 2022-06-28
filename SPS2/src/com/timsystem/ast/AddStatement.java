@@ -62,6 +62,9 @@ public class AddStatement implements Statement {
         } else if (arg.equals("yaml")) {
             new YAML().inject();
             return;
+        }else if (arg.equals("spksoup")){
+            SpkSoup.inject();
+            return;
         }
         try {
             Handler.handle(readSource(arg), arg, true);
