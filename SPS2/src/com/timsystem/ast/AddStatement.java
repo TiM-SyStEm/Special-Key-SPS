@@ -78,6 +78,10 @@ public class AddStatement implements Statement {
                 XML.inject();
                 return;
             }
+            case "spksoup" ->{
+                SpkSoup.inject();
+                return;
+            }
         }
         try {
             Handler.handle(readSource(arg), arg, true);
