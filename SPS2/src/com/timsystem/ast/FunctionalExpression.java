@@ -47,9 +47,9 @@ public final class FunctionalExpression implements Expression, Statement {
         } catch (SPKException ex) {
             if (indent == 0) System.out.println("See more information in call stack!\n");
             indent++;
-            String indentStr = "";
+            StringBuilder indentStr = new StringBuilder();
             for (int i = 0; i < indent; i++) {
-                indentStr += "   ";
+                indentStr.append("   ");
             }
             throw new SPKException("InFunctionException", ex.getType() + " -> \n" + indentStr + "" +  ex.getText());
         }
