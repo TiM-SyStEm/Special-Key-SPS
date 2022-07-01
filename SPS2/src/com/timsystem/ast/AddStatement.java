@@ -16,12 +16,12 @@ public class AddStatement implements Statement {
             FileReader fr = new FileReader(file);
             BufferedReader reader = new BufferedReader(fr);
             String line = reader.readLine();
-            String content = "";
+            StringBuilder content = new StringBuilder();
             while (line != null) {
-                content += line + "\n";
+                content.append(line).append("\n");
                 line = reader.readLine();
             }
-            return content;
+            return content.toString();
         } catch (FileNotFoundException ex) {
             throw new SPKException("ModuleError", "module '" + name + "' is not found");
         }
@@ -76,6 +76,10 @@ public class AddStatement implements Statement {
             }
             case "xml" -> {
                 XML.inject();
+                return;
+            }
+            case "spksoup" -> {
+                SpkSoup.inject();
                 return;
             }
         }
