@@ -1,0 +1,15 @@
+File;
+Open;
+Save;
+Save as;
+Run;
+Run console;
+Run compiling;
+Documentation;
+Report;
+View;
+Examples;
+No info about path;
+Colored error;
+In first save the file;
+File not found;
