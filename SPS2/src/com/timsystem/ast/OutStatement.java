@@ -9,7 +9,7 @@ public class OutStatement implements Statement {
 
     @Override
     public void execute() {
-        System.out.println(expr.eval().raw());
+        System.out.println(expr.eval());
     }
 
     @Override
