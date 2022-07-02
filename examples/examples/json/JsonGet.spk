@@ -1,0 +1,7 @@
+Add json
+Add stl
+
+var testObj = file.read("test.json")
+var testStr = json.get(testObj, "test")
+
+out : testStr

@@ -1,0 +1,22 @@
+Add sgl
+
+# вершины квадрата, состоит из двух теругольников
+var v_pos =
+[
+    0.5, 0.5, 0.0,
+    -0.5, 0.5, 0.0,
+    -0.5, -0.5, 0.0,
+    0.5, 0.5, 0.0,
+    0.5, -0.5, 0.0,
+    -0.5, -0.5, 0.0,
+]
+
+fun update(){
+    sgl.viewEvents()
+    sgl.clearColor(0, 0, 0, 1)
+    # рисуем треугольники по вершинам
+    sgl.drawTriangles(v_pos)
+    sgl.swapBuffers()
+}
+sgl.windowCenterPos()
+sgl.createWindow("Title", ref update)
