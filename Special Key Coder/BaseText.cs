@@ -17,10 +17,11 @@
         public string coloredError;
         public string inFirstSaveFile;
         public string fileNotFound;
+        public string launge;
 
         public BaseText(string file, string fileOpen, string fileSave,
         string fileSaveAs, string run, string runConsole, string runCompiling, string docs, string report, string view, string examples,
-        string noInfoAboutPath, string coloredError, string inFirstSaveFile, string fileNotFound)
+        string noInfoAboutPath, string coloredError, string inFirstSaveFile, string fileNotFound, string launge)
         {
             this.file = file;
             this.fileOpen = fileOpen;
@@ -37,6 +38,7 @@
             this.coloredError = coloredError;
             this.inFirstSaveFile = inFirstSaveFile;
             this.fileNotFound = fileNotFound;
+            this.launge = launge;
         }
     }
 }

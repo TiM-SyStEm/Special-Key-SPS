@@ -13,3 +13,4 @@ No info about path;
 Colored error;
 In first save the file;
 File not found;
+Language;
