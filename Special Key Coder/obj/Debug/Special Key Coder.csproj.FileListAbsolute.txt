@@ -1,0 +1,78 @@
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\bin\Debug\Special Key Coder.exe.config
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\bin\Debug\Special Key Coder.exe
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\bin\Debug\Special Key Coder.pdb
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\bin\Debug\FastColoredTextBox.xml
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special_KeyCoder.allmodules.resources
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special_KeyCoder.Form1.resources
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special_Key_Coder.Properties.Resources.resources
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special Key Coder.csproj.GenerateResource.cache
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special Key Coder.csproj.CoreCompileInputs.cache
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special Key Coder.csproj.CopyComplete
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special Key Coder.exe
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special Key Coder.pdb
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\SPKcoder\SPKcoder_1\SPKcoder\Special KeyCoder\obj\Debug\Special Key Coder.csproj.AssemblyReference.cache
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\Special Key Coder\bin\Debug\Special Key Coder.exe.config
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\Special Key Coder\bin\Debug\Special Key Coder.exe
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\Special Key Coder\bin\Debug\Special Key Coder.pdb
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\Special Key Coder\bin\Debug\AutocompleteMenu.dll
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\Special Key Coder\bin\Debug\FastColoredTextBox.xml
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\Special Key Coder\obj\Debug\Special Key Coder.csproj.AssemblyReference.cache
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\Special Key Coder\obj\Debug\Special_KeyCoder.Form1.resources
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\Special Key Coder\obj\Debug\Special_Key_Coder.Properties.Resources.resources
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\Special Key Coder\obj\Debug\Special Key Coder.csproj.GenerateResource.cache
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\Special Key Coder\obj\Debug\Special Key Coder.csproj.CoreCompileInputs.cache
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\Special Key Coder\obj\Debug\Special Key Coder.csproj.CopyComplete
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\Special Key Coder\obj\Debug\Special Key Coder.exe
+C:\Users\79333\OneDrive\Рабочий стол\Project-Special Key\Special Key Coder\obj\Debug\Special Key Coder.pdb
+C:\Users\svatoslav\Downloads\Special Key Coder\Special Key Coder\obj\Debug\Special Key Coder.csprojAssemblyReference.cache
+C:\Users\svatoslav\Downloads\Special Key Coder\Special Key Coder\obj\Debug\Special Key Coder.exe
+C:\Users\svatoslav\Downloads\Special Key Coder\Special Key Coder\obj\Debug\Special Key Coder.pdb
+C:\Users\svatoslav\Downloads\Special Key Coder\Special Key Coder\bin\Debug\Special Key Coder.exe.config
+C:\Users\svatoslav\Downloads\Special Key Coder\Special Key Coder\bin\Debug\Special Key Coder.exe
+C:\Users\svatoslav\Downloads\Special Key Coder\Special Key Coder\bin\Debug\Special Key Coder.pdb
+C:\Users\svatoslav\Downloads\Special Key Coder\Special Key Coder\bin\Debug\AutocompleteMenu.dll
+C:\Users\svatoslav\Downloads\Special Key Coder\Special Key Coder\bin\Debug\FastColoredTextBox.xml
+C:\Users\svatoslav\Downloads\Special Key Coder\Special Key Coder\obj\Debug\Special_KeyCoder.Form1.resources
+C:\Users\svatoslav\Downloads\Special Key Coder\Special Key Coder\obj\Debug\Special_Key_Coder.Properties.Resources.resources
+C:\Users\svatoslav\Downloads\Special Key Coder\Special Key Coder\obj\Debug\Special Key Coder.csproj.GenerateResource.cache
+C:\Users\svatoslav\Downloads\Special Key Coder\Special Key Coder\obj\Debug\Special Key Coder.csproj.CopyComplete
+C:\Users\svatoslav\Downloads\Special-Key-SPS\Special Key Coder\Special Key Coder\bin\Debug\Special Key Coder.exe.config
+C:\Users\svatoslav\Downloads\Special-Key-SPS\Special Key Coder\Special Key Coder\bin\Debug\Special Key Coder.exe
+C:\Users\svatoslav\Downloads\Special-Key-SPS\Special Key Coder\Special Key Coder\bin\Debug\Special Key Coder.pdb
+C:\Users\svatoslav\Downloads\Special-Key-SPS\Special Key Coder\Special Key Coder\bin\Debug\AutocompleteMenu.dll
+C:\Users\svatoslav\Downloads\Special-Key-SPS\Special Key Coder\Special Key Coder\bin\Debug\FastColoredTextBox.xml
+C:\Users\svatoslav\Downloads\Special-Key-SPS\Special Key Coder\Special Key Coder\obj\Debug\Special Key Coder.csprojAssemblyReference.cache
+C:\Users\svatoslav\Downloads\Special-Key-SPS\Special Key Coder\Special Key Coder\obj\Debug\Special_KeyCoder.Form1.resources
+C:\Users\svatoslav\Downloads\Special-Key-SPS\Special Key Coder\Special Key Coder\obj\Debug\Special_Key_Coder.Properties.Resources.resources
+C:\Users\svatoslav\Downloads\Special-Key-SPS\Special Key Coder\Special Key Coder\obj\Debug\Special Key Coder.csproj.GenerateResource.cache
+C:\Users\svatoslav\Downloads\Special-Key-SPS\Special Key Coder\Special Key Coder\obj\Debug\Special Key Coder.csproj.CopyComplete
+C:\Users\svatoslav\Downloads\Special-Key-SPS\Special Key Coder\Special Key Coder\obj\Debug\Special Key Coder.exe
+C:\Users\svatoslav\Downloads\Special-Key-SPS\Special Key Coder\Special Key Coder\obj\Debug\Special Key Coder.pdb
+C:\Users\semen\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\Special Key Coder\bin\Debug\Special Key Coder.exe.config
+C:\Users\semen\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\Special Key Coder\bin\Debug\Special Key Coder.exe
+C:\Users\semen\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\Special Key Coder\bin\Debug\Special Key Coder.pdb
+C:\Users\semen\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\Special Key Coder\bin\Debug\AutocompleteMenu.dll
+C:\Users\semen\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\Special Key Coder\bin\Debug\FastColoredTextBox.xml
+C:\Users\semen\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\Special Key Coder\obj\Debug\Special Key Coder.csproj.AssemblyReference.cache
+C:\Users\semen\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\Special Key Coder\obj\Debug\Special Key Coder.csproj.SuggestedBindingRedirects.cache
+C:\Users\semen\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\Special Key Coder\obj\Debug\Special_KeyCoder.Form1.resources
+C:\Users\semen\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\Special Key Coder\obj\Debug\Special_Key_Coder.Properties.Resources.resources
+C:\Users\semen\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\Special Key Coder\obj\Debug\Special Key Coder.csproj.GenerateResource.cache
+C:\Users\semen\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\Special Key Coder\obj\Debug\Special Key Coder.csproj.CoreCompileInputs.cache
+C:\Users\semen\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\Special Key Coder\obj\Debug\Special Key Coder.csproj.CopyComplete
+C:\Users\semen\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\Special Key Coder\obj\Debug\Special Key Coder.exe
+C:\Users\semen\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\Special Key Coder\obj\Debug\Special Key Coder.pdb
+C:\Users\svatoslav\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\bin\Debug\Special Key Coder.exe.config
+C:\Users\svatoslav\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\bin\Debug\Special Key Coder.exe
+C:\Users\svatoslav\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\bin\Debug\Special Key Coder.pdb
+C:\Users\svatoslav\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\bin\Debug\AutocompleteMenu.dll
+C:\Users\svatoslav\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\bin\Debug\FastColoredTextBox.xml
+C:\Users\svatoslav\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\obj\Debug\Special Key Coder.csproj.AssemblyReference.cache
+C:\Users\svatoslav\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\obj\Debug\Special Key Coder.csproj.SuggestedBindingRedirects.cache
+C:\Users\svatoslav\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\obj\Debug\Special_KeyCoder.Form1.resources
+C:\Users\svatoslav\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\obj\Debug\Special_Key_Coder.Properties.Resources.resources
+C:\Users\svatoslav\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\obj\Debug\Special Key Coder.csproj.GenerateResource.cache
+C:\Users\svatoslav\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\obj\Debug\Special Key Coder.csproj.CoreCompileInputs.cache
+C:\Users\svatoslav\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\obj\Debug\Special Key Coder.csproj.CopyComplete
+C:\Users\svatoslav\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\obj\Debug\Special Key Coder.exe
+C:\Users\svatoslav\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\obj\Debug\Special Key Coder.pdb
