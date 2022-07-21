@@ -26,9 +26,12 @@ namespace Special_KeyCoder
         private FastColoredTextBoxNS.Style AddStyle = new FastColoredTextBoxNS.TextStyle(Brushes.Orange, null, FontStyle.Underline);
         private FastColoredTextBoxNS.Style GoldenRodStyle = new FastColoredTextBoxNS.TextStyle(Brushes.Goldenrod, null, FontStyle.Italic);
         private FastColoredTextBoxNS.Style TurquoiseStyle = new FastColoredTextBoxNS.TextStyle(Brushes.Turquoise, null, FontStyle.Regular);
-        private FastColoredTextBoxNS.Style MediumPurpleStyle = new FastColoredTextBoxNS.TextStyle(Brushes.Purple, null, FontStyle.Regular);
+        private FastColoredTextBoxNS.Style MediumPurpleStyle = new FastColoredTextBoxNS.TextStyle(Brushes.Fuchsia, null, FontStyle.Regular);
         public static BaseText bs;
-        public Form1()
+
+        public int tabIndexB = 0;
+
+        public Form1(string filePach)
         {
             InitializeComponent();
             if (File.ReadAllText("SaveLangIs.txt") == "")
@@ -58,8 +61,16 @@ namespace Special_KeyCoder
             примерыToolStripMenuItem.Text = bs.examples;
             button1.Text = bs.noInfoAboutPath;
             laToolStripMenuItem.Text = bs.launge;
+            fileNewToolStripMenuItem.Text = bs.newFile;
 
             fastColoredTextBox1.Text = File.ReadAllText("codeRestart.txt");
+            File.WriteAllText("CodesB\\1.txt", "");
+
+            if (filePach.Length > 0)
+            {
+                fastColoredTextBox1.Text = File.ReadAllText(filePach, Encoding.UTF8);
+            }
+
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -162,6 +173,8 @@ namespace Special_KeyCoder
             {
                 MessageBox.Show(bs.coloredError);
             }
+            File.WriteAllText($"CodesB\\{tabIndexB+1}.txt", fastColoredTextBox1.Text);
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -264,6 +277,31 @@ namespace Special_KeyCoder
             File.WriteAllText("SaveLangIs.txt", "ua");
             File.WriteAllText("codeRestart.txt", fastColoredTextBox1.Text);
             Application.Restart();
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            File.WriteAllText("codeRestart.txt", "");
+            for (int i = 1; i < tabControl1.TabPages.Count+1; i++)
+            {
+                File.Delete($"CodesB\\{i}.txt");
+            }
+        }
+
+        private void fileNewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TabPage tabPage = new TabPage();
+            tabPage.BackColor = Color.SteelBlue;
+            tabPage.Text = Convert.ToString(tabControl1.TabPages.Count + 1);
+            tabControl1.TabPages.Add(tabPage);
+            string fileName = $"CodesB\\{tabControl1.TabPages.Count}.txt";
+            File.WriteAllText(fileName, "");
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            tabIndexB = tabControl1.SelectedIndex;
+            fastColoredTextBox1.Text = File.ReadAllText($"CodesB\\{tabIndexB + 1}.txt");
         }
     }
 }

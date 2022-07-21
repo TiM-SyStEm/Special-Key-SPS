@@ -14,3 +14,4 @@ Erreur de couleur;
 Dans un premier temps, enregistrez le fichier;
 Fichier introuvable;
 Langue;
+Nouveau fichier;

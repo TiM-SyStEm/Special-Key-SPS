@@ -76,3 +76,17 @@ C:\Users\svatoslav\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special K
 C:\Users\svatoslav\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\obj\Debug\Special Key Coder.csproj.CopyComplete
 C:\Users\svatoslav\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\obj\Debug\Special Key Coder.exe
 C:\Users\svatoslav\Downloads\Special-Key-SPS-main\Special-Key-SPS-main\Special Key Coder\obj\Debug\Special Key Coder.pdb
+C:\Users\semen\Downloads\spk_key_coder-main\spk_key_coder-main\bin\Debug\Special Key Coder.exe.config
+C:\Users\semen\Downloads\spk_key_coder-main\spk_key_coder-main\bin\Debug\Special Key Coder.exe
+C:\Users\semen\Downloads\spk_key_coder-main\spk_key_coder-main\bin\Debug\Special Key Coder.pdb
+C:\Users\semen\Downloads\spk_key_coder-main\spk_key_coder-main\bin\Debug\AutocompleteMenu.dll
+C:\Users\semen\Downloads\spk_key_coder-main\spk_key_coder-main\bin\Debug\FastColoredTextBox.xml
+C:\Users\semen\Downloads\spk_key_coder-main\spk_key_coder-main\obj\Debug\Special Key Coder.csproj.AssemblyReference.cache
+C:\Users\semen\Downloads\spk_key_coder-main\spk_key_coder-main\obj\Debug\Special Key Coder.csproj.SuggestedBindingRedirects.cache
+C:\Users\semen\Downloads\spk_key_coder-main\spk_key_coder-main\obj\Debug\Special_KeyCoder.Form1.resources
+C:\Users\semen\Downloads\spk_key_coder-main\spk_key_coder-main\obj\Debug\Special_Key_Coder.Properties.Resources.resources
+C:\Users\semen\Downloads\spk_key_coder-main\spk_key_coder-main\obj\Debug\Special Key Coder.csproj.GenerateResource.cache
+C:\Users\semen\Downloads\spk_key_coder-main\spk_key_coder-main\obj\Debug\Special Key Coder.csproj.CoreCompileInputs.cache
+C:\Users\semen\Downloads\spk_key_coder-main\spk_key_coder-main\obj\Debug\Special Key Coder.csproj.CopyComplete
+C:\Users\semen\Downloads\spk_key_coder-main\spk_key_coder-main\obj\Debug\Special Key Coder.exe
+C:\Users\semen\Downloads\spk_key_coder-main\spk_key_coder-main\obj\Debug\Special Key Coder.pdb
