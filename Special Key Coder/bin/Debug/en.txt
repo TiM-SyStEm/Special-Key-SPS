@@ -14,3 +14,4 @@ Colored error;
 In first save the file;
 File not found;
 Language;
+New file;
