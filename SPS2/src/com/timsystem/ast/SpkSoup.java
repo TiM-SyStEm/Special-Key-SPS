@@ -17,8 +17,8 @@ import java.util.Map;
 public class SpkSoup {
 
     public static String docs = "";
-    public static Document docum;
-    public static Elements element;
+    public static Document docum = null;
+    public static Elements element = null;
 
     public static void inject() {
 
@@ -30,9 +30,10 @@ public class SpkSoup {
                 doc = Jsoup.connect(args[0].toString()).get();
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch {
+                return;
             }
-            docs = doc.toString();
-            Variables.set("document", new StringValue((docs).getBytes(StandardCharsets.UTF_8)));
+            Variables.set("document", new StringValue((doc.toString()).getBytes(StandardCharsets.UTF_8)));
             docum = doc;
             return NumberValue.MINUS_ONE;
         }));
