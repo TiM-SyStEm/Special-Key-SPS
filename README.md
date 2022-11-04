@@ -1,7 +1,7 @@
 <div align="center">
   <img src="branding/icon.png" width="500" alt="SPK">
   
-Special key is a dynamic, fast and object-oriented programming language for buinding versatile and fast applications!
+Special key is a dynamic, fast and object-oriented programming language for building versatile and fast applications!
 
 It is in heavy develpoment now, but ready to try out!
 </div>
