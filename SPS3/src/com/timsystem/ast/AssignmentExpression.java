@@ -1,8 +1,6 @@
 package com.timsystem.ast;
 
 import com.timsystem.lib.GettableSettable;
-import com.timsystem.lib.Handler;
-import com.timsystem.runtime.ClassValue;
 import com.timsystem.runtime.Value;
 
 public final class AssignmentExpression implements Expression, Statement {
@@ -23,9 +21,9 @@ public final class AssignmentExpression implements Expression, Statement {
     @Override
     public Value eval() {
         // Simple assignment
-        Value res = Handler.setInstenced(expression.eval());
-        target.set(res);
-        return res;
+        Value result = expression.eval();
+        target.set(result);
+        return result;
     }
 
     @Override

@@ -50,4 +50,12 @@ public class ArrayAccessExpression implements Expression {
     public String toString() {
         return variable + indices;
     }
+
+    public String getVariable() {
+        return variable;
+    }
+
+    public List<Expression> getIndices() {
+        return indices;
+    }
 }

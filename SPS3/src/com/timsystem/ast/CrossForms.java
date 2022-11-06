@@ -26,23 +26,8 @@ public class CrossForms extends JFrame {
     private final List<JavaTuple> components = new ArrayList<JavaTuple>();
     private final List<String> actions = new ArrayList<>();
 
-    private void DrawLabel() {
-        Document document = cfmlFile.getDocument();
-        Node node = document.selectSingleNode("/window/settings");
-        List<Node> labels = node.selectNodes("/window/label");
-        for (Node label : labels) {
-            JLabel lbl = new JLabel(label.getText());
-            add(lbl);
-            lbl.setLayout(null);
-            lbl.setBounds(Integer.parseInt(label.valueOf("@x")),
-                    Integer.parseInt(label.valueOf("@y")),
-                    Integer.parseInt(label.valueOf("@width")),
-                    Integer.parseInt(label.valueOf("@height")));
-            lbl.setVisible(true);
-            if(!Objects.equals(label.valueOf("@id"), "") || label.valueOf("@id") != null) {
-                components.add(new JavaTuple(label.valueOf("@id"), lbl));
-            }
-        }
+    private static void DrawLabel() {
+
     }
 
     private void DrawCombox() {

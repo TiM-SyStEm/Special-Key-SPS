@@ -76,27 +76,11 @@ public class StringExpression implements Expression {
         return str;
     }
 
-    public String getCurrent() {
-        return current;
-    }
-
-    public StringBuilder getResult() {
-        return result;
-    }
-
-    public int getLine() {
-        return line;
-    }
-
-    public int getLength() {
-        return length;
-    }
-
-    public int getPos() {
-        return pos;
-    }
-
     public String getStr() {
         return str;
+    }
+
+    public void setStr(String str) {
+        this.str = str;
     }
 }

@@ -23,12 +23,12 @@ public final class ArrayExpression implements Expression {
         return array;
     }
 
+    public List<Expression> getElements() {
+        return elements;
+    }
+
     @Override
     public String toString() {
         return elements.toString();
-    }
-
-    public List<Expression> getElements() {
-        return elements;
     }
 }

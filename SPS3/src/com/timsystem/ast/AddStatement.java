@@ -123,7 +123,7 @@ public class AddStatement implements Statement {
                 return;
             }
             case "jrt" -> {
-                new JRT().inject();
+                JRT.inject();
                 return;
             }
         }

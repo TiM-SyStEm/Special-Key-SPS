@@ -46,8 +46,6 @@ public final class ContainerAccessExpression implements Expression, GettableSett
             else if (container instanceof ClassValue) {
                 // StringValue key = (StringValue) lastIndex;
                 container = ((ClassValue) container).getField(lastIndex.toString());
-            } else if (container instanceof LStructValue) {
-                container = ((LStructValue) container).getField(lastIndex.toString());
             } else if (container instanceof MapValue) {
                 container =(((MapValue) container).get(lastIndex));
             } else if (container instanceof EnumValue) {

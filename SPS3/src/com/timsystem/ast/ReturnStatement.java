@@ -20,12 +20,12 @@ public class ReturnStatement extends RuntimeException implements Statement {
         throw this;
     }
 
+    public Expression getExpression() {
+        return expression;
+    }
+
     @Override
     public String toString() {
         return "return";
-    }
-
-    public Expression getExpression() {
-        return expression;
     }
 }

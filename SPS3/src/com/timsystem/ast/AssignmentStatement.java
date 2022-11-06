@@ -63,11 +63,6 @@ public final class AssignmentStatement implements Statement {
         }
     }
 
-    @Override
-    public String toString() {
-        return String.format("var %s = %s", variable, expression);
-    }
-
     public String getVariable() {
         return variable;
     }
@@ -78,5 +73,10 @@ public final class AssignmentStatement implements Statement {
 
     public int getMode() {
         return mode;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("var %s = %s", variable, expression);
     }
 }

@@ -280,11 +280,6 @@ public final class BinaryExpression implements Expression {
         return NumberValue.of(number1.intValue() % value2.asInt());
     }
 
-    @Override
-    public String toString() {
-        return String.format("%s %c %s", expr1, operation, expr2);
-    }
-
     public Expression getExpr1() {
         return expr1;
     }
@@ -295,5 +290,10 @@ public final class BinaryExpression implements Expression {
 
     public char getOperation() {
         return operation;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s %c %s", expr1, operation, expr2);
     }
 }

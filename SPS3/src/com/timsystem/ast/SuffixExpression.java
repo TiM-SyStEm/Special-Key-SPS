@@ -68,11 +68,11 @@ public class SuffixExpression implements Expression {
         return NumberValue.of(value.asInt() - 1);
     }
 
-    public char getOperation() {
-        return operation;
-    }
-
     public Expression getExpr() {
         return expr;
+    }
+
+    public char getOperation() {
+        return operation;
     }
 }

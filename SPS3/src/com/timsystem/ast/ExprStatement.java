@@ -13,12 +13,12 @@ public class ExprStatement implements Statement {
         expr.eval();
     }
 
+    public Expression getExpr() {
+        return expr;
+    }
+
     @Override
     public String toString() {
         return expr.toString();
-    }
-
-    public Expression getExpr() {
-        return expr;
     }
 }

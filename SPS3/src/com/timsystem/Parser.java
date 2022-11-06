@@ -94,7 +94,7 @@ public final class Parser {
         } else if (match(TokenType.STRUCT)) {
             return klass();
         } else if (match(TokenType.LIGHTSTRUCT)) {
-                return struct();
+            return struct();
         } else if (match(TokenType.AT)) {
             if (match(TokenType.SPEC)) {
                 return specification();
@@ -718,10 +718,10 @@ public final class Parser {
         } else if (match(TokenType.STRING)) {
             return new StringExpression(current.getText(), get(0).getLine(), "", 0);
         }else if (match(TokenType.LPAREN)) {
-                Expression expr = expression();
-                if (match(TokenType.COLON)) return dict(expr);
-                match(TokenType.RPAREN);
-                return expr;
+            Expression expr = expression();
+            if (match(TokenType.COLON)) return dict(expr);
+            match(TokenType.RPAREN);
+            return expr;
         }
         throw new SPKException("ExpressionError", String.format("unknown expression '%s' at line %s", current.getType(), current.getLine()));
     }

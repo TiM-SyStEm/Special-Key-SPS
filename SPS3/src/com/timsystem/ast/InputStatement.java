@@ -25,6 +25,10 @@ public class InputStatement implements Expression, Statement {
         return new StringValue(sc.nextLine().getBytes(StandardCharsets.UTF_8));
     }
 
+    public Expression getExpr() {
+        return expr;
+    }
+
     @Override
     public String toString() {
         return "input : " + expr;
