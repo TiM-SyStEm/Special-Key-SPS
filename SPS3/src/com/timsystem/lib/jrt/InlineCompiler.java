@@ -83,6 +83,9 @@ public class InlineCompiler {
     }
 
     public static JRTFunction getFunction(String fname) {
+        if (JRT.stlOverrides.containsKey(fname)) {
+            return JRT.stlOverrides.get(fname);
+        }
         return JRT.jrts.get(fname);
     }
 

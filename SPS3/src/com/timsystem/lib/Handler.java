@@ -6,17 +6,16 @@ import com.timsystem.ast.BlockStatement;
 import com.timsystem.ast.Expression;
 import com.timsystem.log;
 import com.timsystem.runtime.ClassScoping;
-import com.timsystem.runtime.ClassValue;
 import com.timsystem.runtime.NumberValue;
 import com.timsystem.runtime.Value;
 import com.timsystem.runtime.Variables;
 
-import java.util.*;
+import java.util.Date;
+import java.util.List;
 
 public class Handler {
 
     public static ClassScoping SCOPING = ClassScoping.GLOBAL;
-    public static List<String> instencesed = new ArrayList<>();
 
     public static void handle(String input, String pathToScript, boolean isExec) {
         try {
@@ -56,10 +55,6 @@ public class Handler {
                 count--;
             }
         }
-    }
-    public static Value setInstenced(Value res){
-        instencesed.add(((ClassValue)res).name);
-        return res;
     }
     public static Value returnHandle(String input, String pathToScript) {
         try {
