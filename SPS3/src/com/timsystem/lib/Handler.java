@@ -56,6 +56,11 @@ public class Handler {
             }
         }
     }
+    public static Value setInstenced(Value res){
+        try{instencesed.add(((ClassValue)res).name);}
+        catch (Exception ex){}
+        return res;
+    }
     public static Value returnHandle(String input, String pathToScript) {
         try {
             final List<Token> tokens = new Lexer(input).tokenize();
