@@ -93,9 +93,7 @@ public final class Parser {
             return new ExprStatement(functionChain(qualifiedName()));
         } else if (match(TokenType.STRUCT)) {
             return klass();
-        } else if (match(TokenType.LIGHTSTRUCT)) {
-                return struct();
-        } else if (match(TokenType.AT)) {
+        } else if (match(TokenType.MINUS)) {
             if (match(TokenType.SPEC)) {
                 return specification();
             }
@@ -242,7 +240,7 @@ public final class Parser {
             if (type.equals("str")) specs.add(SpecificationType.STRING);
             if (type.equals("arr")) specs.add(SpecificationType.ARRAY);
             if (type.equals("fun")) specs.add(SpecificationType.FUNCTION);
-            if (type.equals("Class")) specs.add(SpecificationType.CLASS);
+            if (type.equals("struct")) specs.add(SpecificationType.CLASS);
             if (type.equals("bool")) specs.add(SpecificationType.NUMBER);
             match(TokenType.COMMA);
         }
@@ -251,12 +249,7 @@ public final class Parser {
     }
 
     private Statement fieldStatement() {
-        final Token current = get(0);
-        if (get(0).getType() == TokenType.WORD) {
-            final String variable = current.getText();
-            return new FieldStatement(variable);
-        }
-        throw new SPKException("StatementError", "unknown statement");
+        return new FieldStatement(consume(TokenType.WORD).getText());
     }
 
     private Statement klass() {
@@ -282,22 +275,14 @@ public final class Parser {
                 if (match(TokenType.FUN)) {
                     String fun_name = consume(TokenType.WORD).getText();
                     List<String> args = arguments();
-                    targets.put(fun_name, new ValueExpression(new FunctionValue(new UserDefinedFunction(fun_name, args, statementOrBlock()), true, false)));
-                    continue;
-                }
-            }
-            if (match(TokenType.PROTECTED)) {
-                if (match(TokenType.FUN)) {
-                    String fun_name = consume(TokenType.WORD).getText();
-                    List<String> args = arguments();
-                    targets.put(fun_name, new ValueExpression(new FunctionValue(new UserDefinedFunction(fun_name, args, statementOrBlock()), false, true)));
+                    targets.put(fun_name, new ValueExpression(new FunctionValue(new UserDefinedFunction(fun_name, args, statementOrBlock()), true)));
                     continue;
                 }
             }
             if (match(TokenType.FUN)) {
                 String fun_name = consume(TokenType.WORD).getText();
                 List<String> args = arguments();
-                targets.put(fun_name, new ValueExpression(new FunctionValue(new UserDefinedFunction(fun_name, args, statementOrBlock()), false, false)));
+                targets.put(fun_name, new ValueExpression(new FunctionValue(new UserDefinedFunction(fun_name, args, statementOrBlock()), false)));
                 continue;
             }
             if (match(TokenType.VAR)) {
@@ -315,43 +300,7 @@ public final class Parser {
         } while(!match(TokenType.RBRACE));
         return extended ? new ExtendedClassDeclaration(result, name, argNames, targets, extension, childClasses) : new ClassDeclaration(result, name, argNames, targets, childClasses);
     }
-    private Statement struct() {
-        Map<String, Expression> targets = new HashMap<>();
-        String name = consume(TokenType.WORD).getText();
-        //targets.put("__class__", new ValueExpression(name));
 
-        LStructValue result = new LStructValue(name);
-        consume(TokenType.LBRACE);
-        do {
-            if (match(TokenType.PRIVATE)) {
-                if (match(TokenType.FUN)) {
-                    String fun_name = consume(TokenType.WORD).getText();
-                    List<String> args = arguments();
-                    targets.put(fun_name, new ValueExpression(new FunctionValue(new UserDefinedFunction(fun_name, args, statementOrBlock()), true, false)));
-                    continue;
-                }
-            }
-            if (match(TokenType.FUN)) {
-                String fun_name = consume(TokenType.WORD).getText();
-                List<String> args = arguments();
-                targets.put(fun_name, new ValueExpression(new FunctionValue(new UserDefinedFunction(fun_name, args, statementOrBlock()), false, false)));
-                continue;
-            }
-            if (match(TokenType.VAR)) {
-                String var_name = consume(TokenType.WORD).getText();
-                consume(TokenType.EQ);
-                targets.put(var_name, expression());
-                continue;
-            }
-            if(match(TokenType.FIELD)){
-                final String variable = consume(TokenType.WORD).getText();
-                Variables.set(variable, NumberValue.MINUS_ONE);
-                continue;
-            }
-            throw new SPKException("BadStructException", "Struct '" + name + "' has doesn't have valid body");
-        } while(!match(TokenType.RBRACE));
-        return new LStructDeclaration(result, name, targets);
-    }
     private Statement doStatement() {
         final Statement statement = statementOrBlock();
         return new DoStatement(statement);
@@ -717,11 +666,10 @@ public final class Parser {
             return new VariableExpression(current.getText());
         } else if (match(TokenType.STRING)) {
             return new StringExpression(current.getText(), get(0).getLine(), "", 0);
-        }else if (match(TokenType.LPAREN)) {
-                Expression expr = expression();
-                if (match(TokenType.COLON)) return dict(expr);
-                match(TokenType.RPAREN);
-                return expr;
+        } else if (match(TokenType.LPAREN)) {
+            Expression result = expression();
+            match(TokenType.RPAREN);
+            return result;
         }
         throw new SPKException("ExpressionError", String.format("unknown expression '%s' at line %s", current.getType(), current.getLine()));
     }
@@ -733,26 +681,6 @@ public final class Parser {
             match(TokenType.COMMA);
         }
         return new ArrayExpression(elements);
-    }
-    private Expression dict(Expression expr) {
-        final List<Expression[]> elements = new ArrayList<>();
-        int ind = 0;
-        while (!match(TokenType.RPAREN)) {
-            if(ind != 0){
-                Expression key = expression();
-                match(TokenType.COLON);
-                Expression val = expression();
-                elements.add(new Expression[]{key, val});
-                match(TokenType.COMMA);
-            }
-            else{
-                Expression val = expression();
-                elements.add(new Expression[]{expr, val});
-                match(TokenType.COMMA);
-            }
-            ind++;
-        }
-        return new DictExpression(elements);
     }
     private Expression element() {
         final String variable = consume(TokenType.WORD).getText();
