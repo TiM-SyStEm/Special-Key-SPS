@@ -21,4 +21,8 @@ public class FieldStatement implements Statement{
     public String toString() {
         return String.format("field %s", variable);
     }
+
+    public String getVariable() {
+        return variable;
+    }
 }

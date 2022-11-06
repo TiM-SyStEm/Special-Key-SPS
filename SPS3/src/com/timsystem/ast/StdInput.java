@@ -26,6 +26,10 @@ public class StdInput implements Expression, Statement {
         return new StringValue(sc.nextLine());
     }
 
+    public Expression getExpr() {
+        return expr;
+    }
+
     @Override
     public String toString() {
         return "input : " + expr;

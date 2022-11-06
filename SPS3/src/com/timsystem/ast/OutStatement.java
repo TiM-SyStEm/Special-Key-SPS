@@ -12,12 +12,12 @@ public class OutStatement implements Statement {
         System.out.println(expr.eval());
     }
 
+    public Expression getExpr() {
+        return expr;
+    }
+
     @Override
     public String toString() {
         return "out : " + expr;
-    }
-
-    public Expression getExpr() {
-        return expr;
     }
 }

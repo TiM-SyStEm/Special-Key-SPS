@@ -23,4 +23,12 @@ public final class TryCatchStatement implements Statement{
             catchStatement.execute();
         }
     }
+
+    public Statement getTryStatement() {
+        return tryStatement;
+    }
+
+    public Statement getCatchStatement() {
+        return catchStatement;
+    }
 }

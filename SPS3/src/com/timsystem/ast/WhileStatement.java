@@ -26,4 +26,12 @@ public class WhileStatement implements Statement {
     public String toString() {
         return "while " + condition + " " + statement;
     }
+
+    public Expression getCondition() {
+        return condition;
+    }
+
+    public Statement getStatement() {
+        return statement;
+    }
 }

@@ -12,21 +12,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 import static com.timsystem.Main.getVer;
-import static com.timsystem.Main.path1;
 
 public class STL {
     public static void inject() {
         Variables.set("__ver__", new StringValue(("Special Key " + getVer()).getBytes(StandardCharsets.UTF_8)));
         Variables.set("__about__", new StringValue(("SPK is dynamic a interpreted programming language built on Java Virtual Machine\nCreated by Timofey Gorlov in Russia with his team").getBytes(StandardCharsets.UTF_8)));
-        Variables.set("__spk__", new StringValue((System.getProperty("user.dir")).getBytes(StandardCharsets.UTF_8)));
+        Variables.set("__cwd__", new StringValue((System.getProperty("user.dir")).getBytes(StandardCharsets.UTF_8)));
         Variables.set("__os__", new StringValue((System.getProperty("os.name")).getBytes(StandardCharsets.UTF_8)));
         Variables.set("__user__", new StringValue((System.getProperty("user.name")).getBytes(StandardCharsets.UTF_8)));
-        Variables.set("__user__", new StringValue((System.getProperty("user.name"))));
-        if(path1 != null){
-            Variables.set("__cwd__", new StringValue(path1.toString()));
-        }else{
-            Variables.set("__cwd__", new StringValue((System.getProperty("user.dir")).getBytes(StandardCharsets.UTF_8)));
-        }
         Functions.set("typeof", (Value... args) -> {
             Arguments.check(1, args.length);
             if (args[0] instanceof NumberValue) {
@@ -38,7 +31,7 @@ public class STL {
                 }
             } else if (args[0] instanceof StringValue) {
                 return new StringValue("String");
-            } else if (args[0] instanceof ArrayValue){
+            }else if (args[0] instanceof ArrayValue){
                 return new StringValue("Array");
             } else return new StringValue("UnknownType");
         });

@@ -52,9 +52,7 @@ public final class FunctionalExpression implements Expression, Statement {
                 indentStr.append("   ");
             }
             throw new SPKException("InFunctionException", ex.getType() + " -> \n" + indentStr + "" +  ex.getText());
-        }/*catch (Exception ex){ // functions protect
-            throw new SPKException("InFunctionException", "RuntimeError has been caused");
-        }*/
+        }
     }
 
     private Function consumeFunction(Expression expr) {
@@ -70,7 +68,7 @@ public final class FunctionalExpression implements Expression, Statement {
     }
 
     private Function getFunction(String key) {
-        if (Functions.isExists(key)) {
+        if (Functions.functions.containsKey(key)) {
             return Functions.get(key);
         }
         if (Variables.isExists(key)) {

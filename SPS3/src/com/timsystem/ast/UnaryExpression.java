@@ -30,6 +30,13 @@ public final class UnaryExpression implements Expression {
         }
     }
 
+    public Expression getExpr1() {
+        return expr1;
+    }
+
+    public char getOperation() {
+        return operation;
+    }
 
     @Override
     public String toString() {

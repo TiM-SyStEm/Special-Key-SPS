@@ -22,4 +22,20 @@ public class ThrowStatement implements Statement{
     public String toString() {
         return "throw " + type + " " + expr;
     }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Expression getExpr() {
+        return expr;
+    }
+
+    public void setExpr(Expression expr) {
+        this.expr = expr;
+    }
 }

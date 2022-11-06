@@ -22,6 +22,10 @@ public class BlockStatement implements Statement {
         }
     }
 
+    public List<Statement> getStatements() {
+        return statements;
+    }
+
     @Override
     public String toString() {
         final StringBuilder result = new StringBuilder();
@@ -29,9 +33,5 @@ public class BlockStatement implements Statement {
             result.append(statement.toString()).append(System.lineSeparator());
         }
         return result.toString();
-    }
-
-    public List<Statement> getStatements() {
-        return statements;
     }
 }

@@ -14,6 +14,14 @@ public final class ArrayAssignmentStatement implements Statement {
         array.getArray().set(array.lastIndex(), expression.eval());
     }
 
+    public ArrayAccessExpression getArray() {
+        return array;
+    }
+
+    public Expression getExpression() {
+        return expression;
+    }
+
     @Override
     public String toString() {
         return String.format("%s = %s", array, expression);

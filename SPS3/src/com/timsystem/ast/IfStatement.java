@@ -21,16 +21,6 @@ public final class IfStatement implements Statement {
         }
     }
 
-    @Override
-    public String toString() {
-        final StringBuilder result = new StringBuilder();
-        result.append("if ").append(expression).append(' ').append(ifStatement);
-        if (elseStatement != null) {
-            result.append("\nelse ").append(elseStatement);
-        }
-        return result.toString();
-    }
-
     public Expression getExpression() {
         return expression;
     }
@@ -41,5 +31,15 @@ public final class IfStatement implements Statement {
 
     public Statement getElseStatement() {
         return elseStatement;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder result = new StringBuilder();
+        result.append("if ").append(expression).append(' ').append(ifStatement);
+        if (elseStatement != null) {
+            result.append("\nelse ").append(elseStatement);
+        }
+        return result.toString();
     }
 }

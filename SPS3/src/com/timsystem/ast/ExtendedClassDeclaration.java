@@ -1,7 +1,6 @@
 package com.timsystem.ast;
 
 import com.timsystem.lib.Arguments;
-import com.timsystem.lib.Handler;
 import com.timsystem.lib.SPKException;
 import com.timsystem.runtime.ClassValue;
 import com.timsystem.runtime.*;
@@ -36,7 +35,7 @@ public class ExtendedClassDeclaration implements Statement {
             if (expr instanceof FunctionValue) {
                 UserDefinedFunction fun = (UserDefinedFunction) ((FunctionValue) expr).getValue();
                 FunctionValue fv = (FunctionValue) expr;
-                result.setField(entry.getKey(), new FunctionValue(new ClassMethod(name, fun.arguments, fun.body, result, fv.isPrivate(), fv.isProtected())));
+                result.setField(entry.getKey(), new FunctionValue(new ClassMethod(name, fun.arguments, fun.body, result, fv.isPrivate())));
                 continue;
             }
             result.setField(entry.getKey(), expr);
@@ -70,11 +69,7 @@ public class ExtendedClassDeclaration implements Statement {
 
         Functions.set(name, (args) -> {
             Arguments.check(result.getArgsCount(), args.length);
-            ClassValue res;
-            if(!Handler.instencesed.contains(name)) {
-                res = new ClassValue(name, argNames, true);
-            }
-            else res = new ClassValue(name, argNames);
+            ClassValue res = new ClassValue(name, argNames);
             for (Map.Entry<String, Expression> entry : targets.entrySet()) {
                 res.setField(entry.getKey(), entry.getValue().eval());
             }
@@ -84,7 +79,7 @@ public class ExtendedClassDeclaration implements Statement {
                 if (expr instanceof FunctionValue) {
                     UserDefinedFunction fun = (UserDefinedFunction) ((FunctionValue) expr).getValue();
                     FunctionValue fv = (FunctionValue) expr;
-                    res.setField(entry.getKey(), new FunctionValue(new ClassMethod(name, fun.arguments, fun.body, res, fv.isPrivate(), fv.isProtected())));
+                    res.setField(entry.getKey(), new FunctionValue(new ClassMethod(name, fun.arguments, fun.body, res, fv.isPrivate())));
                     continue;
                 }
                 res.setField(entry.getKey(), expr);
