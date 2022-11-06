@@ -58,7 +58,8 @@ public class Handler {
         }
     }
     public static Value setInstenced(Value res){
-        instencesed.add(((ClassValue)res).name);
+        try{instencesed.add(((ClassValue)res).name);}
+        catch (Exception ex){}
         return res;
     }
     public static Value returnHandle(String input, String pathToScript) {
