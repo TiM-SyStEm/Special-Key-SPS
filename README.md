@@ -30,12 +30,12 @@ See more about it!
 ## Usage
 Special Key shell provides you some functions to run code
 
-`comp [path_to_file]` - compile and run file
+`run [path_to_file]` - compile and run file
 Example of usage:
 
-`$>comp main`
+`$>run main`
 
-`$>comp main.spk`
+`$>run main.spk`
 
 Notice that extension of file is not required
 
