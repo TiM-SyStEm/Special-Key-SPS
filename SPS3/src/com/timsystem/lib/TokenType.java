@@ -72,6 +72,8 @@ public enum TokenType {
 
     TRY,
     CATCH,
-    PRIVATE
-
+    PRIVATE,
+    PROTECTED,
+    AT,
+    LIGHTSTRUCT
 }

@@ -296,4 +296,3 @@ public final class Lexer {
         tokens.add(new Token(type, text, line));
     }
 }
-
