@@ -4,6 +4,8 @@
 Special key is a dynamic, fast and object-oriented programming language for building versatile and fast applications!
 
 It is in heavy develpoment now, but ready to try out!
+
+  <a href="https://bas1c1.github.io/special-key-site/"> Special Key Web Site </a>
 </div>
 
 ## Installation
